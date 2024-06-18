@@ -6,7 +6,7 @@
 #    By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/18 16:54:33 by akozin            #+#    #+#              #
-#    Updated: 2024/06/18 17:09:35 by akozin           ###   ########.fr        #
+#    Updated: 2024/06/18 17:46:34 by akozin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,12 +16,13 @@ LIBFT_A = $(addprefix $(LIBFT), libft.a)
 GNL = libs/gnl/
 GNL_A = $(addprefix $(GNL), libgnl.a)
 
-MLX = libs/mlx/
+MLX = libs/minilibx-linux/
 MLX_A = $(addprefix $(MLX), libmlx.a)
 
 NAME = miniRT
 
 MAKE = make
+RM = rm -rf
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror# -g -fsanitize=address
