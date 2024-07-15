@@ -1,4 +1,4 @@
 # minirt
 42's MiniRT
 
-with fcosta-f !!
+with https://github.com/Javocho !!
