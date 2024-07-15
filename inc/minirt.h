@@ -6,7 +6,7 @@
 /*   By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 16:07:24 by akozin            #+#    #+#             */
-/*   Updated: 2024/07/15 16:50:45 by akozin           ###   ########.fr       */
+/*   Updated: 2024/07/15 17:13:58 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define MINIRT_H
 
 # include "../libs/libft/libft.h"
+# include "../libs/gnl/get_next_line.h"
 # include <fcntl.h>
 # include <unistd.h>
 # include <stdio.h>
@@ -37,8 +38,10 @@ typedef enum e_err
 {
 	NULL_ERR,
 	FLOAT_ERR,
+	TYPE_ERR,
 	FILE_ERR,
-	FNAME_ERR
+	FNAME_ERR,
+	TOO_MUCH_ERR
 }	t_err;
 
 typedef enum e_obj_name
@@ -77,11 +80,16 @@ typedef struct s_data
 {
 	t_cam	cam;
 	t_light	*lights;
+	int		light_n;
 	t_light	amb;
 	t_obj	*objs;
+	int		obj_n;
 	t_err	error;
+	int		cam_n;
+	int		amb_n;
 }	t_data;
 
-int	file_probe(t_data *data, char *s);
+int		file_probe(t_data *data, char *s);
+void	parser_counter(t_data *data, int fd);
 
 #endif

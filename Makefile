@@ -6,7 +6,7 @@
 #    By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/18 16:54:33 by akozin            #+#    #+#              #
-#    Updated: 2024/07/15 16:47:50 by akozin           ###   ########.fr        #
+#    Updated: 2024/07/15 17:24:27 by akozin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,10 +25,11 @@ MAKE = make
 RM = rm -rf
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror# -g -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -g# -fsanitize=address
 
 SRCNAMES = main.c \
-		   utils/fileprobe.c
+		   utils/fileprobe.c \
+		   parse/parser_counter.c
 
 SRCS = $(SRCNAMES)
 OBJS = $(addprefix obj/, $(SRCS:.c=.o))
@@ -37,7 +38,7 @@ DEPS = $(addprefix obj/, $(SRCS:.c=.d))
 all:		folders make_libs $(NAME)
 
 folders:
-	mkdir -p obj/ obj/utils/
+	mkdir -p obj/ obj/utils/ obj/parse/
 
 make_libs:
 	$(MAKE) -C $(LIBFT)
