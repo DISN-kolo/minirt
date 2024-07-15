@@ -6,7 +6,7 @@
 /*   By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 15:29:46 by akozin            #+#    #+#             */
-/*   Updated: 2024/07/15 17:18:11 by akozin           ###   ########.fr       */
+/*   Updated: 2024/07/15 17:27:52 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ int	main(int ac, char **av)
 	parser_counter(&data, fd);
 	if (data.error != NULL_ERR)
 		return (close(fd), printf("fail parse\n"), 1);
+	else
+		printf("counted Ls: %d\ncounted objs: %d\n", data.light_n, data.obj_n);
 	close(fd);
 	printf("file close OK\n");
 	return (0);
