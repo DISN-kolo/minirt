@@ -6,7 +6,7 @@
 /*   By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 16:07:12 by akozin            #+#    #+#             */
-/*   Updated: 2024/07/15 15:46:37 by akozin           ###   ########.fr       */
+/*   Updated: 2024/07/15 15:48:59 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	ft_atoi(char *src)
 	{
 		res *= 10;
 		if (ft_isn(*src))
-			res += *src - '0';	
+			res += *src - '0';
 		else
 			return (-1);
 		src++;
