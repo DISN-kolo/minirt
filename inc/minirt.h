@@ -6,11 +6,17 @@
 /*   By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 16:07:24 by akozin            #+#    #+#             */
-/*   Updated: 2024/07/15 16:29:35 by akozin           ###   ########.fr       */
+/*   Updated: 2024/07/15 16:50:45 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libs/libft/libft.h"
+#ifndef MINIRT_H
+# define MINIRT_H
+
+# include "../libs/libft/libft.h"
+# include <fcntl.h>
+# include <unistd.h>
+# include <stdio.h>
 
 typedef struct s_vec3
 {
@@ -30,7 +36,9 @@ typedef struct s_rgb
 typedef enum e_err
 {
 	NULL_ERR,
-	FLOAT_ERR
+	FLOAT_ERR,
+	FILE_ERR,
+	FNAME_ERR
 }	t_err;
 
 typedef enum e_obj_name
@@ -73,3 +81,7 @@ typedef struct s_data
 	t_obj	*objs;
 	t_err	error;
 }	t_data;
+
+int	file_probe(t_data *data, char *s);
+
+#endif
