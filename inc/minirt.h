@@ -6,7 +6,7 @@
 /*   By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 16:07:24 by akozin            #+#    #+#             */
-/*   Updated: 2024/07/16 12:29:52 by akozin           ###   ########.fr       */
+/*   Updated: 2024/07/16 14:38:13 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ typedef enum e_err
 	TYPE_ERR,
 	FILE_ERR,
 	FNAME_ERR,
-	TOO_MUCH_ERR
+	TOO_MUCH_ERR,
+	MALLOC_ERR
 }	t_err;
 
 typedef enum e_obj_name
@@ -89,12 +90,21 @@ typedef struct s_data
 	int		amb_n;
 }	t_data;
 
+void	data_init(t_data *data);
+void	allocate_stuff(t_data *data);
+
 int		file_probe(t_data *data, char *s);
 void	parser_counter(t_data *data, int fd);
 
+void	parser(t_data *data, int fd);
+
+void	parse_amb(t_data *data, char **s);
+
 void	err_exit(t_data *data, int code, int fd_to_close);
+void	print_err(t_data *data);
 void	print_usage(char *s);
 
+void	free_str_arr(char ***s);
 void	free_all(t_data *data);
 
 #endif

@@ -1,27 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_all.c                                         :+:      :+:    :+:   */
+/*   parse_amb.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/16 12:21:37 by akozin            #+#    #+#             */
-/*   Updated: 2024/07/16 12:30:03 by akozin           ###   ########.fr       */
+/*   Created: 2024/07/16 14:35:05 by akozin            #+#    #+#             */
+/*   Updated: 2024/07/16 14:45:01 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minirt.h"
 
-void	free_all(t_data *data)
+void	parse_amb(t_data *data, char **s)
 {
-	if (data->lights)
+	printf("data: %p\n", data);
+	while (*s)
 	{
-		free(data->lights);
-		data->lights = NULL;
-	}
-	if (data->objs)
-	{
-		free(data->objs);
-		data->objs = NULL;
+		printf("'%s'\n", *s);
+		s++;
 	}
 }

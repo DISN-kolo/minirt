@@ -6,7 +6,7 @@
 #    By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/18 16:54:33 by akozin            #+#    #+#              #
-#    Updated: 2024/07/16 12:47:37 by akozin           ###   ########.fr        #
+#    Updated: 2024/07/16 14:37:38 by akozin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,10 +29,13 @@ CFLAGS = -Wall -Wextra -Werror -g# -fsanitize=address
 
 SRCNAMES = main.c \
 		   utils/fileprobe.c \
+		   utils/inits.c \
 		   parse/parser_counter.c \
+		   parse/parser.c \
+		   parse/parse_amb.c \
 		   console/print_usage.c \
 		   console/print_errors.c \
-		   free_utils/free_all.c
+		   free_utils/free_utils.c
 
 SRCS = $(SRCNAMES)
 OBJS = $(addprefix obj/, $(SRCS:.c=.o))

@@ -6,7 +6,7 @@
 /*   By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 16:59:36 by akozin            #+#    #+#             */
-/*   Updated: 2024/07/16 13:04:26 by akozin           ###   ########.fr       */
+/*   Updated: 2024/07/16 13:08:50 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static void	count_object_in_line(t_data *data, char *s)
 	else if (!ft_strncmp(s, "L ", 2))
 		return ((void)(data->light_n += 1));
 	else if (!ft_strncmp(s, "sp ", 3) || !ft_strncmp(s, "pl ", 3)
-			|| !ft_strncmp(s, "cy ", 3))
+		|| !ft_strncmp(s, "cy ", 3))
 		return ((void)(data->obj_n += 1));
 	return ((void)(data->error = TYPE_ERR));
 }
