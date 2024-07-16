@@ -6,7 +6,7 @@
 /*   By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 16:07:24 by akozin            #+#    #+#             */
-/*   Updated: 2024/07/15 17:13:58 by akozin           ###   ########.fr       */
+/*   Updated: 2024/07/16 12:29:52 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,5 +91,10 @@ typedef struct s_data
 
 int		file_probe(t_data *data, char *s);
 void	parser_counter(t_data *data, int fd);
+
+void	err_exit(t_data *data, int code, int fd_to_close);
+void	print_usage(char *s);
+
+void	free_all(t_data *data);
 
 #endif

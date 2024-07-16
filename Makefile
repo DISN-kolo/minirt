@@ -6,7 +6,7 @@
 #    By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/18 16:54:33 by akozin            #+#    #+#              #
-#    Updated: 2024/07/15 17:24:27 by akozin           ###   ########.fr        #
+#    Updated: 2024/07/16 12:22:14 by akozin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,10 @@ CFLAGS = -Wall -Wextra -Werror -g# -fsanitize=address
 
 SRCNAMES = main.c \
 		   utils/fileprobe.c \
-		   parse/parser_counter.c
+		   parse/parser_counter.c \
+		   console/print_usage.c \
+		   console/print_errors.c \
+		   free_utils/free_all.c
 
 SRCS = $(SRCNAMES)
 OBJS = $(addprefix obj/, $(SRCS:.c=.o))
@@ -38,7 +41,7 @@ DEPS = $(addprefix obj/, $(SRCS:.c=.d))
 all:		folders make_libs $(NAME)
 
 folders:
-	mkdir -p obj/ obj/utils/ obj/parse/
+	mkdir -p obj/ obj/utils/ obj/parse/ obj/console/ obj/free_utils/
 
 make_libs:
 	$(MAKE) -C $(LIBFT)

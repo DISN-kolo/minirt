@@ -6,13 +6,13 @@
 /*   By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 16:59:36 by akozin            #+#    #+#             */
-/*   Updated: 2024/07/15 17:25:33 by akozin           ###   ########.fr       */
+/*   Updated: 2024/07/16 12:35:42 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minirt.h"
 
-void	count_object_in_line(t_data *data, char *s)
+static void	count_object_in_line(t_data *data, char *s)
 {
 	while (*s && *s != '\n' && *s == ' ')
 		s++;
@@ -37,6 +37,7 @@ void	count_object_in_line(t_data *data, char *s)
 	else if (!ft_strncmp(s, "sp ", 3) || !ft_strncmp(s, "pl ", 3)
 			|| !ft_strncmp(s, "cy ", 3))
 		return ((void)(data->obj_n += 1));
+	return ((void)(data->error = TYPE_ERR));
 }
 
 void	parser_counter(t_data *data, int fd)
@@ -58,5 +59,4 @@ void	parser_counter(t_data *data, int fd)
 		free(line);
 		line = get_next_line(fd);
 	}
-	printf("while exited  \n");
 }
