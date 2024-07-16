@@ -6,7 +6,7 @@
 /*   By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 16:59:36 by akozin            #+#    #+#             */
-/*   Updated: 2024/07/16 12:35:42 by akozin           ###   ########.fr       */
+/*   Updated: 2024/07/16 13:04:26 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	parser_counter(t_data *data, int fd)
 	line = get_next_line(fd);
 	while (line)
 	{
-		if (!ft_strncmp(line, "\n", 2))
+		if (!ft_strncmp(line, "\n", 2) || data->error != NULL_ERR)
 		{
 			free(line);
 			line = get_next_line(fd);
@@ -55,7 +55,7 @@ void	parser_counter(t_data *data, int fd)
 		}
 		count_object_in_line(data, line);
 		if (data->error != NULL_ERR)
-			return ((void)(free(line)));
+			continue ;
 		free(line);
 		line = get_next_line(fd);
 	}
