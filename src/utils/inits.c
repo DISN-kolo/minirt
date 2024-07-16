@@ -6,7 +6,7 @@
 /*   By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 13:12:55 by akozin            #+#    #+#             */
-/*   Updated: 2024/07/16 13:23:24 by akozin           ###   ########.fr       */
+/*   Updated: 2024/07/16 17:14:23 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,14 @@ void	allocate_stuff(t_data *data)
 	data->objs = malloc(sizeof (t_obj) * (data->obj_n + 1));
 	if (!data->objs)
 		return ((void)(data->error = MALLOC_ERR));
+}
+
+t_rgb	rgb_init(void)
+{
+	t_rgb	res;
+
+	res.r = 0;
+	res.g = 0;
+	res.b = 0;
+	return (res);
 }

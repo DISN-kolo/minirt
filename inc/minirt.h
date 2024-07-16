@@ -6,7 +6,7 @@
 /*   By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 16:07:24 by akozin            #+#    #+#             */
-/*   Updated: 2024/07/16 16:20:23 by akozin           ###   ########.fr       */
+/*   Updated: 2024/07/16 17:14:08 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ typedef enum e_err
 {
 	NULL_ERR,
 	DOUBLE_ERR,
+	RGB_ERR,
 	TYPE_ERR,
 	FILE_ERR,
 	FNAME_ERR,
@@ -94,6 +95,7 @@ typedef struct s_data
 
 void	data_init(t_data *data);
 void	allocate_stuff(t_data *data);
+t_rgb	rgb_init(void);
 
 int		file_probe(t_data *data, char *s);
 void	parser_counter(t_data *data, int fd);
@@ -103,6 +105,7 @@ void	parser(t_data *data, int fd);
 void	parse_amb(t_data *data, char **s);
 
 double	parse_power(t_data *data, char *s);
+t_rgb	parse_rgb(t_data *data, char *s);
 
 void	err_exit(t_data *data, int code, int fd_to_close);
 void	print_err(t_data *data);

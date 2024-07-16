@@ -6,7 +6,7 @@
 #    By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/18 16:54:33 by akozin            #+#    #+#              #
-#    Updated: 2024/07/16 16:19:22 by akozin           ###   ########.fr        #
+#    Updated: 2024/07/16 17:13:46 by akozin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +35,7 @@ SRCNAMES = main.c \
 		   parse/parser.c \
 		   parse/parse_amb.c \
 		   parse/parse_power.c \
+		   parse/parse_rgb.c \
 		   console/print_usage.c \
 		   console/print_errors.c \
 		   free_utils/free_utils.c

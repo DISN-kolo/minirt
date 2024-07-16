@@ -6,7 +6,7 @@
 /*   By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 15:21:27 by akozin            #+#    #+#             */
-/*   Updated: 2024/07/16 16:24:52 by akozin           ###   ########.fr       */
+/*   Updated: 2024/07/16 16:31:54 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static double	res_add_logic(int *ptp, double res, char c)
 	if (!*ptp)
 		res = res * 10. + (double)(c - '0');
 	else
-		res += ((double)(c - '0'))/pow(10., (*ptp)++);
+		res += ((double)(c - '0')) / pow(10., (*ptp)++);
 	return (res);
 }
 

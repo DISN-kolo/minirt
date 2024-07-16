@@ -6,7 +6,7 @@
 /*   By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 12:14:04 by akozin            #+#    #+#             */
-/*   Updated: 2024/07/16 15:31:20 by akozin           ###   ########.fr       */
+/*   Updated: 2024/07/16 16:34:41 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ void	print_err(t_data *data)
 {
 	if (data->error == DOUBLE_ERR)
 		ft_putstr_fd("Incorrectly entered double\n", 2);
+	else if (data->error == RGB_ERR)
+		ft_putstr_fd("Incorrectly entered RGB\n", 2);
 	else if (data->error == TYPE_ERR)
 		ft_putstr_fd("Unknown line encountered\n", 2);
 	else if (data->error == FILE_ERR)
