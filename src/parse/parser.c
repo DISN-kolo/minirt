@@ -6,7 +6,7 @@
 /*   By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 16:52:58 by akozin            #+#    #+#             */
-/*   Updated: 2024/07/16 14:38:46 by akozin           ###   ########.fr       */
+/*   Updated: 2024/07/16 14:48:24 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ static void	decide_and_read(t_data *data, char **s)
 static void	parse_line(t_data *data, char *s)
 {
 	char	**parsed_line;
+
 	while (*s && *s != '\n' && *s == ' ')
 		s++;
 	if (!*s || *s == '\n')

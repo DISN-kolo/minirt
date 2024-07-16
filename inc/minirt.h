@@ -6,7 +6,7 @@
 /*   By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 16:07:24 by akozin            #+#    #+#             */
-/*   Updated: 2024/07/16 14:38:13 by akozin           ###   ########.fr       */
+/*   Updated: 2024/07/16 16:20:23 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,13 @@
 # include <fcntl.h>
 # include <unistd.h>
 # include <stdio.h>
+# include <math.h>
 
 typedef struct s_vec3
 {
-	float	x;
-	float	y;
-	float	z;
+	double	x;
+	double	y;
+	double	z;
 }	t_vec3;
 
 typedef struct s_rgb
@@ -37,11 +38,12 @@ typedef struct s_rgb
 typedef enum e_err
 {
 	NULL_ERR,
-	FLOAT_ERR,
+	DOUBLE_ERR,
 	TYPE_ERR,
 	FILE_ERR,
 	FNAME_ERR,
-	TOO_MUCH_ERR,
+	TOO_MANY_OBJS_ERR,
+	PARAM_N_ERR,
 	MALLOC_ERR
 }	t_err;
 
@@ -59,15 +61,15 @@ typedef struct s_obj
 	t_vec3		origin;
 	t_rgb		color;
 	t_vec3		normal;
-	float		diameter;
-	float		height;
+	double		diameter;
+	double		height;
 }	t_obj;
 
 typedef struct s_light
 {
 	t_vec3			origin;
 	t_rgb			color;
-	float			power;
+	double			power;
 }	t_light;
 
 typedef struct s_cam
@@ -100,11 +102,15 @@ void	parser(t_data *data, int fd);
 
 void	parse_amb(t_data *data, char **s);
 
+double	parse_power(t_data *data, char *s);
+
 void	err_exit(t_data *data, int code, int fd_to_close);
 void	print_err(t_data *data);
 void	print_usage(char *s);
 
 void	free_str_arr(char ***s);
 void	free_all(t_data *data);
+
+int		str_arr_counter(char **s);
 
 #endif

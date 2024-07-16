@@ -6,7 +6,7 @@
 #    By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/18 16:54:33 by akozin            #+#    #+#              #
-#    Updated: 2024/07/16 14:37:38 by akozin           ###   ########.fr        #
+#    Updated: 2024/07/16 16:19:22 by akozin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,9 +30,11 @@ CFLAGS = -Wall -Wextra -Werror -g# -fsanitize=address
 SRCNAMES = main.c \
 		   utils/fileprobe.c \
 		   utils/inits.c \
+		   utils/misc.c \
 		   parse/parser_counter.c \
 		   parse/parser.c \
 		   parse/parse_amb.c \
+		   parse/parse_power.c \
 		   console/print_usage.c \
 		   console/print_errors.c \
 		   free_utils/free_utils.c

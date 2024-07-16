@@ -6,7 +6,7 @@
 /*   By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 16:59:36 by akozin            #+#    #+#             */
-/*   Updated: 2024/07/16 13:08:50 by akozin           ###   ########.fr       */
+/*   Updated: 2024/07/16 14:57:14 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,14 @@ static void	count_object_in_line(t_data *data, char *s)
 	{
 		data->amb_n += 1;
 		if (data->amb_n > 1)
-			return ((void)(data->error = TOO_MUCH_ERR));
+			return ((void)(data->error = TOO_MANY_OBJS_ERR));
 		return ;
 	}
 	else if (!ft_strncmp(s, "C ", 2))
 	{
 		data->cam_n += 1;
 		if (data->cam_n > 1)
-			return ((void)(data->error = TOO_MUCH_ERR));
+			return ((void)(data->error = TOO_MANY_OBJS_ERR));
 		return ;
 	}
 	else if (!ft_strncmp(s, "L ", 2))
