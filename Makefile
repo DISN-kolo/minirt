@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+         #
+#    By: fcosta-f <fcosta-f@student.42barcelona.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/18 16:54:33 by akozin            #+#    #+#              #
-#    Updated: 2024/07/16 16:19:22 by akozin           ###   ########.fr        #
+#    Updated: 2024/07/16 17:05:32 by fcosta-f         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,7 @@ SRCNAMES = main.c \
 		   utils/fileprobe.c \
 		   utils/inits.c \
 		   utils/misc.c \
+		   utils/vector.c \
 		   parse/parser_counter.c \
 		   parse/parser.c \
 		   parse/parse_amb.c \
@@ -38,6 +39,7 @@ SRCNAMES = main.c \
 		   console/print_usage.c \
 		   console/print_errors.c \
 		   free_utils/free_utils.c
+
 
 SRCS = $(SRCNAMES)
 OBJS = $(addprefix obj/, $(SRCS:.c=.o))
