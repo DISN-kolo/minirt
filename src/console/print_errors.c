@@ -6,7 +6,7 @@
 /*   By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 12:14:04 by akozin            #+#    #+#             */
-/*   Updated: 2024/07/17 14:47:15 by akozin           ###   ########.fr       */
+/*   Updated: 2024/07/17 15:43:54 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,13 @@ void	print_err(t_data *data)
 	if (data->error == DOUBLE_ERR)
 		ft_putstr_fd("Incorrectly entered double\n", 2);
 	else if (data->error == ORIGIN_ERR)
-		ft_putstr_fd("Incorrectly entered floating point vector\n", 2);
+		ft_putstr_fd("Incorrectly entered floating point vector. \
+Format: X,Y,Z\n", 2);
 	else if (data->error == RGB_ERR)
-		ft_putstr_fd("Incorrectly entered RGB\n", 2);
+		ft_putstr_fd("Incorrectly entered RGB. Ranges: 0..255, \
+format: R,G,B\n", 2);
+	else if (data->error == FOV_ERR)
+		ft_putstr_fd("Incorrectly entered FOV. Ranges: 0..180\n", 2);
 	else if (data->error == TYPE_ERR)
 		ft_putstr_fd("Unknown line encountered\n", 2);
 	else if (data->error == FILE_ERR)

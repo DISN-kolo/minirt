@@ -6,7 +6,7 @@
 /*   By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 16:07:24 by akozin            #+#    #+#             */
-/*   Updated: 2024/07/17 15:14:51 by akozin           ###   ########.fr       */
+/*   Updated: 2024/07/17 15:41:27 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef enum e_err
 	DOUBLE_ERR,
 	RGB_ERR,
 	ORIGIN_ERR,
+	FOV_ERR,
 	TYPE_ERR,
 	FILE_ERR,
 	FNAME_ERR,
@@ -111,6 +112,7 @@ double	atod_res_add_logic(int *ptp, double res, char c);
 t_rgb	parse_rgb(t_data *data, char *s);
 t_vec3	parse_origin(t_data *data, char *s);
 t_vec3	parse_normal(t_data *data, char *s);
+int		parse_fov(t_data *data, char *s);
 
 void	err_exit(t_data *data, int code, int fd_to_close);
 void	print_err(t_data *data);
