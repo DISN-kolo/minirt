@@ -6,7 +6,7 @@
 #    By: fcosta-f <fcosta-f@student.42barcelona.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/18 16:54:33 by akozin            #+#    #+#              #
-#    Updated: 2024/07/17 12:41:17 by akozin           ###   ########.fr        #
+#    Updated: 2024/07/17 14:45:13 by akozin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,8 +36,10 @@ SRCNAMES = main.c \
 		   parse/parser_counter.c \
 		   parse/parser.c \
 		   parse/parse_amb.c \
+		   parse/parse_cam.c \
 		   parse/parse_power.c \
 		   parse/parse_rgb.c \
+		   parse/parse_origin.c \
 		   console/print_usage.c \
 		   console/print_errors.c \
 		   free_utils/free_utils.c

@@ -6,7 +6,7 @@
 /*   By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 16:52:58 by akozin            #+#    #+#             */
-/*   Updated: 2024/07/16 14:48:24 by akozin           ###   ########.fr       */
+/*   Updated: 2024/07/17 13:08:34 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 static void	decide_and_read(t_data *data, char **s)
 {
 	if (!ft_strncmp(s[0], "A", 2))
-		parse_amb(data, s); // TODO
-//	else if (!ft_strncmp(s[0], "C", 2))
-//		parse_cam(data, s); // TODO
+		parse_amb(data, s);
+	else if (!ft_strncmp(s[0], "C", 2))
+		parse_cam(data, s); // TODO
 //	else if (!ft_strncmp(s[0], "L", 2))
 //		parse_lig(data, s); // TODO
 //	else if (!ft_strncmp(s[0], "sp", 3))

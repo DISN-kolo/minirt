@@ -6,7 +6,7 @@
 /*   By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 16:07:24 by akozin            #+#    #+#             */
-/*   Updated: 2024/07/16 17:14:08 by akozin           ###   ########.fr       */
+/*   Updated: 2024/07/17 14:45:32 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ typedef enum e_err
 	NULL_ERR,
 	DOUBLE_ERR,
 	RGB_ERR,
+	ORIGIN_ERR,
 	TYPE_ERR,
 	FILE_ERR,
 	FNAME_ERR,
@@ -103,9 +104,12 @@ void	parser_counter(t_data *data, int fd);
 void	parser(t_data *data, int fd);
 
 void	parse_amb(t_data *data, char **s);
+void	parse_cam(t_data *data, char **s);
 
 double	parse_power(t_data *data, char *s);
+double	atod_res_add_logic(int *ptp, double res, char c);
 t_rgb	parse_rgb(t_data *data, char *s);
+t_vec3	parse_origin(t_data *data, char *s);
 
 void	err_exit(t_data *data, int code, int fd_to_close);
 void	print_err(t_data *data);

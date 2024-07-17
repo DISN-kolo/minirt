@@ -6,13 +6,13 @@
 /*   By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 15:21:27 by akozin            #+#    #+#             */
-/*   Updated: 2024/07/16 16:31:54 by akozin           ###   ########.fr       */
+/*   Updated: 2024/07/17 13:43:24 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minirt.h"
 
-static double	res_add_logic(int *ptp, double res, char c)
+double	atod_res_add_logic(int *ptp, double res, char c)
 {
 	if (!*ptp)
 		res = res * 10. + (double)(c - '0');
@@ -33,8 +33,8 @@ double	parse_power(t_data *data, char *s)
 		if (*s == '-')
 			return (data->error = DOUBLE_ERR, -0.0);
 		if (ft_isdigit(*s))
-			res = res_add_logic(&past_the_point, res, *s);
-		else if (*s == '.')
+			res = atod_res_add_logic(&past_the_point, res, *s);
+		else if (*s == '.' && !past_the_point)
 			past_the_point = 1;
 		else
 			return (data->error = DOUBLE_ERR, -0.0);

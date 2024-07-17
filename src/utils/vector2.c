@@ -6,7 +6,7 @@
 /*   By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 12:40:25 by akozin            #+#    #+#             */
-/*   Updated: 2024/07/17 12:41:07 by akozin           ###   ########.fr       */
+/*   Updated: 2024/07/17 15:02:25 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ double	dot_prod(t_vec3 v1, t_vec3 v2)
 
 t_vec3	cross_prod(t_vec3 u, t_vec3 v)
 {
-	t_vec3 result;
+	t_vec3	result;
 
 	result.x = u.y * v.z - u.z * v.y;
 	result.y = u.z * v.x - u.x * v.z;
@@ -50,7 +50,7 @@ t_vec3	vect_inv(t_vec3 v)
 	return (v);
 }
 
-void printVector(t_vec3 v)
+void	print_vector(t_vec3 v)
 {
 	printf("vect: %f, %f, %f\n", v.x, v.y, v.z);
 }
