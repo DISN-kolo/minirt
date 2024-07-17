@@ -6,7 +6,7 @@
 /*   By: fcosta-f <fcosta-f@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 16:51:01 by fcosta-f          #+#    #+#             */
-/*   Updated: 2024/07/17 15:03:29 by akozin           ###   ########.fr       */
+/*   Updated: 2024/07/17 15:10:58 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,12 @@ t_vec3	prod_esc(t_vec3 v, double f)
 void	normalize(t_vec3 *v)
 {
 	double	norm;
+	double	vlen;
 
-	norm = 1 / vec_len(*v);
+	vlen = vec_len(*v);
+	if (vlen == 0.)
+		return ;
+	norm = 1 / vlen;
 	v->x *= norm;
 	v->y *= norm;
 	v->z *= norm;

@@ -6,7 +6,7 @@
 /*   By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 13:09:54 by akozin            #+#    #+#             */
-/*   Updated: 2024/07/17 14:44:55 by akozin           ###   ########.fr       */
+/*   Updated: 2024/07/17 15:06:38 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ void	parse_cam(t_data *data, char **s)
 	else if (elem_c != 4 && elem_c != 5)
 		return ((void)(data->error = PARAM_N_ERR));
 	data->cam.origin = parse_origin(data, s[1]);
-//	data->cam.normal = parse_normal(data, s[2]);
-//	data->cam.fov = parse_fov(data, s[3]);
+	data->cam.normal = parse_normal(data, s[2]); // TODO
+//	data->cam.fov = parse_fov(data, s[3]); // TODO
 	printf("cam params:\n\
 			\torigin: %f %f %f\n\
 			\tnormal: %f %f %f\n\

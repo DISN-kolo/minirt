@@ -6,7 +6,7 @@
 /*   By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 16:07:24 by akozin            #+#    #+#             */
-/*   Updated: 2024/07/17 14:45:32 by akozin           ###   ########.fr       */
+/*   Updated: 2024/07/17 15:14:51 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,7 @@ double	parse_power(t_data *data, char *s);
 double	atod_res_add_logic(int *ptp, double res, char c);
 t_rgb	parse_rgb(t_data *data, char *s);
 t_vec3	parse_origin(t_data *data, char *s);
+t_vec3	parse_normal(t_data *data, char *s);
 
 void	err_exit(t_data *data, int code, int fd_to_close);
 void	print_err(t_data *data);
@@ -119,5 +120,17 @@ void	free_str_arr(char ***s);
 void	free_all(t_data *data);
 
 int		str_arr_counter(char **s);
+
+
+double	vec_len(t_vec3 vec);
+t_vec3	vec_sub(t_vec3 a, t_vec3 b);
+t_vec3	vect_add(t_vec3 a, t_vec3 b);
+t_vec3	prod_esc(t_vec3 v, double f);
+void	normalize(t_vec3 *v);
+double	dot_prod(t_vec3 v1, t_vec3 v2);
+t_vec3	cross_prod(t_vec3 u, t_vec3 v);
+double	distance(t_vec3 a, t_vec3 b);
+t_vec3	vect_inv(t_vec3 v);
+void	print_vector(t_vec3 v);
 
 #endif
