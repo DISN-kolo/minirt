@@ -6,7 +6,7 @@
 #    By: fcosta-f <fcosta-f@student.42barcelona.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/18 16:54:33 by akozin            #+#    #+#              #
-#    Updated: 2024/07/17 12:37:05 by akozin           ###   ########.fr        #
+#    Updated: 2024/07/17 12:41:17 by akozin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,7 @@ SRCNAMES = main.c \
 		   utils/inits.c \
 		   utils/misc.c \
 		   utils/vector.c \
+		   utils/vector2.c \
 		   parse/parser_counter.c \
 		   parse/parser.c \
 		   parse/parse_amb.c \
