@@ -6,7 +6,7 @@
 /*   By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 14:35:05 by akozin            #+#    #+#             */
-/*   Updated: 2024/07/17 13:28:37 by akozin           ###   ########.fr       */
+/*   Updated: 2024/07/17 16:55:55 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,4 @@ void	parse_amb(t_data *data, char **s)
 		return ((void)(data->error = PARAM_N_ERR));
 	data->amb.power = parse_power(data, s[1]);
 	data->amb.color = parse_rgb(data, s[2]);
-	printf("amb color intensity: %f\n", data->amb.power); // XXX
 }

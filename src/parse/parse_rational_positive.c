@@ -1,27 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_power.c                                      :+:      :+:    :+:   */
+/*   parse_rational_positive.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 15:21:27 by akozin            #+#    #+#             */
-/*   Updated: 2024/07/17 16:31:25 by akozin           ###   ########.fr       */
+/*   Updated: 2024/07/17 16:47:23 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minirt.h"
 
-double	atod_res_add_logic(int *ptp, double res, char c)
-{
-	if (!*ptp)
-		res = res * 10. + (double)(c - '0');
-	else
-		res += ((double)(c - '0')) / pow(10., (*ptp)++);
-	return (res);
-}
-
-double	parse_power(t_data *data, char *s)
+double	parse_rational_positive(t_data *data, char *s)
 {
 	int		past_the_point;
 	double	res;
@@ -40,7 +31,5 @@ double	parse_power(t_data *data, char *s)
 			return (data->error = DOUBLE_ERR, -0.0);
 		s++;
 	}
-	if (res > 1.0)
-		return (data->error = DOUBLE_ERR, -0.0);
 	return (res);
 }

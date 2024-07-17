@@ -6,7 +6,7 @@
 /*   By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 16:07:24 by akozin            #+#    #+#             */
-/*   Updated: 2024/07/17 15:41:27 by akozin           ###   ########.fr       */
+/*   Updated: 2024/07/17 16:50:35 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,9 @@ typedef enum e_err
 
 typedef enum e_obj_name
 {
-	SPH,
-	CYL,
-	PLA
+	SP,
+	PL,
+	CY
 }	t_obj_name;
 
 
@@ -85,14 +85,16 @@ typedef struct s_cam
 typedef struct s_data
 {
 	t_cam	cam;
+	int		cam_n;
 	t_light	*lights;
 	int		light_n;
+	int		c_light;
 	t_light	amb;
+	int		amb_n;
 	t_obj	*objs;
 	int		obj_n;
+	int		c_obj;
 	t_err	error;
-	int		cam_n;
-	int		amb_n;
 }	t_data;
 
 void	data_init(t_data *data);
@@ -106,8 +108,11 @@ void	parser(t_data *data, int fd);
 
 void	parse_amb(t_data *data, char **s);
 void	parse_cam(t_data *data, char **s);
+void	parse_lig(t_data *data, char **s);
+void	parse_sp(t_data *data, char **s);
 
 double	parse_power(t_data *data, char *s);
+double	parse_rational_positive(t_data *data, char *s);
 double	atod_res_add_logic(int *ptp, double res, char c);
 t_rgb	parse_rgb(t_data *data, char *s);
 t_vec3	parse_origin(t_data *data, char *s);

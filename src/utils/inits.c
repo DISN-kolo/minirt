@@ -6,7 +6,7 @@
 /*   By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 13:12:55 by akozin            #+#    #+#             */
-/*   Updated: 2024/07/16 17:14:23 by akozin           ###   ########.fr       */
+/*   Updated: 2024/07/17 15:56:25 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,9 @@
 void	data_init(t_data *data)
 {
 	data->light_n = 0;
+	data->c_light = 0;
 	data->obj_n = 0;
+	data->c_obj = 0;
 	data->cam_n = 0;
 	data->amb_n = 0;
 	data->error = NULL_ERR;

@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_cam.c                                        :+:      :+:    :+:   */
+/*   parse_sp.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/17 13:09:54 by akozin            #+#    #+#             */
-/*   Updated: 2024/07/17 16:56:03 by akozin           ###   ########.fr       */
+/*   Created: 2024/07/17 16:36:12 by akozin            #+#    #+#             */
+/*   Updated: 2024/07/17 16:57:49 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minirt.h"
 
-void	parse_cam(t_data *data, char **s)
+void	parse_sp(t_data *data, char **s)
 {
 	int	elem_c;
 
@@ -23,7 +23,22 @@ void	parse_cam(t_data *data, char **s)
 		return ((void)(data->error = PARAM_N_ERR));
 	else if (elem_c != 4 && elem_c != 5)
 		return ((void)(data->error = PARAM_N_ERR));
-	data->cam.origin = parse_origin(data, s[1]);
-	data->cam.normal = parse_normal(data, s[2]);
-	data->cam.fov = parse_fov(data, s[3]);
+	data->objs[data->c_obj].type = SP;
+	data->objs[data->c_obj].origin = parse_origin(data, s[1]);
+	data->objs[data->c_obj].diameter = parse_rational_positive(data, s[2]);
+	data->objs[data->c_obj].color = parse_rgb(data, s[3]);
+	printf("sp params:\n\
+\torigin: %f %f %f\n\
+\tcol: %3d %3d %3d\n\
+\tdiam: %f\n\
+\tnumber: %d\n",
+		data->objs[data->c_obj].origin.x,
+		data->objs[data->c_obj].origin.y,
+		data->objs[data->c_obj].origin.z,
+		data->objs[data->c_obj].color.r,
+		data->objs[data->c_obj].color.g,
+		data->objs[data->c_obj].color.b,
+		data->objs[data->c_obj].diameter,
+		data->c_obj); // XXX
+	data->c_obj++;
 }
