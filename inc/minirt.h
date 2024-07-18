@@ -6,7 +6,7 @@
 /*   By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 16:07:24 by akozin            #+#    #+#             */
-/*   Updated: 2024/07/18 13:52:22 by akozin           ###   ########.fr       */
+/*   Updated: 2024/07/18 14:55:14 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ typedef struct s_data
 }	t_data;
 
 void	data_init(t_data *data);
+void	file_reading(t_data *data, char **av);
 void	allocate_stuff(t_data *data);
 t_rgb	rgb_init(void);
 

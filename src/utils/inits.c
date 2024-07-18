@@ -6,7 +6,7 @@
 /*   By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 13:12:55 by akozin            #+#    #+#             */
-/*   Updated: 2024/07/17 15:56:25 by akozin           ###   ########.fr       */
+/*   Updated: 2024/07/18 14:59:15 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,27 @@ t_rgb	rgb_init(void)
 	res.g = 0;
 	res.b = 0;
 	return (res);
+}
+
+void	file_reading(t_data *data, char **av)
+{
+	int	fd;
+
+	fd = file_probe(data, av[1]);
+	if (data->error != NULL_ERR)
+		err_exit(data, 1, -2);
+	parser_counter(data, fd);
+	if (data->error != NULL_ERR)
+		err_exit(data, 1, fd);
+	close(fd);
+	allocate_stuff(data);
+	if (data->error != NULL_ERR)
+		err_exit(data, 1, -2);
+	fd = file_probe(data, av[1]);
+	if (data->error != NULL_ERR)
+		err_exit(data, 1, -2);
+	parser(data, fd);
+	if (data->error != NULL_ERR)
+		err_exit(data, 1, fd);
+	close(fd);
 }
