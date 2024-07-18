@@ -162,6 +162,8 @@ double	distance(t_vec3 a, t_vec3 b);
 t_vec3	vect_inv(t_vec3 v);
 void	print_vector(t_vec3 v);
 
+double	splane_ray(t_vec3 o, t_vec3 d, t_vec3 pp, t_vec3 n);
+
 void	test_drawing_lol(t_data *data);
 
 #endif
