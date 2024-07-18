@@ -6,7 +6,7 @@
 /*   By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 16:52:58 by akozin            #+#    #+#             */
-/*   Updated: 2024/07/18 13:36:02 by akozin           ###   ########.fr       */
+/*   Updated: 2024/07/18 13:48:00 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,13 @@ static void	decide_and_read(t_data *data, char **s)
 	else if (!ft_strncmp(s[0], "sp", 3))
 		parse_sp(data, s);
 	else if (!ft_strncmp(s[0], "pl", 3))
-		parse_pl(data, s); // TODO
-//	else if (!ft_strncmp(s[0], "cy", 3))
-//		parse_cy(data, s); // TODO
-//	return ((void)(data->error = TYPE_ERR));
+		parse_pl(data, s);
+	else if (!ft_strncmp(s[0], "cy", 3))
+		parse_cy(data, s);
+	else
+		return ((void)(data->error = TYPE_ERR));
 }
-//  ^^^^^^<--- just in case. lol
+//		^^^^^^<--- just in case. lol
 
 /*
  * copying the EOL check from parser counter "just in case"

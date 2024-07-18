@@ -6,7 +6,7 @@
 /*   By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 16:07:24 by akozin            #+#    #+#             */
-/*   Updated: 2024/07/18 13:39:12 by akozin           ###   ########.fr       */
+/*   Updated: 2024/07/18 13:52:22 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,7 @@ void	parse_cam(t_data *data, char **s);
 void	parse_lig(t_data *data, char **s);
 void	parse_sp(t_data *data, char **s);
 void	parse_pl(t_data *data, char **s);
+void	parse_cy(t_data *data, char **s);
 
 double	parse_power(t_data *data, char *s);
 double	parse_rational_positive(t_data *data, char *s);
