@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+        */
+/*   By: fcosta-f < fcosta-f@student.42barcelona    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 16:07:24 by akozin            #+#    #+#             */
-/*   Updated: 2024/07/16 16:20:23 by akozin           ###   ########.fr       */
+/*   Updated: 2024/07/18 20:49:19 by fcosta-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,5 +112,9 @@ void	free_str_arr(char ***s);
 void	free_all(t_data *data);
 
 int		str_arr_counter(char **s);
+
+double	dot_prod(t_vec3 v1, t_vec3 v2);
+t_vec3	vec_sub(t_vec3 a, t_vec3 b);
+
 
 #endif
