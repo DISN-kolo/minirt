@@ -38,18 +38,22 @@ t_vec3	vect_add(t_vec3 a, t_vec3 b)
 
 t_vec3	prod_esc(t_vec3 v, double f)
 {
-	t_vec3	v;
+	t_vec3	w;
 
-	v.x = v.x * f;
-	v.y = v.y * f;
-	v.z = v.z * f;
-	return (v);
+	w.x = v.x * f;
+	w.y = v.y * f;
+	w.z = v.z * f;
+	return (w);
 }
 
 void normalize(t_vec3 *v) { //puede devolver el vector
 	double norm;
+	double len;
 	
-	norm = 1/vec_len(*v);
+	len = vec_len(*v);
+	if (len == 0)
+		return ;
+	norm = 1/len;
 	v->x *= norm;
 	v->y *= norm;
 	v->z *= norm;
