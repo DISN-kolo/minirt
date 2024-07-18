@@ -6,7 +6,7 @@
 /*   By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 13:12:55 by akozin            #+#    #+#             */
-/*   Updated: 2024/07/18 14:59:15 by akozin           ###   ########.fr       */
+/*   Updated: 2024/07/18 15:24:53 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	data_init(t_data *data)
 	data->error = NULL_ERR;
 	data->lights = NULL;
 	data->objs = NULL;
+	data->mlx = NULL;
 }
 
 void	allocate_stuff(t_data *data)
@@ -66,4 +67,16 @@ void	file_reading(t_data *data, char **av)
 	if (data->error != NULL_ERR)
 		err_exit(data, 1, fd);
 	close(fd);
+}
+
+void	mlx_setting_up(t_data *data)
+{
+	data->mlx = mlx_init();
+	data->win = mlx_new_window(data->mlx, 1920, 1080, "MiniRT");
+	data->img.img = mlx_new_image(data->mlx, 1920, 1080);
+	data->img.addr = mlx_get_data_addr(data->img.img,
+			&(data->img.bits_per_pixel), &(data->img.line_length),
+			&(data->img.endian));
+	mlx_hook(data->win, 2, 1L << 0, key_hand, data);
+	mlx_hook(data->win, 17, 0, x_hand, data);
 }

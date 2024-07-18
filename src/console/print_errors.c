@@ -6,7 +6,7 @@
 /*   By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 12:14:04 by akozin            #+#    #+#             */
-/*   Updated: 2024/07/17 15:43:54 by akozin           ###   ########.fr       */
+/*   Updated: 2024/07/18 15:03:10 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
  */
 void	print_err(t_data *data)
 {
+	ft_putstr_fd("Error\n", 2);
 	if (data->error == DOUBLE_ERR)
 		ft_putstr_fd("Incorrectly entered double\n", 2);
 	else if (data->error == ORIGIN_ERR)
@@ -39,4 +40,6 @@ format: R,G,B\n", 2);
 		ft_putstr_fd("Wrong number of parameters on some line\n", 2);
 	else if (data->error == MALLOC_ERR)
 		ft_putstr_fd("Malloc error\n", 2);
+	else
+		ft_putstr_fd("Unknown error\n", 2);
 }

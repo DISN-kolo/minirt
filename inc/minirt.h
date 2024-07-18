@@ -6,7 +6,7 @@
 /*   By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 16:07:24 by akozin            #+#    #+#             */
-/*   Updated: 2024/07/18 14:55:14 by akozin           ###   ########.fr       */
+/*   Updated: 2024/07/18 15:22:13 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,20 @@
 
 # include "../libs/libft/libft.h"
 # include "../libs/gnl/get_next_line.h"
+# include "../libs/minilibx-linux/mlx.h"
 # include <fcntl.h>
 # include <unistd.h>
 # include <stdio.h>
 # include <math.h>
+
+typedef struct s_img
+{
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}	t_img;
 
 typedef struct s_vec3
 {
@@ -95,12 +105,18 @@ typedef struct s_data
 	int		obj_n;
 	int		c_obj;
 	t_err	error;
+	void	*mlx;
+	void	*win;
+	t_img	img;
 }	t_data;
 
 void	data_init(t_data *data);
 void	file_reading(t_data *data, char **av);
 void	allocate_stuff(t_data *data);
-t_rgb	rgb_init(void);
+void	mlx_setting_up(t_data *data);
+
+int		key_hand(int keycode, t_data *data);
+int		x_hand(t_data *data);
 
 int		file_probe(t_data *data, char *s);
 void	parser_counter(t_data *data, int fd);
@@ -117,6 +133,7 @@ void	parse_cy(t_data *data, char **s);
 double	parse_power(t_data *data, char *s);
 double	parse_rational_positive(t_data *data, char *s);
 double	atod_res_add_logic(int *ptp, double res, char c);
+t_rgb	rgb_init(void);
 t_rgb	parse_rgb(t_data *data, char *s);
 t_vec3	parse_origin(t_data *data, char *s);
 t_vec3	parse_normal(t_data *data, char *s);

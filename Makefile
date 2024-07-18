@@ -6,7 +6,7 @@
 #    By: fcosta-f <fcosta-f@student.42barcelona.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/18 16:54:33 by akozin            #+#    #+#              #
-#    Updated: 2024/07/18 13:52:34 by akozin           ###   ########.fr        #
+#    Updated: 2024/07/18 15:22:38 by akozin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,7 @@ CFLAGS = -Wall -Wextra -Werror -g# -fsanitize=address
 SRCNAMES = main.c \
 		   utils/fileprobe.c \
 		   utils/inits.c \
+		   utils/mlx_utils.c \
 		   utils/misc.c \
 		   utils/vector.c \
 		   utils/vector2.c \

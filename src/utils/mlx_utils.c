@@ -1,27 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   mlx_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/15 15:29:46 by akozin            #+#    #+#             */
-/*   Updated: 2024/07/18 15:27:56 by akozin           ###   ########.fr       */
+/*   Created: 2024/07/18 15:15:20 by akozin            #+#    #+#             */
+/*   Updated: 2024/07/18 15:25:26 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/minirt.h"
+#include "../../inc/minirt.h"
 
-int	main(int ac, char **av)
+int	key_hand(int keycode, t_data *data)
 {
-	t_data	data;
-
-	if (ac != 2)
-		return (print_usage(av[0]), 1);
-	data_init(&data);
-	file_reading(&data, av);
-	mlx_setting_up(&data);
-	mlx_loop(data.mlx);
-	free_all(&data);
+	if (keycode == 65307)
+	{
+		free_all(data);
+		exit(0);
+	}
 	return (0);
+}
+
+int	x_hand(t_data *data)
+{
+	free_all(data);
+	exit(0);
 }
