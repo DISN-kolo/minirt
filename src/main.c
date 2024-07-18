@@ -6,7 +6,7 @@
 /*   By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 15:29:46 by akozin            #+#    #+#             */
-/*   Updated: 2024/07/18 15:27:56 by akozin           ###   ########.fr       */
+/*   Updated: 2024/07/18 16:36:41 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ int	main(int ac, char **av)
 	data_init(&data);
 	file_reading(&data, av);
 	mlx_setting_up(&data);
+	printf("img: %p\nadd: %p\n", data.img.img, data.img.addr);
+	test_drawing_lol(&data);
 	mlx_loop(data.mlx);
 	free_all(&data);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 16:07:24 by akozin            #+#    #+#             */
-/*   Updated: 2024/07/18 15:22:13 by akozin           ###   ########.fr       */
+/*   Updated: 2024/07/18 16:16:31 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,9 @@ void	mlx_setting_up(t_data *data);
 int		key_hand(int keycode, t_data *data);
 int		x_hand(t_data *data);
 
+int		rgb_to_int(t_rgb rgb);
+void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
+
 int		file_probe(t_data *data, char *s);
 void	parser_counter(t_data *data, int fd);
 
@@ -159,5 +162,7 @@ t_vec3	cross_prod(t_vec3 u, t_vec3 v);
 double	distance(t_vec3 a, t_vec3 b);
 t_vec3	vect_inv(t_vec3 v);
 void	print_vector(t_vec3 v);
+
+void	test_drawing_lol(t_data *data);
 
 #endif

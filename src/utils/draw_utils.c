@@ -1,29 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mlx_utils.c                                        :+:      :+:    :+:   */
+/*   draw_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/18 15:15:20 by akozin            #+#    #+#             */
-/*   Updated: 2024/07/18 15:48:40 by akozin           ###   ########.fr       */
+/*   Created: 2024/07/18 15:55:54 by akozin            #+#    #+#             */
+/*   Updated: 2024/07/18 16:38:49 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minirt.h"
 
-int	key_hand(int keycode, t_data *data)
+void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 {
-	if (keycode == 65307)
-	{
-		free_all(data);
-		exit(0);
-	}
-	return (0);
+	char	*dst;
+
+	if (x >= 1920 || y >= 1080 || x < 0 || y < 0)
+		return ;
+	dst = img->addr + (y * img->line_length + x * (img->bits_per_pixel / 8));
+	*(unsigned int *)dst = color;
 }
 
-int	x_hand(t_data *data)
+int	rgb_to_int(t_rgb rgb)
 {
-	free_all(data);
-	exit(0);
+	return ((rgb.r << 16) + (rgb.g << 8) + rgb.b);
 }
+//	return ((rgb.r << 16) & 0xFF0000 + (rgb.g << 8) & 0xFF00 + rgb.b & 0xFF);
