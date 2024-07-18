@@ -6,7 +6,7 @@
 /*   By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 16:52:58 by akozin            #+#    #+#             */
-/*   Updated: 2024/07/16 14:48:24 by akozin           ###   ########.fr       */
+/*   Updated: 2024/07/18 13:48:00 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,21 @@
 static void	decide_and_read(t_data *data, char **s)
 {
 	if (!ft_strncmp(s[0], "A", 2))
-		parse_amb(data, s); // TODO
-//	else if (!ft_strncmp(s[0], "C", 2))
-//		parse_cam(data, s); // TODO
-//	else if (!ft_strncmp(s[0], "L", 2))
-//		parse_lig(data, s); // TODO
-//	else if (!ft_strncmp(s[0], "sp", 3))
-//		parse_sph(data, s); // TODO
-//	else if (!ft_strncmp(s[0], "pl", 3))
-//		parse_pla(data, s); // TODO
-//	else if (!ft_strncmp(s[0], "cy", 3))
-//		parse_cyl(data, s); // TODO
-//	return ((void)(data->error = TYPE_ERR));
+		parse_amb(data, s);
+	else if (!ft_strncmp(s[0], "C", 2))
+		parse_cam(data, s);
+	else if (!ft_strncmp(s[0], "L", 2))
+		parse_lig(data, s);
+	else if (!ft_strncmp(s[0], "sp", 3))
+		parse_sp(data, s);
+	else if (!ft_strncmp(s[0], "pl", 3))
+		parse_pl(data, s);
+	else if (!ft_strncmp(s[0], "cy", 3))
+		parse_cy(data, s);
+	else
+		return ((void)(data->error = TYPE_ERR));
 }
-//  ^^^^^^<--- just in case. lol
+//		^^^^^^<--- just in case. lol
 
 /*
  * copying the EOL check from parser counter "just in case"

@@ -25,17 +25,31 @@ MAKE = make
 RM = rm -rf
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -g# -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror# -g -fsanitize=address
 
 SRCNAMES = main.c \
 		   utils/fileprobe.c \
 		   utils/inits.c \
+		   utils/mlx_utils.c \
+		   utils/draw_utils.c \
 		   utils/misc.c \
 		   utils/vector.c \
+		   utils/vector2.c \
 		   parse/parser_counter.c \
 		   parse/parser.c \
 		   parse/parse_amb.c \
+		   parse/parse_cam.c \
+		   parse/parse_lig.c \
+		   parse/parse_sp.c \
+		   parse/parse_pl.c \
+		   parse/parse_cy.c \
 		   parse/parse_power.c \
+		   parse/parse_rational_positive.c \
+		   parse/parse_rgb.c \
+		   parse/parse_origin.c \
+		   parse/parse_normal.c \
+		   parse/parse_fov.c \
+		   draw/draw.c \
 		   console/print_usage.c \
 		   console/print_errors.c \
 		   free_utils/free_utils.c \
@@ -49,7 +63,7 @@ DEPS = $(addprefix obj/, $(SRCS:.c=.d))
 all:		folders make_libs $(NAME)
 
 folders:
-	mkdir -p obj/ obj/utils/ obj/parse/ obj/console/ obj/free_utils/ obj/ray/
+	mkdir -p obj/ obj/utils/ obj/parse/ obj/console/ obj/free_utils/ obj/draw/ obj/ray/
 
 make_libs:
 	$(MAKE) -C $(LIBFT)

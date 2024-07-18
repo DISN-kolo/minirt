@@ -6,7 +6,7 @@
 /*   By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 12:14:04 by akozin            #+#    #+#             */
-/*   Updated: 2024/07/16 15:31:20 by akozin           ###   ########.fr       */
+/*   Updated: 2024/07/18 15:03:10 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,17 @@
  */
 void	print_err(t_data *data)
 {
+	ft_putstr_fd("Error\n", 2);
 	if (data->error == DOUBLE_ERR)
 		ft_putstr_fd("Incorrectly entered double\n", 2);
+	else if (data->error == ORIGIN_ERR)
+		ft_putstr_fd("Incorrectly entered floating point vector. \
+Format: X,Y,Z\n", 2);
+	else if (data->error == RGB_ERR)
+		ft_putstr_fd("Incorrectly entered RGB. Ranges: 0..255, \
+format: R,G,B\n", 2);
+	else if (data->error == FOV_ERR)
+		ft_putstr_fd("Incorrectly entered FOV. Ranges: 0..180\n", 2);
 	else if (data->error == TYPE_ERR)
 		ft_putstr_fd("Unknown line encountered\n", 2);
 	else if (data->error == FILE_ERR)
@@ -31,4 +40,6 @@ void	print_err(t_data *data)
 		ft_putstr_fd("Wrong number of parameters on some line\n", 2);
 	else if (data->error == MALLOC_ERR)
 		ft_putstr_fd("Malloc error\n", 2);
+	else
+		ft_putstr_fd("Unknown error\n", 2);
 }
