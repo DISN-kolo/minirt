@@ -6,7 +6,7 @@
 #    By: fcosta-f <fcosta-f@student.42barcelona.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/18 16:54:33 by akozin            #+#    #+#              #
-#    Updated: 2024/07/17 16:50:20 by akozin           ###   ########.fr        #
+#    Updated: 2024/07/18 13:39:01 by akozin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,6 +39,7 @@ SRCNAMES = main.c \
 		   parse/parse_cam.c \
 		   parse/parse_lig.c \
 		   parse/parse_sp.c \
+		   parse/parse_pl.c \
 		   parse/parse_power.c \
 		   parse/parse_rational_positive.c \
 		   parse/parse_rgb.c \

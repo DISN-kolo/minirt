@@ -6,7 +6,7 @@
 /*   By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 16:33:29 by akozin            #+#    #+#             */
-/*   Updated: 2024/07/16 17:26:51 by akozin           ###   ########.fr       */
+/*   Updated: 2024/07/18 13:39:34 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,5 @@ t_rgb	parse_rgb(t_data *data, char *s)
 		return (res);
 	if (rgb_failcheck(res))
 		return (data->error = RGB_ERR, res);
-	printf("in the end, r = %3d, g = %3d, b = %3d\n", res.r, res.g, res.b); // XXX
 	return (res);
 }
