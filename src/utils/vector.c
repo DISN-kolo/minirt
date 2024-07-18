@@ -39,10 +39,12 @@ t_vec3	vect_add(t_vec3 a, t_vec3 b)
 
 t_vec3	prod_esc(t_vec3 v, double f)
 {
-	v.x = v.x * f;
-	v.y = v.y * f;
-	v.z = v.z * f;
-	return (v);
+	t_vec3	w;
+
+	w.x = v.x * f;
+	w.y = v.y * f;
+	w.z = v.z * f;
+	return (w);
 }
 
 //puede devolver el vector

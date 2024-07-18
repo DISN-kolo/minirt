@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fcosta-f <fcosta-f@student.42barcelona.    +#+  +:+       +#+         #
+#    By: fcosta-f < fcosta-f@student.42barcelona    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/18 16:54:33 by akozin            #+#    #+#              #
-#    Updated: 2024/07/18 16:44:16 by akozin           ###   ########.fr        #
+#    Updated: 2024/07/18 20:48:13 by fcosta-f         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,7 +52,8 @@ SRCNAMES = main.c \
 		   draw/draw.c \
 		   console/print_usage.c \
 		   console/print_errors.c \
-		   free_utils/free_utils.c
+		   free_utils/free_utils.c \
+		   ray/ray_plane.c
 
 
 SRCS = $(SRCNAMES)
@@ -62,7 +63,7 @@ DEPS = $(addprefix obj/, $(SRCS:.c=.d))
 all:		folders make_libs $(NAME)
 
 folders:
-	mkdir -p obj/ obj/utils/ obj/parse/ obj/console/ obj/free_utils/ obj/draw/
+	mkdir -p obj/ obj/utils/ obj/parse/ obj/console/ obj/free_utils/ obj/draw/ obj/ray/
 
 make_libs:
 	$(MAKE) -C $(LIBFT)
