@@ -72,10 +72,10 @@ void	file_reading(t_data *data, char **av)
 void	mlx_setting_up(t_data *data)
 {
 	data->mlx = mlx_init();
-	data->win = mlx_new_window(data->mlx, 1920, 1080, "MiniRT");
+	data->win = mlx_new_window(data->mlx, WIN_X, WIN_Y, "MiniRT");
 	mlx_hook(data->win, 2, 1L << 0, key_hand, data);
 	mlx_hook(data->win, 17, 0, x_hand, data);
-	data->img.img = mlx_new_image(data->mlx, 1920, 1080);
+	data->img.img = mlx_new_image(data->mlx, WIN_X, WIN_Y);
 	data->img.addr = mlx_get_data_addr(data->img.img,
 			&(*data).img.bits_per_pixel, &(*data).img.line_length,
 			&(*data).img.endian);

@@ -21,8 +21,8 @@ void	test_drawing_lol(t_data *data)
 	i = data->obj_n - 1;
 	if (data->obj_n == 0)
 		return ;
-	int	stepx = 1920/data->obj_n;
-	int	stepy = 1080/data->obj_n;
+	int	stepx = WIN_X/data->obj_n;
+	int	stepy = WIN_Y/data->obj_n;
 	while (i >= 0)
 	{
 		printf("%d %d %d\n",

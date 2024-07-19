@@ -21,6 +21,9 @@
 # include <stdio.h>
 # include <math.h>
 
+# define WIN_Y 1080// / 2
+# define WIN_X 1920// / 2
+
 typedef struct s_img
 {
 	void	*img;
@@ -44,7 +47,6 @@ typedef struct s_rgb
 	int	b;
 }	t_rgb;
 
-
 typedef enum e_err
 {
 	NULL_ERR,
@@ -66,7 +68,6 @@ typedef enum e_obj_name
 	PL,
 	CY
 }	t_obj_name;
-
 
 typedef struct s_obj
 {
