@@ -22,7 +22,7 @@ int	main(int ac, char **av)
 	file_reading(&data, av);
 	mlx_setting_up(&data);
 	printf("img: %p\nadd: %p\n", data.img.img, data.img.addr);
-	test_drawing_lol(&data);
+	draw(&data);
 	mlx_loop(data.mlx);
 	free_all(&data);
 	return (0);

@@ -58,6 +58,7 @@ typedef enum e_err
 	FILE_ERR,
 	FNAME_ERR,
 	TOO_MANY_OBJS_ERR,
+	NO_CAM_ERR,
 	PARAM_N_ERR,
 	MALLOC_ERR
 }	t_err;
@@ -165,6 +166,6 @@ void	print_vector(t_vec3 v);
 
 double	splane_ray(t_vec3 o, t_vec3 d, t_vec3 pp, t_vec3 n);
 
-void	test_drawing_lol(t_data *data);
+void	draw(t_data *data);
 
 #endif

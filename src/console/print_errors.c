@@ -15,6 +15,14 @@
 /*
  * see ../../inc/minirt.h for the enum t_err
  */
+static void	print_err_2(t_data *data)
+{
+	if (data->error == NO_CAM_ERR)
+		ft_putstr_fd("The scene must have a camera\n", 2);
+	else
+		ft_putstr_fd("Unknown error\n", 2);
+}
+
 void	print_err(t_data *data)
 {
 	ft_putstr_fd("Error\n", 2);
@@ -41,5 +49,5 @@ format: R,G,B\n", 2);
 	else if (data->error == MALLOC_ERR)
 		ft_putstr_fd("Malloc error\n", 2);
 	else
-		ft_putstr_fd("Unknown error\n", 2);
+		print_err_2(data);
 }
