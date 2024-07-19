@@ -21,10 +21,14 @@
 # include <stdio.h>
 # include <math.h>
 
-//# define WIN_Y 1080
-//# define WIN_X 1920
-# define WIN_Y 1080 / 4
-# define WIN_X 1920 / 4
+//# define WIN_Y 1080.f
+//# define WIN_X 1920.f
+//# define WIN_Y 270.f
+//# define WIN_X 480.f
+# define WIN_Y 540.f
+# define WIN_X 960.f
+//# define WIN_Y 1000.f
+//# define WIN_X 1000.f
 
 typedef struct s_img
 {
@@ -93,7 +97,7 @@ typedef struct s_cam
 {
 	t_vec3	origin;
 	t_vec3	normal;
-	int		fov;
+	double	fov;
 }	t_cam;
 
 typedef struct s_data

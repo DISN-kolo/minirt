@@ -79,5 +79,4 @@ void	mlx_setting_up(t_data *data)
 	data->img.addr = mlx_get_data_addr(data->img.img,
 			&(*data).img.bits_per_pixel, &(*data).img.line_length,
 			&(*data).img.endian);
-	printf("img: %p\nadd: %p\n", data->img.img, data->img.addr);
 }

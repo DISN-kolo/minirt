@@ -21,7 +21,6 @@ int	main(int ac, char **av)
 	data_init(&data);
 	file_reading(&data, av);
 	mlx_setting_up(&data);
-	printf("img: %p\nadd: %p\n", data.img.img, data.img.addr);
 	draw(&data);
 	mlx_loop(data.mlx);
 	free_all(&data);
