@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcosta-f < fcosta-f@student.42barcelona    +#+  +:+       +#+        */
+/*   By: fcosta-f <fcosta-f@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 16:07:24 by akozin            #+#    #+#             */
-/*   Updated: 2024/07/18 20:49:19 by fcosta-f         ###   ########.fr       */
+/*   Updated: 2024/07/19 21:35:51 by fcosta-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 # include <unistd.h>
 # include <stdio.h>
 # include <math.h>
+
+#define EPSILON 0.00001
 
 typedef struct s_img
 {
