@@ -6,7 +6,7 @@
 /*   By: fcosta-f <fcosta-f@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 20:31:30 by fcosta-f          #+#    #+#             */
-/*   Updated: 2024/07/19 21:35:59 by fcosta-f         ###   ########.fr       */
+/*   Updated: 2024/07/19 21:41:21 by fcosta-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@ static void		solve_quadratic(double result[2], t_vec3 o, t_vec3 d, t_obj *obj)
 	q[0] = dot_prod(d, d);
 	q[1] = 2 * dot_prod(d, oc);
 	q[2] = dot_prod(oc, oc) - obj->diameter/2.0 * obj->diameter/2.0;
-	disc = k[1] * k[1] - (4 * k[0] * k[2]); //discriminant to know if there are real solutions eq 2o grado de toda la vida
+	disc = q[1] * q[1] - (4 * q[0] * q[2]); //discriminant to know if there are real solutions eq 2o grado de toda la vida
 	if (disc < 0)
 	{
-		x[0] = INFINITY;
-		x[1] = INFINITY;
+		result[0] = INFINITY;
+		result[1] = INFINITY;
 		return ;
 	}
 	result[0] = (-q[1] + sqrt(disc)) / (2 * q[0]);
@@ -37,11 +37,9 @@ double			sphere_intersection(t_vec3 o, t_vec3 d, t_obj *obj)
 {
 	double	pnear;
 	double	x[2];
-	t_vec3	p1;
-	t_vec3	p2;
 
 	pnear = INFINITY;
-	solve_sphere(x, o, d, lst);
+	solve_quadratic(x, o, d, obj);
 	if (x[0] > EPSILON && x[0] < INFINITY) //epsilon to avoid precision errors self-intersection...
 		pnear = x[0];
 	if (x[1] > EPSILON && x[1] < INFINITY) {
