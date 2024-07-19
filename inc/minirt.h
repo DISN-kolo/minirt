@@ -22,6 +22,14 @@
 # include <math.h>
 
 #define EPSILON 0.00001
+//# define WIN_Y 1080.f
+//# define WIN_X 1920.f
+//# define WIN_Y 270.f
+//# define WIN_X 480.f
+# define WIN_Y 540.f
+# define WIN_X 960.f
+//# define WIN_Y 1000.f
+//# define WIN_X 1000.f
 
 typedef struct s_img
 {
@@ -46,7 +54,6 @@ typedef struct s_rgb
 	int	b;
 }	t_rgb;
 
-
 typedef enum e_err
 {
 	NULL_ERR,
@@ -58,6 +65,7 @@ typedef enum e_err
 	FILE_ERR,
 	FNAME_ERR,
 	TOO_MANY_OBJS_ERR,
+	NO_CAM_ERR,
 	PARAM_N_ERR,
 	MALLOC_ERR
 }	t_err;
@@ -68,7 +76,6 @@ typedef enum e_obj_name
 	PL,
 	CY
 }	t_obj_name;
-
 
 typedef struct s_obj
 {
@@ -91,7 +98,7 @@ typedef struct s_cam
 {
 	t_vec3	origin;
 	t_vec3	normal;
-	int		fov;
+	double	fov;
 }	t_cam;
 
 typedef struct s_data
@@ -155,8 +162,8 @@ int		str_arr_counter(char **s);
 
 double	vec_len(t_vec3 vec);
 t_vec3	vec_sub(t_vec3 a, t_vec3 b);
-t_vec3	vect_add(t_vec3 a, t_vec3 b);
-t_vec3	prod_esc(t_vec3 v, double f);
+t_vec3	vec_add(t_vec3 a, t_vec3 b);
+t_vec3	vec_scale(t_vec3 v, double f);
 void	normalize(t_vec3 *v);
 double	dot_prod(t_vec3 v1, t_vec3 v2);
 t_vec3	cross_prod(t_vec3 u, t_vec3 v);
@@ -166,6 +173,6 @@ void	print_vector(t_vec3 v);
 
 double	splane_ray(t_vec3 o, t_vec3 d, t_vec3 pp, t_vec3 n);
 
-void	test_drawing_lol(t_data *data);
+void	draw(t_data *data);
 
 #endif

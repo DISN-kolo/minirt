@@ -59,4 +59,6 @@ void	parser_counter(t_data *data, int fd)
 		free(line);
 		line = get_next_line(fd);
 	}
+	if (data->cam_n == 0)
+		return ((void)(data->error = NO_CAM_ERR));
 }
