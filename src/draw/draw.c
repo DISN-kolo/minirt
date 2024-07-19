@@ -59,24 +59,47 @@
  * so, for y,
  * => y = 2 * py / WIN_Y - 1
  *
+ * so for our scene, x is to the right, y is up, and z is depth.
+ *
  * this should be enough.
  */
 void	draw(t_data *data)
 {
-	int	i;
-	int	x;
-	int	y;
+	int		px;
+	int		py;
+	t_vec3	f;
+	t_vec3	u;
+	t_vec3	r;
+	double	plane_col;
 
-	i = data->obj_n - 1;
-	if (data->obj_n == 0)
-		return ;
-	while (x < (i + 1) * stepx)
+	px = 0;
+	u.x = 0;
+	u.y = 1;
+	u.z = 0;
+	r.x = 1;
+	r.y = 0;
+	r.z = 0;
+	while (px < WIN_X)
 	{
-		y = 0;
-		while (y < (i + 1) * stepy)
-			my_mlx_pixel_put(&data->img, x, y++,
-				rgb_to_int(data->objs[i].color));
-		x++;
+		py = 0;
+		while (py < WIN_Y)
+		{
+			printf("trying pixel %4d %4d\n", px, py);
+			f = vec_add(data->cam.normal, vec_scale(r, tan(data->cam.fov / 2) * (2 * px / WIN_X - 1)));
+			f = vec_add(data->cam.normal, vec_scale(u, WIN_X / WIN_Y * tan(data->cam.fov / 2) * (2 * py / WIN_Y - 1)));
+			normalize(&f);
+			plane_col = splane_ray(data->cam.origin, f, data->objs[0].origin, data->objs[0].normal);
+			if (plane_col != INFINITY)
+			{
+				printf("ray sent in %4d %4d hits plane at distance %10f from the origin\n", px, py, plane_col);
+				my_mlx_pixel_put(&data->img, px, py++,
+					rgb_to_int(data->objs[0].color));
+			}
+			else
+				my_mlx_pixel_put(&data->img, px, py++,
+					rgb_to_int(data->amb.color));
+		}
+		px++;
 	}
 	mlx_put_image_to_window(data->mlx, data->win, data->img.img, 0, 0);
 }

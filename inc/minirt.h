@@ -21,8 +21,10 @@
 # include <stdio.h>
 # include <math.h>
 
-# define WIN_Y 1080// / 2
-# define WIN_X 1920// / 2
+//# define WIN_Y 1080
+//# define WIN_X 1920
+# define WIN_Y 1080 / 4
+# define WIN_X 1920 / 4
 
 typedef struct s_img
 {
@@ -155,8 +157,8 @@ int		str_arr_counter(char **s);
 
 double	vec_len(t_vec3 vec);
 t_vec3	vec_sub(t_vec3 a, t_vec3 b);
-t_vec3	vect_add(t_vec3 a, t_vec3 b);
-t_vec3	prod_esc(t_vec3 v, double f);
+t_vec3	vec_add(t_vec3 a, t_vec3 b);
+t_vec3	vec_scale(t_vec3 v, double f);
 void	normalize(t_vec3 *v);
 double	dot_prod(t_vec3 v1, t_vec3 v2);
 t_vec3	cross_prod(t_vec3 u, t_vec3 v);
