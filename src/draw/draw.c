@@ -6,7 +6,7 @@
 /*   By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 15:48:10 by akozin            #+#    #+#             */
-/*   Updated: 2024/07/22 14:22:30 by akozin           ###   ########.fr       */
+/*   Updated: 2024/07/22 17:22:20 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	res_setter_internal(double temp, t_col *res, int i)
 	}
 }
 
-static t_col	check_objs_internal(t_vec3 f, t_data *data, int i, t_col res)
+t_col	check_objs_internal(t_vec3 f, t_data *data, int i, t_col res)
 {
 	double	temp;
 
@@ -92,7 +92,7 @@ void	draw(t_data *data)
 			col = check_objects(f, data);
 			if (col.obj_ind != -1 && !isinf(col.r_dist))
 				my_mlx_pixel_put(&data->img, px, py++,
-					rgb_to_int(data->objs[col.obj_ind].color));
+					rgb_to_int(light_calc(data, col, f)));
 			else
 				my_mlx_pixel_put(&data->img, px, py++,
 					rgb_to_int(data->amb.color));

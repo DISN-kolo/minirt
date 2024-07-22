@@ -6,7 +6,7 @@
 #    By: fcosta-f <fcosta-f@student.42barcelona.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/18 16:54:33 by akozin            #+#    #+#              #
-#    Updated: 2024/07/19 21:43:03 by fcosta-f         ###   ########.fr        #
+#    Updated: 2024/07/22 15:38:21 by akozin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +35,7 @@ SRCNAMES = main.c \
 		   utils/misc.c \
 		   utils/vector.c \
 		   utils/vector2.c \
+		   utils/color_mixing.c \
 		   parse/parser_counter.c \
 		   parse/parser.c \
 		   parse/parse_amb.c \
@@ -50,6 +51,7 @@ SRCNAMES = main.c \
 		   parse/parse_normal.c \
 		   parse/parse_fov.c \
 		   draw/draw.c \
+		   draw/light_calculus.c \
 		   console/print_usage.c \
 		   console/print_errors.c \
 		   free_utils/free_utils.c \

@@ -6,7 +6,7 @@
 /*   By: fcosta-f <fcosta-f@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 16:07:24 by akozin            #+#    #+#             */
-/*   Updated: 2024/07/22 14:22:56 by akozin           ###   ########.fr       */
+/*   Updated: 2024/07/22 17:26:13 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include <stdio.h>
 # include <math.h>
 
-#define EPSILON 0.00001
+# define EPSILON 0.00001
 # define WIN_Y 1080.f
 # define WIN_X 1920.f
 //# define WIN_Y 270.f
@@ -30,6 +30,7 @@
 //# define WIN_X 960.f
 //# define WIN_Y 1000.f
 //# define WIN_X 1000.f
+# define FALLOFF 1.f
 
 typedef struct s_col
 {
@@ -179,7 +180,15 @@ void	print_vector(t_vec3 v);
 
 double	splane_ray(t_vec3 o, t_vec3 d, t_vec3 pp, t_vec3 n);
 double	sphere_intersection(t_vec3 o, t_vec3 d, t_obj *obj);
+t_vec3	sphere_n(t_obj sp, t_vec3 p);
 
 void	draw(t_data *data);
+t_col	check_objs_internal(t_vec3 f, t_data *data, int i, t_col res);
+t_rgb	light_calc(t_data *data, t_col col, t_vec3 f);
+
+t_rgb	rgb_add(t_rgb c1, t_rgb c2);
+t_rgb	rgb_mult(t_rgb c1, t_rgb c2);
+t_rgb	rgb_avg(t_rgb c1, t_rgb c2);
+t_rgb	rgb_scale(t_rgb c, double j);
 
 #endif

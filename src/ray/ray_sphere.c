@@ -6,11 +6,20 @@
 /*   By: fcosta-f <fcosta-f@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 20:31:30 by fcosta-f          #+#    #+#             */
-/*   Updated: 2024/07/22 14:22:59 by akozin           ###   ########.fr       */
+/*   Updated: 2024/07/22 14:50:33 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minirt.h"
+
+t_vec3	sphere_n(t_obj sp, t_vec3 p)
+{
+	t_vec3	res;
+
+	res = vec_sub(p, sp.origin);
+	normalize(&res);
+	return (res);
+}
 
 static void		solve_quadratic(double result[2], t_vec3 o, t_vec3 d, t_obj *obj)
 {
