@@ -6,11 +6,62 @@
 /*   By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 15:48:10 by akozin            #+#    #+#             */
-/*   Updated: 2024/07/18 16:43:20 by akozin           ###   ########.fr       */
+/*   Updated: 2024/07/22 14:22:30 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minirt.h"
+
+static void	res_setter_internal(double temp, t_col *res, int i)
+{
+	if (!isinf(temp) && temp > 0 && (isinf(res->r_dist) || temp < res->r_dist))
+	{
+		res->r_dist = temp;
+		res->obj_ind = i;
+	}
+}
+
+static t_col	check_objs_internal(t_vec3 f, t_data *data, int i, t_col res)
+{
+	double	temp;
+
+	if (data->objs[i].type == SP)
+	{
+		temp = sphere_intersection(data->cam.origin, f, &(data->objs[i]));
+		res_setter_internal(temp, &res, i);
+	}
+	else if (data->objs[i].type == PL)
+	{
+		temp = splane_ray(data->cam.origin, f, data->objs[i].origin,
+			data->objs[i].normal);
+		res_setter_internal(temp, &res, i);
+	}
+	else if (data->objs[i].type == CY)
+	{
+		/*
+		temp = cyl_collide_check(); // TODO
+		*/
+		temp = -1;
+		res_setter_internal(temp, &res, i);
+	}
+	return (res);
+}
+
+static t_col	check_objects(t_vec3 f, t_data *data)
+{
+	int		i;
+	t_col	res;
+
+	i = 0;
+	res.obj_ind = -1;
+	res.r_dist = INFINITY;
+	while (i < data->obj_n)
+	{
+		res = check_objs_internal(f, data, i, res);
+		i++;
+	}
+	return (res);
+}
 
 void	draw(t_data *data)
 {
@@ -19,7 +70,7 @@ void	draw(t_data *data)
 	t_vec3	f;
 	t_vec3	r;
 	t_vec3	u;
-	double	plane_col;
+	t_col	col;
 
 	px = 0;
 	r.x = -1;
@@ -33,24 +84,15 @@ void	draw(t_data *data)
 		py = 0;
 		while (py < WIN_Y)
 		{
-			f = vec_add(data->cam.normal,
-					vec_scale(r,
-						tan(data->cam.fov / 2.) *
-						(2 * px / WIN_X - 1)));
-			f = vec_add(f,
-					vec_scale(u,
-						WIN_Y / WIN_X *
-						tan(data->cam.fov / 2.) *
-						(2 * py / WIN_Y - 1)));
+			f = vec_add(data->cam.normal, vec_scale(r,
+				tan(data->cam.fov / 2.) * (2 * px / WIN_X - 1)));
+			f = vec_add(f, vec_scale(u, WIN_Y / WIN_X *
+				tan(data->cam.fov / 2.) * (2 * py / WIN_Y - 1)));
 			normalize(&f);
-			//printf("the vector would be %f %f %f\n\n", f.x, f.y, f.z);
-			plane_col = splane_ray(data->cam.origin, f, data->objs[0].origin, data->objs[0].normal);
-			if (!isinf(plane_col))
-			{
-			//	printf("ray sent in %4d %4d hits plane at distance %10f from the origin\n", px, py, plane_col);
+			col = check_objects(f, data);
+			if (col.obj_ind != -1 && !isinf(col.r_dist))
 				my_mlx_pixel_put(&data->img, px, py++,
-					rgb_to_int(data->objs[0].color));
-			}
+					rgb_to_int(data->objs[col.obj_ind].color));
 			else
 				my_mlx_pixel_put(&data->img, px, py++,
 					rgb_to_int(data->amb.color));

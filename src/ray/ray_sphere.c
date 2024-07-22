@@ -6,7 +6,7 @@
 /*   By: fcosta-f <fcosta-f@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 20:31:30 by fcosta-f          #+#    #+#             */
-/*   Updated: 2024/07/19 21:43:02 by fcosta-f         ###   ########.fr       */
+/*   Updated: 2024/07/22 14:22:59 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static void		solve_quadratic(double result[2], t_vec3 o, t_vec3 d, t_obj *obj)
 	result[1] = (-q[1] - sqrt(disc)) / (2 * q[0]);
 }
 
-double			sphere_intersection(t_vec3 o, t_vec3 d, t_obj *obj)
+double	sphere_intersection(t_vec3 o, t_vec3 d, t_obj *obj)
 {
 	double	pnear;
 	double	x[2];

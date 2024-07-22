@@ -6,7 +6,7 @@
 /*   By: fcosta-f <fcosta-f@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 16:07:24 by akozin            #+#    #+#             */
-/*   Updated: 2024/07/19 21:43:04 by fcosta-f         ###   ########.fr       */
+/*   Updated: 2024/07/22 14:22:56 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,20 @@
 # include <math.h>
 
 #define EPSILON 0.00001
-//# define WIN_Y 1080.f
-//# define WIN_X 1920.f
+# define WIN_Y 1080.f
+# define WIN_X 1920.f
 //# define WIN_Y 270.f
 //# define WIN_X 480.f
-# define WIN_Y 540.f
-# define WIN_X 960.f
+//# define WIN_Y 540.f
+//# define WIN_X 960.f
 //# define WIN_Y 1000.f
 //# define WIN_X 1000.f
+
+typedef struct s_col
+{
+	int		obj_ind;
+	double	r_dist;
+}	t_col;
 
 typedef struct s_img
 {
@@ -172,6 +178,7 @@ t_vec3	vect_inv(t_vec3 v);
 void	print_vector(t_vec3 v);
 
 double	splane_ray(t_vec3 o, t_vec3 d, t_vec3 pp, t_vec3 n);
+double	sphere_intersection(t_vec3 o, t_vec3 d, t_obj *obj);
 
 void	draw(t_data *data);
 
