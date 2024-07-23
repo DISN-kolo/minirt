@@ -6,7 +6,7 @@
 /*   By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 14:53:52 by akozin            #+#    #+#             */
-/*   Updated: 2024/07/23 15:53:30 by akozin           ###   ########.fr       */
+/*   Updated: 2024/07/23 16:37:41 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,12 +73,33 @@ t_rgb	light_calc(t_data *data, t_col col, t_vec3 f)
 		if (l_block.obj_ind == -1 || isinf(l_block.r_dist)
 				|| l_block.r_dist > dist_l || l_block.r_dist < 2. * EPSILON)
 		{
-//			printf("AND HIS OVERWHELMING INTENSITY!\n");
-			//XXX
-			double scale_factor = data->lights[j].power / pow(FALLOFF, dist_l);
-//			printf("j = %d, sf = %f\n", j, scale_factor);
-			t_rgb perceived_light = rgb_scale(data->lights[j].color, scale_factor);
-			ret = rgb_add(ret, perceived_light);
+			if (data->objs[col.obj_ind].type == SP)
+			{
+				double scale_factor = data->lights[j].power / pow(FALLOFF, dist_l);
+				scale_factor *= dot_prod(sphere_n(data->objs[col.obj_ind], col_p), f_light) / (vec_len(sphere_n(data->objs[col.obj_ind], col_p)) * vec_len(f_light));
+				if (data->objs[col.obj_ind].diameter / 2. > distance(data->cam.origin, data->objs[col.obj_ind].origin))
+				{
+					if (data->objs[col.obj_ind].diameter / 2. > distance(data->lights[j].origin, data->objs[col.obj_ind].origin))
+					{
+						t_rgb perceived_light = rgb_scale(data->lights[j].color, scale_factor);
+						ret = rgb_add(ret, perceived_light);
+					}
+				}
+				else if (data->objs[col.obj_ind].diameter / 2. < distance(data->lights[j].origin, data->objs[col.obj_ind].origin))
+				{
+					t_rgb perceived_light = rgb_scale(data->lights[j].color, scale_factor);
+					ret = rgb_add(ret, perceived_light);
+				}
+			}
+			else
+			{
+//				printf("AND HIS OVERWHELMING INTENSITY!\n");
+				//XXX
+				double scale_factor = data->lights[j].power / pow(FALLOFF, dist_l);
+//				printf("j = %d, sf = %f\n", j, scale_factor);
+				t_rgb perceived_light = rgb_scale(data->lights[j].color, scale_factor);
+				ret = rgb_add(ret, perceived_light);
+			}
 		}
 //		else
 //			printf("dist: %f\nneeded: %f\n", l_block.r_dist, dist_l);

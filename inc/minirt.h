@@ -6,7 +6,7 @@
 /*   By: fcosta-f <fcosta-f@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 16:07:24 by akozin            #+#    #+#             */
-/*   Updated: 2024/07/23 15:53:19 by akozin           ###   ########.fr       */
+/*   Updated: 2024/07/23 16:38:49 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 # define WIN_X 1000.f
 //# define WIN_X 50.f
 //# define WIN_Y 50.f
-# define FALLOFF 1.5f
+# define FALLOFF 1.3f
 
 typedef struct s_col
 {

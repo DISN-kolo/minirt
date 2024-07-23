@@ -6,7 +6,7 @@
 /*   By: fcosta-f <fcosta-f@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 20:31:30 by fcosta-f          #+#    #+#             */
-/*   Updated: 2024/07/23 16:03:43 by akozin           ###   ########.fr       */
+/*   Updated: 2024/07/23 16:43:00 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ t_vec3	sphere_n(t_obj sp, t_vec3 p)
 	t_vec3	res;
 
 	res = vec_sub(sp.origin, p);
+	if (vec_len(res) < sp.diameter / 2.)
+		vec_scale(res, -1.);
 	normalize(&res);
 	return (res);
 }
