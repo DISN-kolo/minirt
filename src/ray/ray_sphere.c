@@ -6,7 +6,7 @@
 /*   By: fcosta-f <fcosta-f@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 20:31:30 by fcosta-f          #+#    #+#             */
-/*   Updated: 2024/07/22 14:50:33 by akozin           ###   ########.fr       */
+/*   Updated: 2024/07/23 16:03:43 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,18 @@ t_vec3	sphere_n(t_obj sp, t_vec3 p)
 {
 	t_vec3	res;
 
-	res = vec_sub(p, sp.origin);
+	res = vec_sub(sp.origin, p);
 	normalize(&res);
 	return (res);
 }
 
-static void		solve_quadratic(double result[2], t_vec3 o, t_vec3 d, t_obj *obj)
+static void	solve_quadratic(double result[2], t_vec3 o, t_vec3 d, t_obj *obj)
 {
 	t_vec3	oc;
 	double	disc;
 	double	q[3];
 
-	oc = vec_sub(o, obj->origin); //from ray origin to sphere center
+	oc = vec_sub(obj->origin, o); //from ray origin to sphere center
 	q[0] = dot_prod(d, d);
 	q[1] = 2 * dot_prod(d, oc);
 	q[2] = dot_prod(oc, oc) - obj->diameter/2.0 * obj->diameter/2.0;

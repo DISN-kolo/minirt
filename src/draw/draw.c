@@ -6,7 +6,7 @@
 /*   By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 15:48:10 by akozin            #+#    #+#             */
-/*   Updated: 2024/07/23 13:17:12 by akozin           ###   ########.fr       */
+/*   Updated: 2024/07/23 16:04:24 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,22 +73,24 @@ void	draw(t_data *data)
 	t_col	col;
 
 	px = 0;
-	r.x = -1;
+	r.x = 1;
 	r.y = 0;
 	r.z = 0;
 	u.x = 0;
-	u.y = 1;
+	u.y = -1;
 	u.z = 0;
-	while (px < WIN_X + 1)
+	while (px < WIN_X)
 	{
 		py = 0;
 		while (py < WIN_Y)
 		{
-			f = vec_add(data->cam.normal, vec_scale(r,
+			f = vec_add(data->cam.normal, vec_scale(r, WIN_X / WIN_Y *
 				tan(data->cam.fov / 2.) * (2 * px / WIN_X - 1)));
-			f = vec_add(f, vec_scale(u, WIN_Y / WIN_X *
+			f = vec_add(f, vec_scale(u,
 				tan(data->cam.fov / 2.) * (2 * py / WIN_Y - 1)));
 			normalize(&f);
+		//	printf("for pixel x: %2d, y: %2d we're launching ray: ", px, py);
+		//	print_vector(f);
 			col = check_objects(f, data);
 			if (col.obj_ind != -1 && !isinf(col.r_dist))
 				my_mlx_pixel_put(&data->img, px, py++,

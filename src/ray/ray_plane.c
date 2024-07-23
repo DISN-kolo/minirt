@@ -6,7 +6,7 @@
 /*   By: fcosta-f < fcosta-f@student.42barcelona    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 20:25:59 by fcosta-f          #+#    #+#             */
-/*   Updated: 2024/07/18 20:49:30 by fcosta-f         ###   ########.fr       */
+/*   Updated: 2024/07/23 15:52:39 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ double	splane_ray(t_vec3 o, t_vec3 d, t_vec3 pp, t_vec3 n)
 	den = dot_prod(n, d);
 	if (den == 0)
 		return (INFINITY);
-	x = (dot_prod(n, vec_sub(pp, o))) / den;
+	x = (dot_prod(n, vec_sub(o, pp))) / den;
 	if (x > 0)
 		return (x);
 	else

@@ -6,7 +6,7 @@
 /*   By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 14:53:52 by akozin            #+#    #+#             */
-/*   Updated: 2024/07/23 13:25:16 by akozin           ###   ########.fr       */
+/*   Updated: 2024/07/23 15:53:30 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ t_rgb	light_calc(t_data *data, t_col col, t_vec3 f)
 	
 	j = 0;
 	col_p = vec_add(data->cam.origin, vec_scale(f, col.r_dist));
-	//printf("obj #%d, collision point: ", col.obj_ind);
-	//print_vector(col_p);
+//	printf("obj #%d, collision point: ", col.obj_ind);
+//	print_vector(col_p);
 	ret = data->objs[col.obj_ind].color;
 	ret = rgb_mult(ret, rgb_scale(data->amb.color, data->amb.power));
 	while (j < data->light_n)
