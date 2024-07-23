@@ -6,7 +6,7 @@
 /*   By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 14:53:52 by akozin            #+#    #+#             */
-/*   Updated: 2024/07/23 16:37:41 by akozin           ###   ########.fr       */
+/*   Updated: 2024/07/23 17:03:08 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,11 +81,12 @@ t_rgb	light_calc(t_data *data, t_col col, t_vec3 f)
 				{
 					if (data->objs[col.obj_ind].diameter / 2. > distance(data->lights[j].origin, data->objs[col.obj_ind].origin))
 					{
+						scale_factor *= -1;
 						t_rgb perceived_light = rgb_scale(data->lights[j].color, scale_factor);
 						ret = rgb_add(ret, perceived_light);
 					}
 				}
-				else if (data->objs[col.obj_ind].diameter / 2. < distance(data->lights[j].origin, data->objs[col.obj_ind].origin))
+				else
 				{
 					t_rgb perceived_light = rgb_scale(data->lights[j].color, scale_factor);
 					ret = rgb_add(ret, perceived_light);
