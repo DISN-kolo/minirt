@@ -6,7 +6,7 @@
 /*   By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 15:48:10 by akozin            #+#    #+#             */
-/*   Updated: 2024/07/22 17:22:20 by akozin           ###   ########.fr       */
+/*   Updated: 2024/07/23 13:17:12 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ void	draw(t_data *data)
 					rgb_to_int(light_calc(data, col, f)));
 			else
 				my_mlx_pixel_put(&data->img, px, py++,
-					rgb_to_int(data->amb.color));
+					rgb_to_int(rgb_scale(data->amb.color, data->amb.power)));
 		}
 		px++;
 	}

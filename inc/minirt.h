@@ -6,7 +6,7 @@
 /*   By: fcosta-f <fcosta-f@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 16:07:24 by akozin            #+#    #+#             */
-/*   Updated: 2024/07/22 17:26:13 by akozin           ###   ########.fr       */
+/*   Updated: 2024/07/23 13:13:04 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,17 @@
 # include <math.h>
 
 # define EPSILON 0.00001
-# define WIN_Y 1080.f
-# define WIN_X 1920.f
+//# define WIN_Y 1080.f
+//# define WIN_X 1920.f
 //# define WIN_Y 270.f
 //# define WIN_X 480.f
-//# define WIN_Y 540.f
-//# define WIN_X 960.f
+# define WIN_Y 540.f
+# define WIN_X 960.f
 //# define WIN_Y 1000.f
 //# define WIN_X 1000.f
-# define FALLOFF 1.f
+//# define WIN_X 50.f
+//# define WIN_Y 50.f
+# define FALLOFF 1.5f
 
 typedef struct s_col
 {

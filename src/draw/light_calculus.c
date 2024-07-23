@@ -6,7 +6,7 @@
 /*   By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 14:53:52 by akozin            #+#    #+#             */
-/*   Updated: 2024/07/22 17:32:34 by akozin           ###   ########.fr       */
+/*   Updated: 2024/07/23 13:25:16 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,31 +62,26 @@ t_rgb	light_calc(t_data *data, t_col col, t_vec3 f)
 	ret = rgb_mult(ret, rgb_scale(data->amb.color, data->amb.power));
 	while (j < data->light_n)
 	{
-		f_light = vec_sub(data->lights[j].origin, col_p);
+		f_light = vec_sub(col_p, data->lights[j].origin);
 		normalize(&f_light);
 		l_block.obj_ind = -1;
 		l_block.r_dist = INFINITY;
 		i = 0;
 		while (i < data->obj_n)
-			l_block = check_objs_internal(f, data, i++, l_block);
+			l_block = check_objs_internal(f_light, data, i++, l_block);
 		double dist_l = distance(col_p, data->lights[j].origin);
-		printf("epic collision with distance: %f\n", dist_l);
-		printf("starting ")
 		if (l_block.obj_ind == -1 || isinf(l_block.r_dist)
 				|| l_block.r_dist > dist_l || l_block.r_dist < 2. * EPSILON)
 		{
+//			printf("AND HIS OVERWHELMING INTENSITY!\n");
 			//XXX
 			double scale_factor = data->lights[j].power / pow(FALLOFF, dist_l);
+//			printf("j = %d, sf = %f\n", j, scale_factor);
 			t_rgb perceived_light = rgb_scale(data->lights[j].color, scale_factor);
-			ret = rgb_mult(ret, perceived_light);
-			printf("AND HIS OVERWHELMING INTENSITY!\n");
+			ret = rgb_add(ret, perceived_light);
 		}
-		else
-		{
-		//	printf("ind: %d\nisinf: %d\ndist: %f\nneeded: %f\n", l_block.obj_ind, isinf(l_block.r_dist), l_block.r_dist, distance(col_p, data->lights[j].origin));
-		//	if (l_block.obj_ind != -1)
-		//		printf("obj: %d\n", data->objs[l_block.obj_ind].type);
-		}
+//		else
+//			printf("dist: %f\nneeded: %f\n", l_block.r_dist, dist_l);
 		j++;
 	}
 //	printf("r:  g:  b:\n %3d %3d %3d\n", data->amb.color.r, data->amb.color.g, data->amb.color.b);
