@@ -48,6 +48,7 @@ static void	solve_quadratic(double result[2], t_vec3 o, t_vec3 d, t_obj *obj)
 }
 
 // literally the og func but gets the further intersection.
+// probably useless.
 double	sphere_far_result(t_vec3 o, t_vec3 d, t_obj *obj)
 {
 	double	pfar;

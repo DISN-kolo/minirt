@@ -33,6 +33,11 @@ t_col	check_os_from_int_p(t_ray l, t_data *data, int i, t_col res)
 	{
 		temp = sphere_intersection(l.o, l.f, &(data->objs[i]));
 		res_setter_internal(temp, &res, i);
+		// seems useless
+		/*
+		temp = sphere_far_result(l.o, l.f, &(data->objs[i]));
+		res_setter_internal(temp, &res, i);
+		*/
 	}
 	else if (data->objs[i].type == PL)
 	{
@@ -101,12 +106,11 @@ void	draw(t_data *data)
 	t_col	col;
 
 	px = 0;
-	r.x = 1;
-	r.y = 0;
-	r.z = 0;
 	u.x = 0;
 	u.y = -1;
 	u.z = 0;
+	r = cross_prod(data->cam.normal, u);
+	normalize(&r);
 	while (px < WIN_X)
 	{
 //		printf("\npx: %d\n\n", px);

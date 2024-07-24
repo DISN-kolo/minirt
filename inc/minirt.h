@@ -192,16 +192,18 @@ void	print_vector(t_vec3 v);
 
 double	splane_ray(t_vec3 o, t_vec3 d, t_vec3 pp, t_vec3 n);
 double	sphere_intersection(t_vec3 o, t_vec3 d, t_obj *obj);
+double	sphere_far_result(t_vec3 o, t_vec3 d, t_obj *obj);
 t_vec3	sphere_n(t_obj sp, t_vec3 p);
 
 void	draw(t_data *data);
 t_col	check_objs_internal(t_vec3 f, t_data *data, int i, t_col res);
 t_col	check_os_from_int_p(t_ray l, t_data *data, int i, t_col res);
 t_rgb	light_calc(t_data *data, t_col col, t_vec3 f);
+t_rgb	super_mix(t_rgb ret, t_rgb additive, double scale_factor);
 
 t_rgb	rgb_add(t_rgb c1, t_rgb c2);
 t_rgb	rgb_mult(t_rgb c1, t_rgb c2);
-t_rgb	rgb_avg(t_rgb c1, t_rgb c2);
+t_rgb	rgb_clamp(t_rgb c);
 t_rgb	rgb_scale(t_rgb c, double j);
 
 #endif

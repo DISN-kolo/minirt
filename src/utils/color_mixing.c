@@ -44,20 +44,21 @@ t_rgb	rgb_mult(t_rgb c1, t_rgb c2)
 	return (res);
 }
 
-t_rgb	rgb_avg(t_rgb c1, t_rgb c2)
+t_rgb	rgb_clamp(t_rgb c)
 {
-	t_rgb	res;
-
-	res.r = (c1.r + c2.r) / 2;
-	res.g = (c1.g + c2.g) / 2;
-	res.b = (c1.b + c2.b) / 2;
-	if (res.r > 255)
-		res.r = 255;
-	if (res.g > 255)
-		res.g = 255;
-	if (res.b > 255)
-		res.b = 255;
-	return (res);
+	if (c.r > 255)
+		c.r = 255;
+	if (c.g > 255)
+		c.g = 255;
+	if (c.b > 255)
+		c.b = 255;
+	if (c.r < 0)
+		c.r = 0;
+	if (c.g < 0)
+		c.g = 0;
+	if (c.b < 0)
+		c.b = 0;
+	return (c);
 }
 
 t_rgb	rgb_scale(t_rgb c, double j)
@@ -80,4 +81,38 @@ t_rgb	rgb_scale(t_rgb c, double j)
 	if (res.b < 0)
 		res.b = 0;
 	return (res);
+}
+
+/*
+ * the formula that's being replicated here:
+ *
+ * perceived_light = rgb_scale(data->lights[j].color, scale_factor);
+ *
+ * ret = rgb_add(ret, rgb_scale(rgb_avg(ret, perceived_light), 0.5));
+ *
+ * ret = rgb_add(ret, rgb_mult(ret, perceived_light));
+ */
+t_rgb	super_mix(t_rgb ret, t_rgb additive, double scale_factor)
+{
+	/*
+	return (rgb_add(ret, rgb_scale(additive, scale_factor)));
+	*/
+	t_vec3	vec_ret;
+	t_vec3	vec_addit;
+
+	vec_ret.x = ret.r / 255.;
+	vec_ret.y = ret.g / 255.;
+	vec_ret.z = ret.b / 255.;
+	vec_addit.x = additive.r / 255.;
+	vec_addit.y = additive.g / 255.;
+	vec_addit.z = additive.b / 255.;
+	vec_ret = vec_add(vec_ret, vec_scale(vec_addit, scale_factor));
+	vec_addit.x *= vec_ret.x;
+	vec_addit.y *= vec_ret.y;
+	vec_addit.z *= vec_ret.z;
+	vec_ret = vec_add(vec_ret, vec_scale(vec_addit, scale_factor));
+	ret.r = vec_ret.x * 255;
+	ret.g = vec_ret.y * 255;
+	ret.b = vec_ret.z * 255;
+	return (rgb_clamp(ret));
 }

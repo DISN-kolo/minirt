@@ -120,7 +120,6 @@ t_rgb	light_calc(t_data *data, t_col col, t_vec3 f)
 	int		i;
 	double	dist_l;
 	double	scale_factor;
-	t_rgb	perceived_light;
 	
 	j = 0;
 	col_p = vec_add(data->cam.origin, vec_scale(f, col.r_dist));
@@ -154,10 +153,10 @@ t_rgb	light_calc(t_data *data, t_col col, t_vec3 f)
 		scale_factor = data->lights[j].power / pow(FALLOFF, dist_l);
 		if (data->objs[col.obj_ind].type == SP)
 		{
-			scale_factor *= dot_prod(sphere_n(data->objs[col.obj_ind], col_p), 
-					f_light) /
-							(vec_len(sphere_n(data->objs[col.obj_ind], col_p)) *
-							 vec_len(f_light));
+			scale_factor *= dot_prod(
+					sphere_n(data->objs[col.obj_ind], col_p), f_light);
+//			scale_factor /= vec_len(sphere_n(data->objs[col.obj_ind], col_p));
+//			scale_factor /= vec_len(f_light);
 	//		printf("genius! scale_factor: %f\n", scale_factor);
 	//		printf("genius! normal: ");
 	//		print_vector(sphere_n(data->objs[col.obj_ind], col_p));
@@ -167,12 +166,9 @@ t_rgb	light_calc(t_data *data, t_col col, t_vec3 f)
 		else
 		{
 			//planecase ? XXX
-			scale_factor = data->lights[j].power / pow(FALLOFF, dist_l);
+			scale_factor = data->lights[j].power / pow(FALLOFF, dist_l + 2);
 		}
-		perceived_light = rgb_scale(data->lights[j].color, scale_factor);
-		//ret = rgb_add(ret, rgb_avg(ret, perceived_light));
-		ret = rgb_add(ret, rgb_scale(rgb_avg(ret, perceived_light), 0.5));
-		ret = rgb_add(ret, rgb_mult(ret, perceived_light));
+		ret = super_mix(ret, data->lights[j].color, scale_factor);
 		j++;
 	}
 //	printf("r:  g:  b:\n %3d %3d %3d\n", data->amb.color.r, data->amb.color.g, data->amb.color.b);
