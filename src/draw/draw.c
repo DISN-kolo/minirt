@@ -6,7 +6,7 @@
 /*   By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 15:48:10 by akozin            #+#    #+#             */
-/*   Updated: 2024/07/23 16:04:24 by akozin           ###   ########.fr       */
+/*   Updated: 2024/07/24 14:10:23 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ void	draw(t_data *data)
 	u.z = 0;
 	while (px < WIN_X)
 	{
+//		printf("\npx: %d\n\n", px);
 		py = 0;
 		while (py < WIN_Y)
 		{

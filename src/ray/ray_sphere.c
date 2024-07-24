@@ -6,7 +6,7 @@
 /*   By: fcosta-f <fcosta-f@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 20:31:30 by fcosta-f          #+#    #+#             */
-/*   Updated: 2024/07/23 16:43:00 by akozin           ###   ########.fr       */
+/*   Updated: 2024/07/24 14:10:45 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,10 @@ t_vec3	sphere_n(t_obj sp, t_vec3 p)
 
 	res = vec_sub(sp.origin, p);
 	if (vec_len(res) < sp.diameter / 2.)
+	{
+		//printf("tee hee! someone scaled the normal\n");
 		vec_scale(res, -1.);
+	}
 	normalize(&res);
 	return (res);
 }
@@ -44,6 +47,23 @@ static void	solve_quadratic(double result[2], t_vec3 o, t_vec3 d, t_obj *obj)
 	result[1] = (-q[1] - sqrt(disc)) / (2 * q[0]);
 }
 
+// literally the og func but gets the further intersection.
+double	sphere_far_result(t_vec3 o, t_vec3 d, t_obj *obj)
+{
+	double	pfar;
+	double	x[2];
+
+	pfar = INFINITY;
+	solve_quadratic(x, o, d, obj);
+	if (x[0] > EPSILON && !isinf(x[0]))
+		pfar = x[0];
+	if (x[1] > EPSILON && !isinf(x[1])) {
+		if (x[1] > x[0])
+			pfar = x[1];
+	}
+	return (pfar);
+}
+
 double	sphere_intersection(t_vec3 o, t_vec3 d, t_obj *obj)
 {
 	double	pnear;
@@ -51,9 +71,9 @@ double	sphere_intersection(t_vec3 o, t_vec3 d, t_obj *obj)
 
 	pnear = INFINITY;
 	solve_quadratic(x, o, d, obj);
-	if (x[0] > EPSILON && x[0] < INFINITY) //epsilon to avoid precision errors self-intersection...
+	if (x[0] > EPSILON && !isinf(x[0])) //epsilon to avoid precision errors self-intersection...
 		pnear = x[0];
-	if (x[1] > EPSILON && x[1] < INFINITY) {
+	if (x[1] > EPSILON && !isinf(x[1])) {
 		if (x[1] < x[0])
 			pnear = x[1];
 	}

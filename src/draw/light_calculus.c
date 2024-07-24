@@ -6,11 +6,61 @@
 /*   By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 14:53:52 by akozin            #+#    #+#             */
-/*   Updated: 2024/07/23 17:03:08 by akozin           ###   ########.fr       */
+/*   Updated: 2024/07/24 14:15:13 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minirt.h"
+
+/*
+ * sphere only. must make a selector TODO
+ * shall have an inside-cylinder formula too.....
+ */
+int	ignore_light_sp(t_data *data, int oi, int j)
+{
+	if (distance(data->cam.origin, data->objs[oi].origin) <
+			data->objs[oi].diameter / 2.)
+	{
+		if (distance(data->lights[j].origin, data->objs[oi].origin) >
+				data->objs[oi].diameter / 2.)
+			return (1);
+	}
+	else
+	{
+		if (distance(data->lights[j].origin, data->objs[oi].origin) <
+				data->objs[oi].diameter / 2.)
+			return (1);
+	}
+	return (0);
+}
+
+/* 
+ * used only for the global light calc? maybe it's ok to use in
+ * the light ignore check? XXX
+ */
+int	is_c_in_sp(t_obj sp, t_cam cam)
+{
+	if (distance(cam.origin, sp.origin) < sp.diameter / 2.)
+		return (1);
+	return (0);
+}
+
+int	ignore_light(t_data *data, int j)
+{
+	int	oi;
+
+	oi = 0;
+	while (oi < data->obj_n)
+	{
+		if (data->objs[oi].type == SP)
+		{
+			if (ignore_light_sp(data, oi, j))
+				return (1);
+		}
+		oi++;
+	}
+	return (0); // TODO other funcs
+}
 
 /*
  * 1. get the point in space where the collision has occured
@@ -45,6 +95,20 @@
  *
  * in case of amb, 1 = normal illum, 0 = none (no crazy stuff)
  */
+/*
+ * some logic logic logic:
+ * 1. if we're inside a sphere (or a cylinder for that matter)
+ * 1.1. if the light is inside the sphere:
+ * do normal lighting, calculating intersections etc, but the sphere
+ * normals are (-1)'d.
+ * 1.2. if the light is outside of the sphere:
+ * disregard it completely.
+ * 2. if we're outside of a sphere
+ * 2.1. if the light is inside the sphere:
+ * disregard it completely.
+ * 2.2. if the light is outside of the sphere:
+ * do normal lighting, calculating intersections etc.
+ */
 t_rgb	light_calc(t_data *data, t_col col, t_vec3 f)
 {
 	t_vec3	col_p;
@@ -53,57 +117,52 @@ t_rgb	light_calc(t_data *data, t_col col, t_vec3 f)
 	t_col	l_block;
 	int		j;
 	int		i;
+	double	dist_l;
+	double	scale_factor;
+	t_rgb	perceived_light;
 	
 	j = 0;
 	col_p = vec_add(data->cam.origin, vec_scale(f, col.r_dist));
-//	printf("obj #%d, collision point: ", col.obj_ind);
-//	print_vector(col_p);
 	ret = data->objs[col.obj_ind].color;
 	ret = rgb_mult(ret, rgb_scale(data->amb.color, data->amb.power));
 	while (j < data->light_n)
 	{
+		if (ignore_light(data, j))
+		{
+//			printf("light %2d ignored\n", j);
+			j++;
+			continue ;
+		}
 		f_light = vec_sub(col_p, data->lights[j].origin);
 		normalize(&f_light);
+//		printf("looking at the light with... ");
+//		print_vector(f_light);
 		l_block.obj_ind = -1;
 		l_block.r_dist = INFINITY;
 		i = 0;
 		while (i < data->obj_n)
 			l_block = check_objs_internal(f_light, data, i++, l_block);
-		double dist_l = distance(col_p, data->lights[j].origin);
-		if (l_block.obj_ind == -1 || isinf(l_block.r_dist)
-				|| l_block.r_dist > dist_l || l_block.r_dist < 2. * EPSILON)
+		dist_l = distance(col_p, data->lights[j].origin);
+		scale_factor = data->lights[j].power / pow(FALLOFF, dist_l);
+		if (data->objs[col.obj_ind].type == SP)
 		{
-			if (data->objs[col.obj_ind].type == SP)
-			{
-				double scale_factor = data->lights[j].power / pow(FALLOFF, dist_l);
-				scale_factor *= dot_prod(sphere_n(data->objs[col.obj_ind], col_p), f_light) / (vec_len(sphere_n(data->objs[col.obj_ind], col_p)) * vec_len(f_light));
-				if (data->objs[col.obj_ind].diameter / 2. > distance(data->cam.origin, data->objs[col.obj_ind].origin))
-				{
-					if (data->objs[col.obj_ind].diameter / 2. > distance(data->lights[j].origin, data->objs[col.obj_ind].origin))
-					{
-						scale_factor *= -1;
-						t_rgb perceived_light = rgb_scale(data->lights[j].color, scale_factor);
-						ret = rgb_add(ret, perceived_light);
-					}
-				}
-				else
-				{
-					t_rgb perceived_light = rgb_scale(data->lights[j].color, scale_factor);
-					ret = rgb_add(ret, perceived_light);
-				}
-			}
-			else
-			{
-//				printf("AND HIS OVERWHELMING INTENSITY!\n");
-				//XXX
-				double scale_factor = data->lights[j].power / pow(FALLOFF, dist_l);
-//				printf("j = %d, sf = %f\n", j, scale_factor);
-				t_rgb perceived_light = rgb_scale(data->lights[j].color, scale_factor);
-				ret = rgb_add(ret, perceived_light);
-			}
+			scale_factor *= dot_prod(sphere_n(data->objs[col.obj_ind], col_p), 
+					f_light) /
+							(vec_len(sphere_n(data->objs[col.obj_ind], col_p)) *
+							 vec_len(f_light));
+	//		printf("genius! scale_factor: %f\n", scale_factor);
+	//		printf("genius! normal: ");
+	//		print_vector(sphere_n(data->objs[col.obj_ind], col_p));
+			if (is_c_in_sp(data->objs[col.obj_ind], data->cam))
+				scale_factor *= -1;
 		}
-//		else
-//			printf("dist: %f\nneeded: %f\n", l_block.r_dist, dist_l);
+		else
+		{
+			//planecase ? XXX
+			scale_factor = data->lights[j].power / pow(FALLOFF, dist_l);
+		}
+		perceived_light = rgb_scale(data->lights[j].color, scale_factor);
+		ret = rgb_add(ret, perceived_light);
 		j++;
 	}
 //	printf("r:  g:  b:\n %3d %3d %3d\n", data->amb.color.r, data->amb.color.g, data->amb.color.b);
