@@ -6,7 +6,7 @@
 /*   By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 15:48:10 by akozin            #+#    #+#             */
-/*   Updated: 2024/07/24 14:10:23 by akozin           ###   ########.fr       */
+/*   Updated: 2024/07/24 16:42:20 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,34 @@ static void	res_setter_internal(double temp, t_col *res, int i)
 		res->r_dist = temp;
 		res->obj_ind = i;
 	}
+}
+
+/*
+ * l - ray from the intersection point and to the... whatever, but
+ * usually the light
+ */
+t_col	check_os_from_int_p(t_ray l, t_data *data, int i, t_col res)
+{
+	double	temp;
+
+	if (data->objs[i].type == SP)
+	{
+		temp = sphere_intersection(l.o, l.f, &(data->objs[i]));
+		res_setter_internal(temp, &res, i);
+	}
+	else if (data->objs[i].type == PL)
+	{
+		temp = splane_ray(l.o, l.f, data->objs[i].origin,
+			data->objs[i].normal);
+		res_setter_internal(temp, &res, i);
+	}
+	else if (data->objs[i].type == CY)
+	{
+		//temp = cyl_collide_check(); // TODO
+		temp = -1;
+		res_setter_internal(temp, &res, i);
+	}
+	return (res);
 }
 
 t_col	check_objs_internal(t_vec3 f, t_data *data, int i, t_col res)

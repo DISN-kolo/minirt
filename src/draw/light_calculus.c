@@ -6,7 +6,7 @@
 /*   By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 14:53:52 by akozin            #+#    #+#             */
-/*   Updated: 2024/07/24 14:15:13 by akozin           ###   ########.fr       */
+/*   Updated: 2024/07/24 16:51:55 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,7 @@ t_rgb	light_calc(t_data *data, t_col col, t_vec3 f)
 	t_vec3	col_p;
 	t_rgb	ret;
 	t_vec3	f_light;
+	t_ray	r_light;
 	t_col	l_block;
 	int		j;
 	int		i;
@@ -135,14 +136,21 @@ t_rgb	light_calc(t_data *data, t_col col, t_vec3 f)
 		}
 		f_light = vec_sub(col_p, data->lights[j].origin);
 		normalize(&f_light);
+		r_light.o = col_p;
+		r_light.f = f_light;
 //		printf("looking at the light with... ");
 //		print_vector(f_light);
 		l_block.obj_ind = -1;
 		l_block.r_dist = INFINITY;
 		i = 0;
 		while (i < data->obj_n)
-			l_block = check_objs_internal(f_light, data, i++, l_block);
+			l_block = check_os_from_int_p(r_light, data, i++, l_block);
 		dist_l = distance(col_p, data->lights[j].origin);
+		if (dist_l > l_block.r_dist)
+		{
+			j++;
+			continue ;
+		}
 		scale_factor = data->lights[j].power / pow(FALLOFF, dist_l);
 		if (data->objs[col.obj_ind].type == SP)
 		{
@@ -162,7 +170,9 @@ t_rgb	light_calc(t_data *data, t_col col, t_vec3 f)
 			scale_factor = data->lights[j].power / pow(FALLOFF, dist_l);
 		}
 		perceived_light = rgb_scale(data->lights[j].color, scale_factor);
-		ret = rgb_add(ret, perceived_light);
+		//ret = rgb_add(ret, rgb_avg(ret, perceived_light));
+		ret = rgb_add(ret, rgb_scale(rgb_avg(ret, perceived_light), 0.5));
+		ret = rgb_add(ret, rgb_mult(ret, perceived_light));
 		j++;
 	}
 //	printf("r:  g:  b:\n %3d %3d %3d\n", data->amb.color.r, data->amb.color.g, data->amb.color.b);

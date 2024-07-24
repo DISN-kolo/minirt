@@ -6,7 +6,7 @@
 /*   By: fcosta-f <fcosta-f@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 16:07:24 by akozin            #+#    #+#             */
-/*   Updated: 2024/07/24 14:09:42 by akozin           ###   ########.fr       */
+/*   Updated: 2024/07/24 16:42:19 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,16 @@ typedef struct s_vec3
 	double	y;
 	double	z;
 }	t_vec3;
+
+/*
+ * origin  = o
+ * forward = f
+ */
+typedef struct s_ray
+{
+	t_vec3	o;
+	t_vec3	f;
+}	t_ray;
 
 typedef struct s_rgb
 {
@@ -186,6 +196,7 @@ t_vec3	sphere_n(t_obj sp, t_vec3 p);
 
 void	draw(t_data *data);
 t_col	check_objs_internal(t_vec3 f, t_data *data, int i, t_col res);
+t_col	check_os_from_int_p(t_ray l, t_data *data, int i, t_col res);
 t_rgb	light_calc(t_data *data, t_col col, t_vec3 f);
 
 t_rgb	rgb_add(t_rgb c1, t_rgb c2);
