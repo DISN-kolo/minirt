@@ -6,7 +6,7 @@
 /*   By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 14:53:52 by akozin            #+#    #+#             */
-/*   Updated: 2024/07/25 13:02:35 by akozin           ###   ########.fr       */
+/*   Updated: 2024/07/25 15:22:57 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,17 @@
  */
 int	ignore_light_sp(t_data *data, int oi, int j)
 {
-	if (distance(data->cam.origin, data->objs[oi].origin) <
-			data->objs[oi].diameter / 2.)
+	if (distance(data->cam.origin,
+			data->objs[oi].origin) < data->objs[oi].diameter / 2.)
 	{
-		if (distance(data->lights[j].origin, data->objs[oi].origin) >
-				data->objs[oi].diameter / 2.)
+		if (distance(data->lights[j].origin,
+				data->objs[oi].origin) > data->objs[oi].diameter / 2.)
 			return (1);
 	}
 	else
 	{
-		if (distance(data->lights[j].origin, data->objs[oi].origin) <
-				data->objs[oi].diameter / 2.)
+		if (distance(data->lights[j].origin,
+				data->objs[oi].origin) < data->objs[oi].diameter / 2.)
 			return (1);
 	}
 	return (0);
@@ -36,28 +36,17 @@ int	ignore_light_sp(t_data *data, int oi, int j)
 
 int	ignore_light_pl(t_data *data, int oi, int j)
 {
-	int	signA;
-	int	signB;
+	int	sign_a;
+	int	sign_b;
 
-	signA = (dot_prod(vec_sub(data->objs[oi].origin, data->cam.origin),
+	sign_a = (dot_prod(vec_sub(data->objs[oi].origin, data->cam.origin),
 				data->objs[oi].normal) > 0);
-	signB = (dot_prod(vec_sub(data->objs[oi].origin, data->lights[j].origin),
+	sign_b = (dot_prod(vec_sub(data->objs[oi].origin, data->lights[j].origin),
 				data->objs[oi].normal) > 0);
-	return (signA != signB);
+	return (sign_a != sign_b);
 }
 
-/* 
- * used only for the global light calc? maybe it's ok to use in
- * the light ignore check? XXX
- */
-int	is_c_in_sp(t_obj sp, t_cam cam)
-{
-	if (distance(cam.origin, sp.origin) < sp.diameter / 2.)
-		return (1);
-	return (0);
-}
-
-int	ignore_light(t_data *data, int j)
+int	ignore_light(t_data *data, int *j)
 {
 	int	oi;
 
@@ -66,17 +55,17 @@ int	ignore_light(t_data *data, int j)
 	{
 		if (data->objs[oi].type == SP)
 		{
-			if (ignore_light_sp(data, oi, j))
-				return (1);
+			if (ignore_light_sp(data, oi, *j))
+				return ((*j)++, 1);
 		}
 		else if (data->objs[oi].type == PL)
 		{
-			if (ignore_light_pl(data, oi, j))
-				return (1);
+			if (ignore_light_pl(data, oi, *j))
+				return ((*j)++, 1);
 		}
 		oi++;
 	}
-	return (0); // TODO other funcs
+	return (0); // TODO cylinder
 }
 
 /*
@@ -128,68 +117,33 @@ int	ignore_light(t_data *data, int j)
  */
 t_rgb	light_calc(t_data *data, t_col col, t_vec3 f)
 {
-	t_vec3	col_p;
 	t_rgb	ret;
-	t_vec3	f_light;
 	t_ray	r_light;
-	t_col	l_block;
 	int		j;
-	int		i;
 	double	dist_l;
 	double	scale_factor;
-	
+
 	j = 0;
-	col_p = vec_add(data->cam.origin, vec_scale(f, col.r_dist));
+	col.p = vec_add(data->cam.origin, vec_scale(f, col.r_dist));
+	data->curr_c = col;
 	ret = data->objs[col.obj_ind].color;
 	ret = rgb_mult(ret, rgb_scale(data->amb.color, data->amb.power));
 	while (j < data->light_n)
 	{
-		if (ignore_light(data, j))
-		{
-//			printf("light %2d ignored\n", j);
-			j++;
+		if (ignore_light(data, &j))
 			continue ;
-		}
-		f_light = vec_sub(col_p, data->lights[j].origin);
-		normalize(&f_light);
-		r_light.o = col_p;
-		r_light.f = f_light;
-//		printf("looking at the light with... ");
-//		print_vector(f_light);
-		l_block.obj_ind = -1;
-		l_block.r_dist = INFINITY;
-		i = 0;
-		while (i < data->obj_n)
-			l_block = check_os_from_int_p(r_light, data, i++, l_block);
-		dist_l = distance(col_p, data->lights[j].origin);
-		if (dist_l > l_block.r_dist)
-		{
-			j++;
+		r_light.f = vec_sub(col.p, data->lights[j].origin);
+		normalize(&(r_light.f));
+		r_light.o = col.p;
+		if (light_blocked(data, r_light, &j, &dist_l))
 			continue ;
-		}
 		scale_factor = data->lights[j].power / pow(FALLOFF, dist_l);
 		if (data->objs[col.obj_ind].type == SP)
-		{
-			scale_factor *= dot_prod(
-					sphere_n(data->objs[col.obj_ind], col_p), f_light);
-//			scale_factor /= vec_len(sphere_n(data->objs[col.obj_ind], col_p));
-//			scale_factor /= vec_len(f_light);
-	//		printf("genius! scale_factor: %f\n", scale_factor);
-	//		printf("genius! normal: ");
-	//		print_vector(sphere_n(data->objs[col.obj_ind], col_p));
-			if (is_c_in_sp(data->objs[col.obj_ind], data->cam))
-				scale_factor *= -1;
-		}
-		else
-		{
-			//planecase ? XXX
+			scale_factor *= sc_fac_calc_sp(data, col, r_light);
+		else if (data->objs[col.obj_ind].type == PL)
 			scale_factor = data->lights[j].power / pow(FALLOFF, dist_l + 2);
-		}
 		ret = super_mix(ret, data->lights[j].color, scale_factor);
 		j++;
 	}
-//	printf("r:  g:  b:\n %3d %3d %3d\n", data->amb.color.r, data->amb.color.g, data->amb.color.b);
-//	t_rgb newc = rgb_scale(data->amb.color, data->amb.power);
-//	printf("r:  g:  b:\n %3d %3d %3d\n", newc.r, newc.g, newc.b);
 	return (ret);
 }

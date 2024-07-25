@@ -6,7 +6,7 @@
 /*   By: fcosta-f <fcosta-f@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 16:07:24 by akozin            #+#    #+#             */
-/*   Updated: 2024/07/25 14:39:30 by akozin           ###   ########.fr       */
+/*   Updated: 2024/07/25 15:21:22 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,14 @@ typedef	struct s_ur
 	t_vec3	r;
 }	t_ur;
 
+/*
+ * p - col point
+ */
 typedef struct s_col
 {
 	int		obj_ind;
 	double	r_dist;
+	t_vec3	p;
 }	t_col;
 
 /*
@@ -126,6 +130,11 @@ typedef struct s_cam
 	double	fov;
 }	t_cam;
 
+/*
+ * curr_c really comes in with a clutch when
+ * we have to squeeze some parameters into an aux function
+ * because norminette is not a normal person
+ */
 typedef struct s_data
 {
 	t_cam	cam;
@@ -142,6 +151,7 @@ typedef struct s_data
 	void	*mlx;
 	void	*win;
 	t_img	img;
+	t_col	curr_c;
 }	t_data;
 
 void	data_init(t_data *data);
@@ -206,7 +216,10 @@ t_vec3	find_f(t_data *data, int px, int py, t_ur ur);
 t_ur	set_up_right(t_data *data, t_ur ur);
 t_col	check_objs_internal(t_vec3 f, t_data *data, int i, t_col res);
 t_col	check_os_from_int_p(t_ray l, t_data *data, int i, t_col res);
+
 t_rgb	light_calc(t_data *data, t_col col, t_vec3 f);
+double	sc_fac_calc_sp(t_data *data, t_col col, t_ray r_light);
+int		light_blocked(t_data *data, t_ray r_light, int *j, double *dist_l);
 t_rgb	super_mix(t_rgb ret, t_rgb additive, double scale_factor);
 
 t_rgb	rgb_add(t_rgb c1, t_rgb c2);
