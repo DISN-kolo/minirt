@@ -6,7 +6,7 @@
 #    By: fcosta-f <fcosta-f@student.42barcelona.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/18 16:54:33 by akozin            #+#    #+#              #
-#    Updated: 2024/07/23 15:22:25 by akozin           ###   ########.fr        #
+#    Updated: 2024/07/25 14:38:13 by akozin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,6 +51,7 @@ SRCNAMES = main.c \
 		   parse/parse_normal.c \
 		   parse/parse_fov.c \
 		   draw/draw.c \
+		   draw/draw_internal_funcs.c \
 		   draw/light_calculus.c \
 		   console/print_usage.c \
 		   console/print_errors.c \

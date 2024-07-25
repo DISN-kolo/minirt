@@ -6,7 +6,7 @@
 /*   By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 14:42:12 by akozin            #+#    #+#             */
-/*   Updated: 2024/07/22 16:24:48 by akozin           ###   ########.fr       */
+/*   Updated: 2024/07/25 14:42:14 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,11 +92,11 @@ t_rgb	rgb_scale(t_rgb c, double j)
  *
  * ret = rgb_add(ret, rgb_mult(ret, perceived_light));
  */
+/*
+return (rgb_add(ret, rgb_scale(additive, scale_factor)));
+*/
 t_rgb	super_mix(t_rgb ret, t_rgb additive, double scale_factor)
 {
-	/*
-	return (rgb_add(ret, rgb_scale(additive, scale_factor)));
-	*/
 	t_vec3	vec_ret;
 	t_vec3	vec_addit;
 

@@ -6,7 +6,7 @@
 /*   By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 15:48:10 by akozin            #+#    #+#             */
-/*   Updated: 2024/07/25 13:33:25 by akozin           ###   ########.fr       */
+/*   Updated: 2024/07/25 14:36:47 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,16 +33,11 @@ t_col	check_os_from_int_p(t_ray l, t_data *data, int i, t_col res)
 	{
 		temp = sphere_intersection(l.o, l.f, &(data->objs[i]));
 		res_setter_internal(temp, &res, i);
-		// seems useless
-		/*
-		temp = sphere_far_result(l.o, l.f, &(data->objs[i]));
-		res_setter_internal(temp, &res, i);
-		*/
 	}
 	else if (data->objs[i].type == PL)
 	{
 		temp = splane_ray(l.o, l.f, data->objs[i].origin,
-			data->objs[i].normal);
+				data->objs[i].normal);
 		res_setter_internal(temp, &res, i);
 	}
 	else if (data->objs[i].type == CY)
@@ -66,7 +61,7 @@ t_col	check_objs_internal(t_vec3 f, t_data *data, int i, t_col res)
 	else if (data->objs[i].type == PL)
 	{
 		temp = splane_ray(data->cam.origin, f, data->objs[i].origin,
-			data->objs[i].normal);
+				data->objs[i].normal);
 		res_setter_internal(temp, &res, i);
 	}
 	else if (data->objs[i].type == CY)
@@ -101,32 +96,17 @@ void	draw(t_data *data)
 	int		px;
 	int		py;
 	t_vec3	f;
-	t_vec3	r;
-	t_vec3	u;
+	t_ur	ur;
 	t_col	col;
 
 	px = 0;
-	u.x = 0;
-	u.y = -1;
-	u.z = 0;
-	r = cross_prod(data->cam.normal, u);
-	normalize(&r);
-	u = cross_prod(data->cam.normal, r);
-	normalize(&u);
-	u = vect_inv(u);
+	ur = set_up_right(data, ur);
 	while (px < WIN_X)
 	{
-//		printf("\npx: %d\n\n", px);
 		py = 0;
 		while (py < WIN_Y)
 		{
-			f = vec_add(data->cam.normal, vec_scale(r, WIN_X / WIN_Y *
-				tan(data->cam.fov / 2.) * (2 * px / WIN_X - 1)));
-			f = vec_add(f, vec_scale(u,
-				tan(data->cam.fov / 2.) * (2 * py / WIN_Y - 1)));
-			normalize(&f);
-		//	printf("for pixel x: %2d, y: %2d we're launching ray: ", px, py);
-		//	print_vector(f);
+			f = find_f(data, px, py, ur);
 			col = check_objects(f, data);
 			if (col.obj_ind != -1 && !isinf(col.r_dist))
 				my_mlx_pixel_put(&data->img, px, py++,

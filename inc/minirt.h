@@ -6,7 +6,7 @@
 /*   By: fcosta-f <fcosta-f@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 16:07:24 by akozin            #+#    #+#             */
-/*   Updated: 2024/07/24 16:42:19 by akozin           ###   ########.fr       */
+/*   Updated: 2024/07/25 14:39:30 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,6 @@
 //# define WIN_Y 50.f
 # define FALLOFF 1.3f
 
-typedef struct s_col
-{
-	int		obj_ind;
-	double	r_dist;
-}	t_col;
-
 typedef struct s_img
 {
 	void	*img;
@@ -55,6 +49,18 @@ typedef struct s_vec3
 	double	y;
 	double	z;
 }	t_vec3;
+
+typedef	struct s_ur
+{
+	t_vec3	u;
+	t_vec3	r;
+}	t_ur;
+
+typedef struct s_col
+{
+	int		obj_ind;
+	double	r_dist;
+}	t_col;
 
 /*
  * origin  = o
@@ -196,6 +202,8 @@ double	sphere_far_result(t_vec3 o, t_vec3 d, t_obj *obj);
 t_vec3	sphere_n(t_obj sp, t_vec3 p);
 
 void	draw(t_data *data);
+t_vec3	find_f(t_data *data, int px, int py, t_ur ur);
+t_ur	set_up_right(t_data *data, t_ur ur);
 t_col	check_objs_internal(t_vec3 f, t_data *data, int i, t_col res);
 t_col	check_os_from_int_p(t_ray l, t_data *data, int i, t_col res);
 t_rgb	light_calc(t_data *data, t_col col, t_vec3 f);
