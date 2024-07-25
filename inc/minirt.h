@@ -6,7 +6,7 @@
 /*   By: fcosta-f <fcosta-f@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 16:07:24 by akozin            #+#    #+#             */
-/*   Updated: 2024/07/25 15:46:20 by akozin           ###   ########.fr       */
+/*   Updated: 2024/07/25 16:05:15 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ typedef enum e_err
 {
 	NULL_ERR,
 	DOUBLE_ERR,
+	NORMAL_ERR,
 	RGB_ERR,
 	ORIGIN_ERR,
 	FOV_ERR,
