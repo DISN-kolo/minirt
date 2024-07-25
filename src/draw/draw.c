@@ -6,7 +6,7 @@
 /*   By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 15:48:10 by akozin            #+#    #+#             */
-/*   Updated: 2024/07/24 16:42:20 by akozin           ###   ########.fr       */
+/*   Updated: 2024/07/25 13:33:25 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,9 @@ void	draw(t_data *data)
 	u.z = 0;
 	r = cross_prod(data->cam.normal, u);
 	normalize(&r);
+	u = cross_prod(data->cam.normal, r);
+	normalize(&u);
+	u = vect_inv(u);
 	while (px < WIN_X)
 	{
 //		printf("\npx: %d\n\n", px);

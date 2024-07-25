@@ -6,7 +6,7 @@
 /*   By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 14:53:52 by akozin            #+#    #+#             */
-/*   Updated: 2024/07/24 16:51:55 by akozin           ###   ########.fr       */
+/*   Updated: 2024/07/25 13:02:35 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,18 @@ int	ignore_light_sp(t_data *data, int oi, int j)
 	return (0);
 }
 
+int	ignore_light_pl(t_data *data, int oi, int j)
+{
+	int	signA;
+	int	signB;
+
+	signA = (dot_prod(vec_sub(data->objs[oi].origin, data->cam.origin),
+				data->objs[oi].normal) > 0);
+	signB = (dot_prod(vec_sub(data->objs[oi].origin, data->lights[j].origin),
+				data->objs[oi].normal) > 0);
+	return (signA != signB);
+}
+
 /* 
  * used only for the global light calc? maybe it's ok to use in
  * the light ignore check? XXX
@@ -55,6 +67,11 @@ int	ignore_light(t_data *data, int j)
 		if (data->objs[oi].type == SP)
 		{
 			if (ignore_light_sp(data, oi, j))
+				return (1);
+		}
+		else if (data->objs[oi].type == PL)
+		{
+			if (ignore_light_pl(data, oi, j))
 				return (1);
 		}
 		oi++;
