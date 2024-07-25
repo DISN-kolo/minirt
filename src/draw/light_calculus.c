@@ -6,7 +6,7 @@
 /*   By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 14:53:52 by akozin            #+#    #+#             */
-/*   Updated: 2024/07/25 15:22:57 by akozin           ###   ########.fr       */
+/*   Updated: 2024/07/25 15:45:08 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,10 +124,7 @@ t_rgb	light_calc(t_data *data, t_col col, t_vec3 f)
 	double	scale_factor;
 
 	j = 0;
-	col.p = vec_add(data->cam.origin, vec_scale(f, col.r_dist));
-	data->curr_c = col;
-	ret = data->objs[col.obj_ind].color;
-	ret = rgb_mult(ret, rgb_scale(data->amb.color, data->amb.power));
+	light_calc_init(data, &col, f, &ret);
 	while (j < data->light_n)
 	{
 		if (ignore_light(data, &j))
@@ -137,13 +134,12 @@ t_rgb	light_calc(t_data *data, t_col col, t_vec3 f)
 		r_light.o = col.p;
 		if (light_blocked(data, r_light, &j, &dist_l))
 			continue ;
-		scale_factor = data->lights[j].power / pow(FALLOFF, dist_l);
 		if (data->objs[col.obj_ind].type == SP)
-			scale_factor *= sc_fac_calc_sp(data, col, r_light);
+			scale_factor = data->lights[j].power / pow(FALLOFF, dist_l) \
+							* sc_fac_calc_sp(data, col, r_light);
 		else if (data->objs[col.obj_ind].type == PL)
 			scale_factor = data->lights[j].power / pow(FALLOFF, dist_l + 2);
-		ret = super_mix(ret, data->lights[j].color, scale_factor);
-		j++;
+		ret = super_mix(ret, data->lights[j++].color, scale_factor);
 	}
 	return (ret);
 }

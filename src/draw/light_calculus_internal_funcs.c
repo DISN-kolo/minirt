@@ -6,7 +6,7 @@
 /*   By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 14:48:52 by akozin            #+#    #+#             */
-/*   Updated: 2024/07/25 15:22:49 by akozin           ###   ########.fr       */
+/*   Updated: 2024/07/25 15:41:12 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,12 @@ int	light_blocked(t_data *data, t_ray r_light, int *j, double *dist_l)
 		return (1);
 	}
 	return (0);
+}
+
+void	light_calc_init(t_data *data, t_col *col, t_vec3 f, t_rgb *ret)
+{
+	col->p = vec_add(data->cam.origin, vec_scale(f, col->r_dist));
+	data->curr_c = *col;
+	*ret = data->objs[col->obj_ind].color;
+	*ret = rgb_mult(*ret, rgb_scale(data->amb.color, data->amb.power));
 }

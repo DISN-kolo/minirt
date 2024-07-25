@@ -6,7 +6,7 @@
 /*   By: fcosta-f <fcosta-f@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 16:07:24 by akozin            #+#    #+#             */
-/*   Updated: 2024/07/25 15:21:22 by akozin           ###   ########.fr       */
+/*   Updated: 2024/07/25 15:46:20 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ typedef struct s_vec3
 	double	z;
 }	t_vec3;
 
-typedef	struct s_ur
+typedef struct s_ur
 {
 	t_vec3	u;
 	t_vec3	r;
@@ -218,6 +218,7 @@ t_col	check_objs_internal(t_vec3 f, t_data *data, int i, t_col res);
 t_col	check_os_from_int_p(t_ray l, t_data *data, int i, t_col res);
 
 t_rgb	light_calc(t_data *data, t_col col, t_vec3 f);
+void	light_calc_init(t_data *data, t_col *col, t_vec3 f, t_rgb *ret);
 double	sc_fac_calc_sp(t_data *data, t_col col, t_ray r_light);
 int		light_blocked(t_data *data, t_ray r_light, int *j, double *dist_l);
 t_rgb	super_mix(t_rgb ret, t_rgb additive, double scale_factor);
