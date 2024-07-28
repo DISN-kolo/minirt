@@ -95,10 +95,18 @@ t_rgb	rgb_scale(t_rgb c, double j)
 /*
 return (rgb_add(ret, rgb_scale(additive, scale_factor)));
 */
-t_rgb	super_mix(t_rgb ret, t_rgb additive, double scale_factor)
+/*
+ * actually a better model would be to multiply all and add all,
+ * separately and non-destructively (adding obj rgb each time!!!)
+ * this way if we have 0 amb light we can still have a 0 power
+ * ambient lighting and the objects illuminated by point lights
+ * with the colors being more correct than just 0+col
+ */
+t_rgb	super_mix(t_rgb ret, t_rgb additive, double scale_factor, t_rgb o_rgb)
 {
 	t_vec3	vec_ret;
 	t_vec3	vec_addit;
+	t_vec3	vec_o;
 
 	vec_ret.x = ret.r / 255.;
 	vec_ret.y = ret.g / 255.;
@@ -106,11 +114,13 @@ t_rgb	super_mix(t_rgb ret, t_rgb additive, double scale_factor)
 	vec_addit.x = additive.r / 255.;
 	vec_addit.y = additive.g / 255.;
 	vec_addit.z = additive.b / 255.;
-	vec_ret = vec_add(vec_ret, vec_scale(vec_addit, scale_factor));
-	vec_addit.x *= vec_ret.x;
-	vec_addit.y *= vec_ret.y;
-	vec_addit.z *= vec_ret.z;
-	vec_ret = vec_add(vec_ret, vec_scale(vec_addit, scale_factor));
+	vec_o.x = o_rgb.r / 255.;
+	vec_o.y = o_rgb.g / 255.;
+	vec_o.z = o_rgb.b / 255.;
+	vec_o.x *= vec_addit.x;
+	vec_o.y *= vec_addit.y;
+	vec_o.z *= vec_addit.z;
+	vec_ret = vec_add(vec_ret, vec_scale(vec_o, scale_factor));
 	ret.r = vec_ret.x * 255;
 	ret.g = vec_ret.y * 255;
 	ret.b = vec_ret.z * 255;

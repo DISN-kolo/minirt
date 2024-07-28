@@ -53,6 +53,7 @@ SRCNAMES = main.c \
 		   draw/draw.c \
 		   draw/draw_internal_funcs.c \
 		   draw/light_calculus.c \
+		   draw/light_calculus_ignores.c \
 		   draw/light_calculus_internal_funcs.c \
 		   console/print_usage.c \
 		   console/print_errors.c \

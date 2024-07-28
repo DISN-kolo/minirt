@@ -220,9 +220,10 @@ t_col	check_os_from_int_p(t_ray l, t_data *data, int i, t_col res);
 
 t_rgb	light_calc(t_data *data, t_col col, t_vec3 f);
 void	light_calc_init(t_data *data, t_col *col, t_vec3 f, t_rgb *ret);
+int		ignore_light(t_data *data, int *j);
 double	sc_fac_calc_sp(t_data *data, t_col col, t_ray r_light);
 int		light_blocked(t_data *data, t_ray r_light, int *j, double *dist_l);
-t_rgb	super_mix(t_rgb ret, t_rgb additive, double scale_factor);
+t_rgb	super_mix(t_rgb ret, t_rgb additive, double scale_factor, t_rgb o_rgb);
 
 t_rgb	rgb_add(t_rgb c1, t_rgb c2);
 t_rgb	rgb_mult(t_rgb c1, t_rgb c2);

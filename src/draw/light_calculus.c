@@ -12,60 +12,14 @@
 
 #include "../../inc/minirt.h"
 
-/*
- * sphere only. must make a selector TODO
- * shall have an inside-cylinder formula too.....
- */
-int	ignore_light_sp(t_data *data, int oi, int j)
+double	choose_obj_for_sf(t_data *data, t_ray r_light, int j, double dist_l)
 {
-	if (distance(data->cam.origin,
-			data->objs[oi].origin) < data->objs[oi].diameter / 2.)
-	{
-		if (distance(data->lights[j].origin,
-				data->objs[oi].origin) > data->objs[oi].diameter / 2.)
-			return (1);
-	}
-	else
-	{
-		if (distance(data->lights[j].origin,
-				data->objs[oi].origin) < data->objs[oi].diameter / 2.)
-			return (1);
-	}
-	return (0);
-}
-
-int	ignore_light_pl(t_data *data, int oi, int j)
-{
-	int	sign_a;
-	int	sign_b;
-
-	sign_a = (dot_prod(vec_sub(data->objs[oi].origin, data->cam.origin),
-				data->objs[oi].normal) > 0);
-	sign_b = (dot_prod(vec_sub(data->objs[oi].origin, data->lights[j].origin),
-				data->objs[oi].normal) > 0);
-	return (sign_a != sign_b);
-}
-
-int	ignore_light(t_data *data, int *j)
-{
-	int	oi;
-
-	oi = 0;
-	while (oi < data->obj_n)
-	{
-		if (data->objs[oi].type == SP)
-		{
-			if (ignore_light_sp(data, oi, *j))
-				return ((*j)++, 1);
-		}
-		else if (data->objs[oi].type == PL)
-		{
-			if (ignore_light_pl(data, oi, *j))
-				return ((*j)++, 1);
-		}
-		oi++;
-	}
-	return (0); // TODO cylinder
+	if (data->objs[data->curr_c.obj_ind].type == SP)
+		return (data->lights[j].power / pow(FALLOFF, dist_l) \
+						* sc_fac_calc_sp(data, data->curr_c, r_light));
+	else if (data->objs[data->curr_c.obj_ind].type == PL)
+		return (data->lights[j].power / pow(FALLOFF, dist_l + 2));
+	return (-42.);
 }
 
 /*
@@ -134,12 +88,9 @@ t_rgb	light_calc(t_data *data, t_col col, t_vec3 f)
 		r_light.o = col.p;
 		if (light_blocked(data, r_light, &j, &dist_l))
 			continue ;
-		if (data->objs[col.obj_ind].type == SP)
-			scale_factor = data->lights[j].power / pow(FALLOFF, dist_l) \
-							* sc_fac_calc_sp(data, col, r_light);
-		else if (data->objs[col.obj_ind].type == PL)
-			scale_factor = data->lights[j].power / pow(FALLOFF, dist_l + 2);
-		ret = super_mix(ret, data->lights[j++].color, scale_factor);
+		scale_factor = choose_obj_for_sf(data, r_light, j, dist_l);
+		ret = super_mix(ret, data->lights[j++].color, scale_factor,
+				data->objs[col.obj_ind].color);
 	}
 	return (ret);
 }
