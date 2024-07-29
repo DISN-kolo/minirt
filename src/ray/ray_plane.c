@@ -12,17 +12,43 @@
 
 #include "../../inc/minirt.h"
 
-double			plane_ray(t_vec3 o, t_vec3 d, t_vec3 pp, t_vec3 n)
-{ //o origen rayo, d direccion rayo, pp punto en el plano, n vector normal plano
+/*
+ * o - ray origin
+ * d - ray direction
+ * pp - plane origin
+ * n - normal vector of the plane
+ *
+ * if n and d are perpendicular, i.e., the ray is parallel to the plane,
+ * then obviously no intersection is possible
+ *
+ * the x solution comes from equating these two P's (random points):
+ * 1. a point P along the ray:            P = o + d * x
+ * 2. a way to write the plane equation: (P - p) . n = 0
+ *
+ * 1 is easily explained as start + direction * advancement
+ * 2 is explained as "the dot product = 0 => the vectors are perpendicular",
+ * therefore what is perpendicular to a plane's perpendicular is lying in
+ * the plane itself.
+ *
+ * so, equating these two P's, we get a place where they meet - thus, an
+ * intersection (this is the general logic with all the following shapes too)
+ *
+ * (o + d*x - p) . n = 0
+ * o . n + d*x . n - p . n = 0
+ * d . n *x = (p-o) . n
+ * x = (p-o) . n / d . n
+ */
+double	plane_ray(t_vec3 o, t_vec3 d, t_vec3 pp, t_vec3 n)
+{
 	double	x;
-	double  den;
+	double	den;
 
 	den = dot_prod(n, d);
-	if (den == 0) //ray paralelo al plano no interseccion
+	if (den == 0)
 		return (INFINITY);
-	x = (dot_prod(n, vec_sub(pp, o))) / den;
-    if (x > 0)
-        return (x);
-    else //una intersección negativa indicaría que el punto de intersección entre el rayo y el plano se encuentra detrás del origen del rayo.
-        return (INFINITY);
+	x = (dot_prod(n, vec_sub(o, pp))) / den;
+	if (x > 0)
+		return (x);
+	else
+		return (INFINITY);
 }

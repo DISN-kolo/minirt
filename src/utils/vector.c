@@ -37,7 +37,7 @@ t_vec3	vec_add(t_vec3 a, t_vec3 b)
 	return (v);
 }
 
-t_vec3	prod_esc(t_vec3 v, double f)
+t_vec3	vec_scale(t_vec3 v, double f)
 {
 	t_vec3	w;
 

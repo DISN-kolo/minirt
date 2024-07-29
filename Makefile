@@ -6,7 +6,7 @@
 #    By: fcosta-f < fcosta-f@student.42barcelona    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/18 16:54:33 by akozin            #+#    #+#              #
-#    Updated: 2024/07/20 17:14:56 by fcosta-f         ###   ########.fr        #
+#    Updated: 2024/07/25 15:12:11 by akozin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ MAKE = make
 RM = rm -rf
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror# -g -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -g# -fsanitize=address
 
 SRCNAMES = main.c \
 		   utils/fileprobe.c \
@@ -35,6 +35,7 @@ SRCNAMES = main.c \
 		   utils/misc.c \
 		   utils/vector.c \
 		   utils/vector2.c \
+		   utils/color_mixing.c \
 		   parse/parser_counter.c \
 		   parse/parser.c \
 		   parse/parse_amb.c \
@@ -50,6 +51,10 @@ SRCNAMES = main.c \
 		   parse/parse_normal.c \
 		   parse/parse_fov.c \
 		   draw/draw.c \
+		   draw/draw_internal_funcs.c \
+		   draw/light_calculus.c \
+		   draw/light_calculus_ignores.c \
+		   draw/light_calculus_internal_funcs.c \
 		   console/print_usage.c \
 		   console/print_errors.c \
 		   free_utils/free_utils.c \

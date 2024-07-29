@@ -21,7 +21,18 @@
 # include <stdio.h>
 # include <math.h>
 
-#define EPSILON 0.00001
+# define EPSILON 0.00001
+//# define WIN_Y 1080.f
+//# define WIN_X 1920.f
+//# define WIN_Y 270.f
+//# define WIN_X 480.f
+//# define WIN_Y 540.f
+//# define WIN_X 960.f
+# define WIN_Y 1000.f
+# define WIN_X 1000.f
+//# define WIN_X 50.f
+//# define WIN_Y 50.f
+# define FALLOFF 1.3f
 
 typedef struct s_img
 {
@@ -39,6 +50,32 @@ typedef struct s_vec3
 	double	z;
 }	t_vec3;
 
+typedef struct s_ur
+{
+	t_vec3	u;
+	t_vec3	r;
+}	t_ur;
+
+/*
+ * p - col point
+ */
+typedef struct s_col
+{
+	int		obj_ind;
+	double	r_dist;
+	t_vec3	p;
+}	t_col;
+
+/*
+ * origin  = o
+ * forward = f
+ */
+typedef struct s_ray
+{
+	t_vec3	o;
+	t_vec3	f;
+}	t_ray;
+
 typedef struct s_rgb
 {
 	int	r;
@@ -46,11 +83,11 @@ typedef struct s_rgb
 	int	b;
 }	t_rgb;
 
-
 typedef enum e_err
 {
 	NULL_ERR,
 	DOUBLE_ERR,
+	NORMAL_ERR,
 	RGB_ERR,
 	ORIGIN_ERR,
 	FOV_ERR,
@@ -58,6 +95,7 @@ typedef enum e_err
 	FILE_ERR,
 	FNAME_ERR,
 	TOO_MANY_OBJS_ERR,
+	NO_CAM_ERR,
 	PARAM_N_ERR,
 	MALLOC_ERR
 }	t_err;
@@ -68,7 +106,6 @@ typedef enum e_obj_name
 	PL,
 	CY
 }	t_obj_name;
-
 
 typedef struct s_obj
 {
@@ -91,9 +128,14 @@ typedef struct s_cam
 {
 	t_vec3	origin;
 	t_vec3	normal;
-	int		fov;
+	double	fov;
 }	t_cam;
 
+/*
+ * curr_c really comes in with a clutch when
+ * we have to squeeze some parameters into an aux function
+ * because norminette is not a normal person
+ */
 typedef struct s_data
 {
 	t_cam	cam;
@@ -110,6 +152,7 @@ typedef struct s_data
 	void	*mlx;
 	void	*win;
 	t_img	img;
+	t_col	curr_c;
 }	t_data;
 
 void	data_init(t_data *data);
@@ -156,7 +199,7 @@ int		str_arr_counter(char **s);
 double	vec_len(t_vec3 vec);
 t_vec3	vec_sub(t_vec3 a, t_vec3 b);
 t_vec3	vec_add(t_vec3 a, t_vec3 b);
-t_vec3	prod_esc(t_vec3 v, double f);
+t_vec3	vec_scale(t_vec3 v, double f);
 void	normalize(t_vec3 *v);
 double	dot_prod(t_vec3 v1, t_vec3 v2);
 t_vec3	cross_prod(t_vec3 u, t_vec3 v);
@@ -164,7 +207,28 @@ double	distance(t_vec3 a, t_vec3 b);
 t_vec3	vec_inv(t_vec3 v);
 void	print_vector(t_vec3 v);
 
-void	test_drawing_lol(t_data *data);
+double	splane_ray(t_vec3 o, t_vec3 d, t_vec3 pp, t_vec3 n);
+double	sphere_intersection(t_vec3 o, t_vec3 d, t_obj *obj);
+double	sphere_far_result(t_vec3 o, t_vec3 d, t_obj *obj);
+t_vec3	sphere_n(t_obj sp, t_vec3 p);
+
+void	draw(t_data *data);
+t_vec3	find_f(t_data *data, int px, int py, t_ur ur);
+t_ur	set_up_right(t_data *data, t_ur ur);
+t_col	check_objs_internal(t_vec3 f, t_data *data, int i, t_col res);
+t_col	check_os_from_int_p(t_ray l, t_data *data, int i, t_col res);
+
+t_rgb	light_calc(t_data *data, t_col col, t_vec3 f);
+void	light_calc_init(t_data *data, t_col *col, t_vec3 f, t_rgb *ret);
+int		ignore_light(t_data *data, int *j);
+double	sc_fac_calc_sp(t_data *data, t_col col, t_ray r_light);
+int		light_blocked(t_data *data, t_ray r_light, int *j, double *dist_l);
+t_rgb	super_mix(t_rgb ret, t_rgb additive, double scale_factor, t_rgb o_rgb);
+
+t_rgb	rgb_add(t_rgb c1, t_rgb c2);
+t_rgb	rgb_mult(t_rgb c1, t_rgb c2);
+t_rgb	rgb_clamp(t_rgb c);
+t_rgb	rgb_scale(t_rgb c, double j);
 
 double			plane_ray(t_vec3 o, t_vec3 d, t_vec3 pp, t_vec3 n);
 

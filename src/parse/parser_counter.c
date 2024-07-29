@@ -6,7 +6,7 @@
 /*   By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 16:59:36 by akozin            #+#    #+#             */
-/*   Updated: 2024/07/16 14:57:14 by akozin           ###   ########.fr       */
+/*   Updated: 2024/07/29 12:17:00 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,4 +59,6 @@ void	parser_counter(t_data *data, int fd)
 		free(line);
 		line = get_next_line(fd);
 	}
+	if (data->cam_n == 0 && data->error == NULL_ERR)
+		return ((void)(data->error = NO_CAM_ERR));
 }

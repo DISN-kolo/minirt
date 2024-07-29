@@ -26,4 +26,5 @@ void	parse_cam(t_data *data, char **s)
 	data->cam.origin = parse_origin(data, s[1]);
 	data->cam.normal = parse_normal(data, s[2]);
 	data->cam.fov = parse_fov(data, s[3]);
+	data->cam.fov = data->cam.fov / 180. * M_PI;
 }

@@ -6,7 +6,7 @@
 /*   By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 12:14:04 by akozin            #+#    #+#             */
-/*   Updated: 2024/07/18 15:03:10 by akozin           ###   ########.fr       */
+/*   Updated: 2024/07/25 16:07:25 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,16 @@
 /*
  * see ../../inc/minirt.h for the enum t_err
  */
+static void	print_err_2(t_data *data)
+{
+	if (data->error == NO_CAM_ERR)
+		ft_putstr_fd("The scene must have a camera\n", 2);
+	else if (data->error == NORMAL_ERR)
+		ft_putstr_fd("Poorly entered normal\n", 2);
+	else
+		ft_putstr_fd("Unknown error\n", 2);
+}
+
 void	print_err(t_data *data)
 {
 	ft_putstr_fd("Error\n", 2);
@@ -41,5 +51,5 @@ format: R,G,B\n", 2);
 	else if (data->error == MALLOC_ERR)
 		ft_putstr_fd("Malloc error\n", 2);
 	else
-		ft_putstr_fd("Unknown error\n", 2);
+		print_err_2(data);
 }
