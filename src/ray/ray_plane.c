@@ -6,13 +6,13 @@
 /*   By: fcosta-f < fcosta-f@student.42barcelona    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 20:25:59 by fcosta-f          #+#    #+#             */
-/*   Updated: 2024/07/18 20:49:30 by fcosta-f         ###   ########.fr       */
+/*   Updated: 2024/07/20 22:44:28 by fcosta-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minirt.h"
 
-double			splane_ray(t_vec3 o, t_vec3 d, t_vec3 pp, t_vec3 n)
+double			plane_ray(t_vec3 o, t_vec3 d, t_vec3 pp, t_vec3 n)
 { //o origen rayo, d direccion rayo, pp punto en el plano, n vector normal plano
 	double	x;
 	double  den;

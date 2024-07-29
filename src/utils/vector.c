@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vector.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcosta-f <fcosta-f@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: fcosta-f < fcosta-f@student.42barcelona    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 16:51:01 by fcosta-f          #+#    #+#             */
-/*   Updated: 2024/07/17 15:10:58 by akozin           ###   ########.fr       */
+/*   Updated: 2024/07/20 23:44:54 by fcosta-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_vec3	vec_sub(t_vec3 a, t_vec3 b)
 	return (v);
 }
 
-t_vec3	vect_add(t_vec3 a, t_vec3 b)
+t_vec3	vec_add(t_vec3 a, t_vec3 b)
 {
 	t_vec3	v;
 
