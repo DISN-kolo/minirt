@@ -6,7 +6,7 @@
 /*   By: fcosta-f < fcosta-f@student.42barcelona    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 16:07:24 by akozin            #+#    #+#             */
-/*   Updated: 2024/07/20 23:45:08 by fcosta-f         ###   ########.fr       */
+/*   Updated: 2024/07/29 15:38:24 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -207,10 +207,11 @@ double	distance(t_vec3 a, t_vec3 b);
 t_vec3	vec_inv(t_vec3 v);
 void	print_vector(t_vec3 v);
 
-double	splane_ray(t_vec3 o, t_vec3 d, t_vec3 pp, t_vec3 n);
+double	plane_ray(t_vec3 o, t_vec3 d, t_vec3 pp, t_vec3 n);
 double	sphere_intersection(t_vec3 o, t_vec3 d, t_obj *obj);
 double	sphere_far_result(t_vec3 o, t_vec3 d, t_obj *obj);
 t_vec3	sphere_n(t_obj sp, t_vec3 p);
+double	cylinder_intersection(const t_ray cam, const t_obj obj);
 
 void	draw(t_data *data);
 t_vec3	find_f(t_data *data, int px, int py, t_ur ur);
@@ -230,6 +231,5 @@ t_rgb	rgb_mult(t_rgb c1, t_rgb c2);
 t_rgb	rgb_clamp(t_rgb c);
 t_rgb	rgb_scale(t_rgb c, double j);
 
-double			plane_ray(t_vec3 o, t_vec3 d, t_vec3 pp, t_vec3 n);
 
 #endif

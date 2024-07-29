@@ -6,7 +6,7 @@
 /*   By: fcosta-f < fcosta-f@student.42barcelona    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 15:48:10 by akozin            #+#    #+#             */
-/*   Updated: 2024/07/20 17:21:49 by fcosta-f         ###   ########.fr       */
+/*   Updated: 2024/07/29 15:41:38 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,13 @@ t_col	check_os_from_int_p(t_ray l, t_data *data, int i, t_col res)
 	}
 	else if (data->objs[i].type == PL)
 	{
-		temp = splane_ray(l.o, l.f, data->objs[i].origin,
+		temp = plane_ray(l.o, l.f, data->objs[i].origin,
 				data->objs[i].normal);
 		res_setter_internal(temp, &res, i);
 	}
 	else if (data->objs[i].type == CY)
 	{
-		//temp = cyl_collide_check(); // TODO
-		temp = -1;
+		temp = cylinder_intersection(l, data->objs[i]);
 		res_setter_internal(temp, &res, i);
 	}
 	return (res);
@@ -53,6 +52,7 @@ t_col	check_os_from_int_p(t_ray l, t_data *data, int i, t_col res)
 t_col	check_objs_internal(t_vec3 f, t_data *data, int i, t_col res)
 {
 	double	temp;
+	t_ray	l;
 
 	if (data->objs[i].type == SP)
 	{
@@ -61,16 +61,15 @@ t_col	check_objs_internal(t_vec3 f, t_data *data, int i, t_col res)
 	}
 	else if (data->objs[i].type == PL)
 	{
-		temp = splane_ray(data->cam.origin, f, data->objs[i].origin,
+		temp = plane_ray(data->cam.origin, f, data->objs[i].origin,
 				data->objs[i].normal);
 		res_setter_internal(temp, &res, i);
 	}
 	else if (data->objs[i].type == CY)
 	{
-		/*
-		temp = cyl_collide_check(); // TODO
-		*/
-		temp = -1;
+		l.o = data->cam.origin;
+		l.f = f;
+		temp = cylinder_intersection(l, data->objs[i]);
 		res_setter_internal(temp, &res, i);
 	}
 	return (res);

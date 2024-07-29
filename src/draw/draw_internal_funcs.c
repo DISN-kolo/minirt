@@ -6,7 +6,7 @@
 /*   By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 14:29:50 by akozin            #+#    #+#             */
-/*   Updated: 2024/07/25 14:41:09 by akozin           ###   ########.fr       */
+/*   Updated: 2024/07/29 15:30:35 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,6 @@ t_ur	set_up_right(t_data *data, t_ur ur)
 	normalize(&(ur.r));
 	ur.u = cross_prod(data->cam.normal, ur.r);
 	normalize(&(ur.u));
-	ur.u = vect_inv(ur.u);
+	ur.u = vec_inv(ur.u);
 	return (ur);
 }

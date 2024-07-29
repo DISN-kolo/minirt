@@ -6,7 +6,7 @@
 /*   By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 14:53:52 by akozin            #+#    #+#             */
-/*   Updated: 2024/07/29 15:21:18 by akozin           ###   ########.fr       */
+/*   Updated: 2024/07/29 16:31:09 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,9 @@ double	choose_obj_for_sf(t_data *data, t_ray r_light, int j, double dist_l)
 						* sc_fac_calc_sp(data, data->curr_c, r_light));
 	else if (data->objs[data->curr_c.obj_ind].type == PL)
 		return (data->lights[j].power / pow(FALLOFF, dist_l + 2));
+	else if (data->objs[data->curr_c.obj_ind].type == CY)
+		return (data->lights[j].power / pow(FALLOFF, dist_l) \
+						* sc_fac_calc_sp(data, data->curr_c, r_light));
 	return (-42.);
 }
 

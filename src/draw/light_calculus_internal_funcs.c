@@ -6,7 +6,7 @@
 /*   By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 14:48:52 by akozin            #+#    #+#             */
-/*   Updated: 2024/07/25 15:41:12 by akozin           ###   ########.fr       */
+/*   Updated: 2024/07/29 16:34:45 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,27 @@
 int	is_c_in_sp(t_obj sp, t_cam cam)
 {
 	if (distance(cam.origin, sp.origin) < sp.diameter / 2.)
+		return (1);
+	return (0);
+}
+
+int	is_c_in_cy(t_obj cy, t_cam cam)
+{
+	t_vec3	cam_dist_v;
+	double	cam_dist;
+	int		sign_a;
+	int		sign_c;
+
+	sign_a = (dot_prod(vec_sub(cy.origin, cam.origin),
+				cy.normal) > 0);
+	sign_c = (dot_prod(vec_sub(vec_add(cy.origin,
+					vec_scale(cy.normal,
+						cy.height)), cam.origin),
+				cy.normal) > 0);
+	cam_dist_v = vec_sub(cam.origin, cy.origin);
+	cam_dist = vec_len(vec_sub(vec_scale(cy.normal, dot_prod(cam_dist_v, cy.normal)),
+				cam_dist_v));
+	if (sign_a > 0 && sign_c < 0 && cam_dist < cy.diameter / 2.)
 		return (1);
 	return (0);
 }

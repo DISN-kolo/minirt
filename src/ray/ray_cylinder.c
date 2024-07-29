@@ -6,13 +6,13 @@
 /*   By: fcosta-f < fcosta-f@student.42barcelona    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 17:15:59 by fcosta-f          #+#    #+#             */
-/*   Updated: 2024/07/20 23:49:28 by fcosta-f         ###   ########.fr       */
+/*   Updated: 2024/07/29 15:58:46 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minirt.h"
 
-static double	caps_intersection(t_cam cam, const t_obj obj)
+static double	caps_intersection(t_ray cam, const t_obj obj)
 {
 	double	d1;
 	double	d2;
@@ -20,13 +20,13 @@ static double	caps_intersection(t_cam cam, const t_obj obj)
 	t_vec3	p2;
 	t_vec3	c2;
 
-	c2 = vec_add(obj.origin, prod_esc(obj.normal, obj.height)); //center of the top cap:
-	d1 = plane_ray(cam.origin, cam.normal, obj.origin, obj.normal);
-	d2 = plane_ray	(cam.origin, cam.normal, c2, obj.normal);
+	c2 = vec_add(obj.origin, vec_scale(obj.normal, obj.height)); //center of the top cap:
+	d1 = plane_ray(cam.o, cam.f, obj.origin, obj.normal);
+	d2 = plane_ray	(cam.o, cam.f, c2, obj.normal);
 	if (d1 < INFINITY || d2 < INFINITY)
 	{
-		p1 = vec_add(cam.origin, prod_esc(cam.normal, d1));
-		p2 = vec_add(cam.origin, prod_esc(cam.normal, d2));
+		p1 = vec_add(cam.o, vec_scale(cam.f, d1));
+		p2 = vec_add(cam.o, vec_scale(cam.f, d2));
 		if ((d1 < INFINITY && distance(p1, obj.origin) <= obj.diameter/2) && (d2 < INFINITY && distance(p2, c2) <= obj.diameter/2)) {
 			if (d1 < d2)
 				return (d1);
@@ -46,9 +46,9 @@ static int		solve_quadratic(double result[2], t_vec3 o, t_vec3 d, t_obj *obj)
 	t_vec3 v;
 	t_vec3 w;
 
-	v = prod_esc(obj->normal, dot_prod(d, obj->normal)); // It shows how much of d is in the same direction as the cylinder's axis.
-	v = vec_sub(d, v); //vec_sub v from d leaves us with the component of d that is perpendicular to the cylinder's axis.
-	w = prod_esc(obj->normal, dot_prod(obj->normal, vec_sub(o, obj->origin)));
+	v = vec_scale(obj->normal, dot_prod(d, obj->normal)); // It shows how much of d is in the same direction as the cylinder's axis.
+	v = vec_sub(v, d); //vec_sub v from d leaves us with the component of d that is perpendicular to the cylinder's axis.
+	w = vec_scale(obj->normal, dot_prod(obj->normal, vec_sub(o, obj->origin)));
 	w = vec_sub(vec_sub(o, obj->origin), w);
 	q[0] = dot_prod(v, v);
 	q[1] = 2 * dot_prod(v, w);
@@ -79,21 +79,21 @@ static void		calc_correct_inters(double x2[2], const t_obj obj, double dist1, do
 	x2[0] = x;
 }
 
-static double	body_inters(t_cam cam, t_obj obj)
+static double	body_inters(t_ray cam, t_obj obj)
 {
 	double	x2[2];
 
-	if (!solve_quadratic(x2, cam.origin, cam.normal, &obj))
+	if (!solve_quadratic(x2, cam.o, cam.f, &obj))
 		return (INFINITY);
-	double d1 = dot_prod(obj.normal, vec_sub(prod_esc(cam.normal, x2[0]), vec_sub(obj.origin, cam.origin)));
-	double d2 = dot_prod(obj.normal, vec_sub(prod_esc(cam.normal, x2[1]), vec_sub(obj.origin, cam.origin)));
+	double d1 = dot_prod(obj.normal, vec_sub(vec_sub(cam.o, obj.origin), vec_scale(cam.f, x2[0])));
+	double d2 = dot_prod(obj.normal, vec_sub(vec_sub(cam.o, obj.origin), vec_scale(cam.f, x2[1])));
 	if (!((d1 >= 0 && d1 <= obj.height && x2[0] > EPSILON) || (d2 >= 0 && d2 <= obj.height && x2[0] > EPSILON)))
 		return (INFINITY);
 	calc_correct_inters(x2, obj, d1, d2);
 	return (x2[0]);
 }
 
-double	cylinder_intersection(const t_cam cam, const t_obj obj) //done
+double	cylinder_intersection(const t_ray cam, const t_obj obj) //done
 {
 	double	dbody;
 	double	dcaps;
@@ -123,6 +123,6 @@ t_vec3 point_to_line(t_vec3 A, t_vec3 B, t_vec3 P)
 		t = 0.0;
 	else if (t > 1.0)
 		t = 1.0;
-	return (vec_add(A, prod_esc(AB, t)));
+	return (vec_add(A, vec_scale(AB, t)));
 	//Adds the scaled vector to point A, giving us the point along the line segment AB that is closest to P.
 }
