@@ -6,7 +6,7 @@
 /*   By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 15:48:10 by akozin            #+#    #+#             */
-/*   Updated: 2024/07/25 14:36:47 by akozin           ###   ########.fr       */
+/*   Updated: 2024/07/29 15:21:06 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 static void	res_setter_internal(double temp, t_col *res, int i)
 {
-	if (!isinf(temp) && temp > 0 && (isinf(res->r_dist) || temp < res->r_dist))
+	if (!isinf(temp) && temp > EPSILON
+		&& (isinf(res->r_dist) || temp < res->r_dist))
 	{
 		res->r_dist = temp;
 		res->obj_ind = i;
