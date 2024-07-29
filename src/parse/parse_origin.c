@@ -6,7 +6,7 @@
 /*   By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 13:26:17 by akozin            #+#    #+#             */
-/*   Updated: 2024/07/17 15:01:07 by akozin           ###   ########.fr       */
+/*   Updated: 2024/07/29 12:34:18 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ t_vec3	parse_origin(t_data *data, char *s)
 
 	res = vec3_init();
 	ax = 0;
-	while (*s && *s != ' ')
+	while (*s && *s != ' ' && data->error == NULL_ERR)
 	{
 		if (*s == ',')
 		{
@@ -78,7 +78,7 @@ t_vec3	parse_origin(t_data *data, char *s)
 		else
 			intern_vec3_fill(data, ax, &s, &res);
 	}
-	if (ax != 2)
+	if (ax != 2 && data->error == NULL_ERR)
 		return (data->error = ORIGIN_ERR, res);
 	return (res);
 }
