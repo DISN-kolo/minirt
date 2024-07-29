@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vector2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+        */
+/*   By: fcosta-f < fcosta-f@student.42barcelona    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 12:40:25 by akozin            #+#    #+#             */
-/*   Updated: 2024/07/17 15:02:25 by akozin           ###   ########.fr       */
+/*   Updated: 2024/07/20 23:45:08 by fcosta-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ double	distance(t_vec3 a, t_vec3 b)
 	return (sqrt(x + y + z));
 }
 
-t_vec3	vect_inv(t_vec3 v)
+t_vec3	vec_inv(t_vec3 v)
 {
 	v.x = -v.x;
 	v.y = -v.y;

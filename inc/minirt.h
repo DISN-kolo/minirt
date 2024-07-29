@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcosta-f <fcosta-f@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: fcosta-f < fcosta-f@student.42barcelona    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 16:07:24 by akozin            #+#    #+#             */
-/*   Updated: 2024/07/29 15:19:00 by akozin           ###   ########.fr       */
+/*   Updated: 2024/07/20 23:45:08 by fcosta-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -204,7 +204,7 @@ void	normalize(t_vec3 *v);
 double	dot_prod(t_vec3 v1, t_vec3 v2);
 t_vec3	cross_prod(t_vec3 u, t_vec3 v);
 double	distance(t_vec3 a, t_vec3 b);
-t_vec3	vect_inv(t_vec3 v);
+t_vec3	vec_inv(t_vec3 v);
 void	print_vector(t_vec3 v);
 
 double	splane_ray(t_vec3 o, t_vec3 d, t_vec3 pp, t_vec3 n);
@@ -229,5 +229,7 @@ t_rgb	rgb_add(t_rgb c1, t_rgb c2);
 t_rgb	rgb_mult(t_rgb c1, t_rgb c2);
 t_rgb	rgb_clamp(t_rgb c);
 t_rgb	rgb_scale(t_rgb c, double j);
+
+double			plane_ray(t_vec3 o, t_vec3 d, t_vec3 pp, t_vec3 n);
 
 #endif

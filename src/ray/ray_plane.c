@@ -6,7 +6,7 @@
 /*   By: fcosta-f < fcosta-f@student.42barcelona    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 20:25:59 by fcosta-f          #+#    #+#             */
-/*   Updated: 2024/07/23 15:52:39 by akozin           ###   ########.fr       */
+/*   Updated: 2024/07/20 22:44:28 by fcosta-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@
  * d . n *x = (p-o) . n
  * x = (p-o) . n / d . n
  */
-double	splane_ray(t_vec3 o, t_vec3 d, t_vec3 pp, t_vec3 n)
+double	plane_ray(t_vec3 o, t_vec3 d, t_vec3 pp, t_vec3 n)
 {
 	double	x;
 	double	den;

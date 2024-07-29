@@ -3,7 +3,7 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fcosta-f <fcosta-f@student.42barcelona.    +#+  +:+       +#+         #
+#    By: fcosta-f < fcosta-f@student.42barcelona    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/18 16:54:33 by akozin            #+#    #+#              #
 #    Updated: 2024/07/25 15:12:11 by akozin           ###   ########.fr        #
@@ -59,7 +59,8 @@ SRCNAMES = main.c \
 		   console/print_errors.c \
 		   free_utils/free_utils.c \
 		   ray/ray_plane.c \
-		   ray/ray_sphere.c
+		   ray/ray_sphere.c \
+		   ray/ray_cylinder.c
 
 
 SRCS = $(SRCNAMES)
