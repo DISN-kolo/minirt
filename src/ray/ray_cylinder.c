@@ -6,7 +6,7 @@
 /*   By: fcosta-f < fcosta-f@student.42barcelona    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 17:15:59 by fcosta-f          #+#    #+#             */
-/*   Updated: 2024/07/29 15:58:46 by akozin           ###   ########.fr       */
+/*   Updated: 2024/07/29 16:43:10 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ static double	body_inters(t_ray cam, t_obj obj)
 	return (x2[0]);
 }
 
-double	cylinder_intersection(const t_ray cam, const t_obj obj) //done
+double	cylinder_intersection(int *b, const t_ray cam, const t_obj obj) //done
 {
 	double	dbody;
 	double	dcaps;
@@ -103,8 +103,8 @@ double	cylinder_intersection(const t_ray cam, const t_obj obj) //done
 	if (dbody < INFINITY || dcaps < INFINITY)
 	{
 		if (dbody < dcaps) //que est'a m'as cerca
-			return (dbody);
-		return (dcaps);
+			return (*b = 1, dbody);
+		return (*b = 0, dcaps);
 	}
 	return (INFINITY);
 }
