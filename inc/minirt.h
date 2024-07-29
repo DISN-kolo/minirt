@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcosta-f <fcosta-f@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: fcosta-f < fcosta-f@student.42barcelona    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 16:07:24 by akozin            #+#    #+#             */
-/*   Updated: 2024/07/19 21:43:04 by fcosta-f         ###   ########.fr       */
+/*   Updated: 2024/07/20 23:45:08 by fcosta-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,15 +155,17 @@ int		str_arr_counter(char **s);
 
 double	vec_len(t_vec3 vec);
 t_vec3	vec_sub(t_vec3 a, t_vec3 b);
-t_vec3	vect_add(t_vec3 a, t_vec3 b);
+t_vec3	vec_add(t_vec3 a, t_vec3 b);
 t_vec3	prod_esc(t_vec3 v, double f);
 void	normalize(t_vec3 *v);
 double	dot_prod(t_vec3 v1, t_vec3 v2);
 t_vec3	cross_prod(t_vec3 u, t_vec3 v);
 double	distance(t_vec3 a, t_vec3 b);
-t_vec3	vect_inv(t_vec3 v);
+t_vec3	vec_inv(t_vec3 v);
 void	print_vector(t_vec3 v);
 
 void	test_drawing_lol(t_data *data);
+
+double			plane_ray(t_vec3 o, t_vec3 d, t_vec3 pp, t_vec3 n);
 
 #endif
