@@ -120,9 +120,12 @@ t_rgb	super_mix(t_rgb ret, t_rgb additive, double scale_factor, t_rgb o_rgb)
 	vec_o.x *= vec_addit.x;
 	vec_o.y *= vec_addit.y;
 	vec_o.z *= vec_addit.z;
-	vec_ret = vec_add(vec_ret, vec_scale(vec_o, scale_factor));
+	o_rgb.r = 255. * scale_factor * vec_o.x;
+	o_rgb.g = 255. * scale_factor * vec_o.y;
+	o_rgb.b = 255. * scale_factor * vec_o.z;
+	o_rgb = rgb_clamp(o_rgb);
 	ret.r = vec_ret.x * 255;
 	ret.g = vec_ret.y * 255;
 	ret.b = vec_ret.z * 255;
-	return (rgb_clamp(ret));
+	return (rgb_clamp(rgb_add(ret, o_rgb)));
 }
