@@ -6,7 +6,7 @@
 /*   By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 13:12:55 by akozin            #+#    #+#             */
-/*   Updated: 2024/07/18 16:32:29 by akozin           ###   ########.fr       */
+/*   Updated: 2024/07/29 18:08:05 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	data_init(t_data *data)
 	data->lights = NULL;
 	data->objs = NULL;
 	data->mlx = NULL;
+	data->cy_b = -1;
 }
 
 void	allocate_stuff(t_data *data)

@@ -6,7 +6,7 @@
 /*   By: fcosta-f < fcosta-f@student.42barcelona    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 15:48:10 by akozin            #+#    #+#             */
-/*   Updated: 2024/07/29 15:41:38 by akozin           ###   ########.fr       */
+/*   Updated: 2024/07/29 18:12:23 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ static void	res_setter_internal(double temp, t_col *res, int i)
 t_col	check_os_from_int_p(t_ray l, t_data *data, int i, t_col res)
 {
 	double	temp;
+	int		dummy;
 
 	if (data->objs[i].type == SP)
 	{
@@ -43,7 +44,7 @@ t_col	check_os_from_int_p(t_ray l, t_data *data, int i, t_col res)
 	}
 	else if (data->objs[i].type == CY)
 	{
-		temp = cylinder_intersection(l, data->objs[i]);
+		temp = cylinder_intersection(&(dummy), l, data->objs[i]);
 		res_setter_internal(temp, &res, i);
 	}
 	return (res);
@@ -69,7 +70,7 @@ t_col	check_objs_internal(t_vec3 f, t_data *data, int i, t_col res)
 	{
 		l.o = data->cam.origin;
 		l.f = f;
-		temp = cylinder_intersection(l, data->objs[i]);
+		temp = cylinder_intersection(&(data->cy_b), l, data->objs[i]);
 		res_setter_internal(temp, &res, i);
 	}
 	return (res);

@@ -6,7 +6,7 @@
 /*   By: fcosta-f < fcosta-f@student.42barcelona    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 16:07:24 by akozin            #+#    #+#             */
-/*   Updated: 2024/07/29 16:43:21 by akozin           ###   ########.fr       */
+/*   Updated: 2024/07/29 18:29:22 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@
 //# define WIN_X 960.f
 # define WIN_Y 1000.f
 # define WIN_X 1000.f
-//# define WIN_X 50.f
-//# define WIN_Y 50.f
+//# define WIN_X 100.f
+//# define WIN_Y 100.f
 # define FALLOFF 1.3f
 
 typedef struct s_img
@@ -153,6 +153,7 @@ typedef struct s_data
 	void	*win;
 	t_img	img;
 	t_col	curr_c;
+	int		cy_b;
 }	t_data;
 
 void	data_init(t_data *data);
@@ -223,6 +224,9 @@ t_rgb	light_calc(t_data *data, t_col col, t_vec3 f);
 void	light_calc_init(t_data *data, t_col *col, t_vec3 f, t_rgb *ret);
 int		ignore_light(t_data *data, int *j);
 double	sc_fac_calc_sp(t_data *data, t_col col, t_ray r_light);
+double	sc_fac_calc_cy(t_data *data, t_col col, t_ray r_light);
+int		is_c_in_sp(t_obj sp, t_cam cam);
+int		is_c_in_cy(t_obj cy, t_cam cam);
 int		light_blocked(t_data *data, t_ray r_light, int *j, double *dist_l);
 t_rgb	super_mix(t_rgb ret, t_rgb additive, double scale_factor, t_rgb o_rgb);
 
@@ -230,6 +234,5 @@ t_rgb	rgb_add(t_rgb c1, t_rgb c2);
 t_rgb	rgb_mult(t_rgb c1, t_rgb c2);
 t_rgb	rgb_clamp(t_rgb c);
 t_rgb	rgb_scale(t_rgb c, double j);
-
 
 #endif

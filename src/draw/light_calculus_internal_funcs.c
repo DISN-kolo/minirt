@@ -6,7 +6,7 @@
 /*   By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 14:48:52 by akozin            #+#    #+#             */
-/*   Updated: 2024/07/29 16:34:45 by akozin           ###   ########.fr       */
+/*   Updated: 2024/07/29 18:23:54 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,26 +33,15 @@ int	is_c_in_cy(t_obj cy, t_cam cam)
 	sign_a = (dot_prod(vec_sub(cy.origin, cam.origin),
 				cy.normal) > 0);
 	sign_c = (dot_prod(vec_sub(vec_add(cy.origin,
-					vec_scale(cy.normal,
-						cy.height)), cam.origin),
+						vec_scale(cy.normal,
+							cy.height)), cam.origin),
 				cy.normal) > 0);
 	cam_dist_v = vec_sub(cam.origin, cy.origin);
-	cam_dist = vec_len(vec_sub(vec_scale(cy.normal, dot_prod(cam_dist_v, cy.normal)),
-				cam_dist_v));
-	if (sign_a > 0 && sign_c < 0 && cam_dist < cy.diameter / 2.)
+	cam_dist = vec_len(vec_sub(vec_scale(cy.normal,
+					dot_prod(cam_dist_v, cy.normal)), cam_dist_v));
+	if (sign_a > 0 && sign_c == 0 && cam_dist < cy.diameter / 2.)
 		return (1);
 	return (0);
-}
-
-double	sc_fac_calc_sp(t_data *data, t_col col, t_ray r_light)
-{
-	double	sc_fac_mult;
-
-	sc_fac_mult = dot_prod(
-			sphere_n(data->objs[col.obj_ind], col.p), r_light.f);
-	if (is_c_in_sp(data->objs[col.obj_ind], data->cam))
-		sc_fac_mult *= -1;
-	return (sc_fac_mult);
 }
 
 int	light_blocked(t_data *data, t_ray r_light, int *j, double *dist_l)
