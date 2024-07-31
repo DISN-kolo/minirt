@@ -6,7 +6,7 @@
 #    By: fcosta-f < fcosta-f@student.42barcelona    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/18 16:54:33 by akozin            #+#    #+#              #
-#    Updated: 2024/07/31 14:40:47 by akozin           ###   ########.fr        #
+#    Updated: 2024/07/31 16:18:21 by akozin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,10 +25,10 @@ MAKE = make
 RM = rm -rf
 
 CC = gcc
-#CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -Wall -Wextra -Werror -g
 # don't use with valgrind lol       !vvvvvvvvvvvvvvvv!
 #CFLAGS = -Wall -Wextra -Werror -fsanitize=address
-CFLAGS = -Wall -Wextra -Werror
+#CFLAGS = -Wall -Wextra -Werror
 
 SRCNAMES = main.c \
 		   utils/fileprobe.c \

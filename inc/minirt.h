@@ -6,7 +6,7 @@
 /*   By: fcosta-f < fcosta-f@student.42barcelona    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 16:07:24 by akozin            #+#    #+#             */
-/*   Updated: 2024/07/31 13:22:57 by akozin           ###   ########.fr       */
+/*   Updated: 2024/07/31 16:59:19 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@
 //# define WIN_X 960.f
 # define WIN_Y 1000.f
 # define WIN_X 1000.f
-//# define WIN_X 100.f
-//# define WIN_Y 100.f
+//# define WIN_X 50.f
+//# define WIN_Y 50.f
 # define FALLOFF 1.3f
 
 typedef struct s_img
@@ -107,6 +107,12 @@ typedef enum e_obj_name
 	CY
 }	t_obj_name;
 
+/*
+ * we use the cy_b to determine whether the collision was
+ * with the body (1) or the cap (0) of the cylinder
+ * obv only if its a cylinder
+ * => by default it should be -1 ?
+ */
 typedef struct s_obj
 {
 	t_obj_name	type;
@@ -115,6 +121,7 @@ typedef struct s_obj
 	t_vec3		normal;
 	double		diameter;
 	double		height;
+	int			cy_b;
 }	t_obj;
 
 typedef struct s_light
@@ -153,7 +160,6 @@ typedef struct s_data
 	void	*win;
 	t_img	img;
 	t_col	curr_c;
-	int		cy_b;
 }	t_data;
 
 void	data_init(t_data *data);

@@ -6,7 +6,7 @@
 /*   By: fcosta-f < fcosta-f@student.42barcelona    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 17:15:59 by fcosta-f          #+#    #+#             */
-/*   Updated: 2024/07/31 13:22:26 by akozin           ###   ########.fr       */
+/*   Updated: 2024/07/31 16:58:52 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ static int	solve_quadratic(double result[2], t_vec3 o, t_vec3 d, t_obj *obj)
 	q[2] = dot_prod(w, w) - pow(obj->diameter / 2, 2);
 	result[0] = (-q[1] + sqrt(pow(q[1], 2) - 4 * q[0] * q[2])) / (2 * q[0]);
 	result[1] = (-q[1] - sqrt(pow(q[1], 2) - 4 * q[0] * q[2])) / (2 * q[0]);
-	if ((!result[0] && !result[1])
+	if ((isnan(result[0]) && isnan(result[1]))
 		|| (result[0] < EPSILON && result[1] < EPSILON))
 		return (0);
 	return (1);
@@ -92,6 +92,7 @@ static void	calc_correct_inters(double x2[2], const t_obj obj,
 {
 	double	x;
 
+	x = INFINITY;
 	if ((dist1 >= 0 && dist1 <= obj.height && x2[0] > EPSILON)
 		&& (dist2 >= 0 && dist2 <= obj.height && x2[1] > EPSILON))
 	{

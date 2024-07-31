@@ -6,7 +6,7 @@
 /*   By: fcosta-f < fcosta-f@student.42barcelona    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 15:48:10 by akozin            #+#    #+#             */
-/*   Updated: 2024/07/29 18:12:23 by akozin           ###   ########.fr       */
+/*   Updated: 2024/07/31 17:04:31 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,8 @@ t_col	check_objs_internal(t_vec3 f, t_data *data, int i, t_col res)
 	{
 		l.o = data->cam.origin;
 		l.f = f;
-		temp = cylinder_intersection(&(data->cy_b), l, data->objs[i]);
+		data->objs[i].cy_b = -1;
+		temp = cylinder_intersection(&(data->objs[i].cy_b), l, data->objs[i]);
 		res_setter_internal(temp, &res, i);
 	}
 	return (res);

@@ -6,7 +6,7 @@
 /*   By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 16:58:49 by akozin            #+#    #+#             */
-/*   Updated: 2024/07/31 15:22:32 by akozin           ###   ########.fr       */
+/*   Updated: 2024/07/31 17:04:19 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,18 +40,18 @@ double	sc_fac_calc_cy(t_data *data, t_col col, t_ray r_light)
 {
 	double	sc_fac_mult;
 
-	if (data->cy_b == 1)
+	if (data->objs[col.obj_ind].cy_b == 1)
 	{
 		sc_fac_mult = dot_prod(
 				cylinder_n(data->objs[col.obj_ind], col.p), r_light.f);
 		if (is_c_in_cy(data->objs[col.obj_ind], data->cam))
 			sc_fac_mult *= -0.2;
 	}
-	else if (data->cy_b == 0)
+	else if (data->objs[col.obj_ind].cy_b == 0)
 		return (1 / pow(FALLOFF, 2));
 	else
 	{
-		printf("something is wrong\n");
+		ft_putstr_fd("something is wrong\n", 2);
 		return (100);
 	}
 	return (sc_fac_mult);

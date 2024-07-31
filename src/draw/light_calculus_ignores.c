@@ -6,7 +6,7 @@
 /*   By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 14:53:52 by akozin            #+#    #+#             */
-/*   Updated: 2024/07/29 18:29:05 by akozin           ###   ########.fr       */
+/*   Updated: 2024/07/31 15:51:26 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,9 @@ int	ignore_light_pl(t_data *data, int oi, int j)
 				data->objs[oi].normal) > 0);
 	sign_b = (dot_prod(vec_sub(data->objs[oi].origin, data->lights[j].origin),
 				data->objs[oi].normal) > 0);
-	return (sign_a != sign_b);
+	if (sign_a != sign_b)
+		return (1);
+	return (0);
 }
 
 int	ignore_light(t_data *data, int *j)
