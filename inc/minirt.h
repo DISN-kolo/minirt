@@ -6,7 +6,7 @@
 /*   By: fcosta-f < fcosta-f@student.42barcelona    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 16:07:24 by akozin            #+#    #+#             */
-/*   Updated: 2024/07/31 16:59:19 by akozin           ###   ########.fr       */
+/*   Updated: 2024/07/31 18:20:52 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@
 //# define WIN_X 960.f
 # define WIN_Y 1000.f
 # define WIN_X 1000.f
-//# define WIN_X 50.f
-//# define WIN_Y 50.f
+//# define WIN_X 150.f
+//# define WIN_Y 150.f
 # define FALLOFF 1.3f
 
 typedef struct s_img
@@ -237,7 +237,9 @@ t_col	check_os_from_int_p(t_ray l, t_data *data, int i, t_col res);
 
 t_rgb	light_calc(t_data *data, t_col col, t_vec3 f);
 void	light_calc_init(t_data *data, t_col *col, t_vec3 f, t_rgb *ret);
+double	light_dist_calc(t_data *data, int j, int oi);
 int		ignore_light(t_data *data, int *j);
+int		ignore_light_cy_second_pl_pass(t_data *data, int oi, int j);
 double	sc_fac_calc_sp(t_data *data, t_col col, t_ray r_light);
 double	sc_fac_calc_cy(t_data *data, t_col col, t_ray r_light);
 int		is_c_in_sp(t_obj sp, t_cam cam);

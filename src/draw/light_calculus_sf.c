@@ -6,7 +6,7 @@
 /*   By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 16:58:49 by akozin            #+#    #+#             */
-/*   Updated: 2024/07/31 17:04:19 by akozin           ###   ########.fr       */
+/*   Updated: 2024/07/31 18:15:49 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,10 @@ double	sc_fac_calc_cy(t_data *data, t_col col, t_ray r_light)
 		sc_fac_mult = dot_prod(
 				cylinder_n(data->objs[col.obj_ind], col.p), r_light.f);
 		if (is_c_in_cy(data->objs[col.obj_ind], data->cam))
-			sc_fac_mult *= -0.2;
+		{
+			print_vector(cylinder_n(data->objs[col.obj_ind], col.p));
+			sc_fac_mult *= -1;
+		}
 	}
 	else if (data->objs[col.obj_ind].cy_b == 0)
 		return (1 / pow(FALLOFF, 2));

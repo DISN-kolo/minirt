@@ -6,7 +6,7 @@
 /*   By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 14:48:52 by akozin            #+#    #+#             */
-/*   Updated: 2024/07/31 17:03:29 by akozin           ###   ########.fr       */
+/*   Updated: 2024/07/31 18:16:31 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,4 +69,28 @@ void	light_calc_init(t_data *data, t_col *col, t_vec3 f, t_rgb *ret)
 	data->curr_c = *col;
 	*ret = data->objs[col->obj_ind].color;
 	*ret = rgb_mult(*ret, rgb_scale(data->amb.color, data->amb.power));
+}
+
+int	ignore_light_cy_second_pl_pass(t_data *data, int oi, int j)
+{
+	int		sign_a;
+	int		sign_b;
+	int		sign_c;
+	int		sign_d;
+
+	sign_a = (dot_prod(vec_sub(data->objs[oi].origin, data->cam.origin),
+				data->objs[oi].normal) > 0);
+	sign_b = (dot_prod(vec_sub(data->objs[oi].origin, data->lights[j].origin),
+				data->objs[oi].normal) > 0);
+	sign_c = (dot_prod(vec_sub(vec_add(data->objs[oi].origin,
+						vec_scale(data->objs[oi].normal,
+							data->objs[oi].height)), data->cam.origin),
+				data->objs[oi].normal) > 0);
+	sign_d = (dot_prod(vec_sub(vec_add(data->objs[oi].origin,
+						vec_scale(data->objs[oi].normal,
+							data->objs[oi].height)), data->lights[j].origin),
+				data->objs[oi].normal) > 0);
+	if (sign_a != sign_b || sign_c != sign_d)
+		return (1);
+	return (0);
 }

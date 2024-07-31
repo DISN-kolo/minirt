@@ -6,7 +6,7 @@
 #    By: fcosta-f < fcosta-f@student.42barcelona    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/18 16:54:33 by akozin            #+#    #+#              #
-#    Updated: 2024/07/31 17:22:01 by akozin           ###   ########.fr        #
+#    Updated: 2024/07/31 18:21:10 by akozin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,6 +60,7 @@ SRCNAMES = main.c \
 		   draw/light_calculus_sf.c \
 		   draw/light_calculus_ignores.c \
 		   draw/light_calculus_internal_funcs.c \
+		   draw/light_calculus_internal_funcs_2.c \
 		   console/print_usage.c \
 		   console/print_errors.c \
 		   free_utils/free_utils.c \

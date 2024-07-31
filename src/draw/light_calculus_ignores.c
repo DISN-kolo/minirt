@@ -6,7 +6,7 @@
 /*   By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 14:53:52 by akozin            #+#    #+#             */
-/*   Updated: 2024/07/31 15:51:26 by akozin           ###   ########.fr       */
+/*   Updated: 2024/07/31 18:19:32 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ int	ignore_light_sp(t_data *data, int oi, int j)
 int	internal_ignore_light_cy(t_data *data, int oi, int j)
 {
 	t_vec3	cam_dist_v;
-	t_vec3	light_dist_v;
 	double	cam_dist;
 	double	light_dist;
 
@@ -45,14 +44,13 @@ int	internal_ignore_light_cy(t_data *data, int oi, int j)
 	cam_dist = vec_len(vec_sub(vec_scale(data->objs[oi].normal,
 					dot_prod(cam_dist_v, data->objs[oi].normal)),
 				cam_dist_v));
-	light_dist_v = vec_sub(data->lights[j].origin, data->objs[oi].origin);
-	light_dist = vec_len(vec_sub(vec_scale(data->objs[oi].normal,
-					dot_prod(light_dist_v, data->objs[oi].normal)),
-				light_dist_v));
+	light_dist = light_dist_calc(data, j, oi);
 	if (cam_dist < data->objs[oi].diameter / 2.)
 	{
 		if (light_dist > data->objs[oi].diameter / 2.)
 			return (1);
+		else
+			return (ignore_light_cy_second_pl_pass(data, oi, j));
 	}
 	else
 	{
