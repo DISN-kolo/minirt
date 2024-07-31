@@ -6,7 +6,7 @@
 /*   By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 12:21:37 by akozin            #+#    #+#             */
-/*   Updated: 2024/07/18 15:30:55 by akozin           ###   ########.fr       */
+/*   Updated: 2024/07/31 14:28:40 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,11 @@ void	free_all(t_data *data)
 {
 	if (data->mlx)
 	{
-		mlx_destroy_image(data->mlx, data->img.img);
-		mlx_destroy_window(data->mlx, data->win);
+		if (data->img.img)
+			mlx_destroy_image(data->mlx, data->img.img);
+		if (data->win)
+			mlx_destroy_window(data->mlx, data->win);
+		mlx_destroy_display(data->mlx);
 		free(data->mlx);
 		data->mlx = NULL;
 	}

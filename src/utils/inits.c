@@ -6,7 +6,7 @@
 /*   By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 13:12:55 by akozin            #+#    #+#             */
-/*   Updated: 2024/07/29 18:08:05 by akozin           ###   ########.fr       */
+/*   Updated: 2024/07/31 14:34:40 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,10 +73,25 @@ void	file_reading(t_data *data, char **av)
 void	mlx_setting_up(t_data *data)
 {
 	data->mlx = mlx_init();
+	if (!data->mlx)
+	{
+		data->error = MALLOC_ERR;
+		err_exit(data, 1, -2);
+	}
 	data->win = mlx_new_window(data->mlx, WIN_X, WIN_Y, "MiniRT");
+	if (!data->win)
+	{
+		data->error = MALLOC_ERR;
+		err_exit(data, 1, -2);
+	}
 	mlx_hook(data->win, 2, 1L << 0, key_hand, data);
 	mlx_hook(data->win, 17, 0, x_hand, data);
 	data->img.img = mlx_new_image(data->mlx, WIN_X, WIN_Y);
+	if (!data->img.img)
+	{
+		data->error = MALLOC_ERR;
+		err_exit(data, 1, -2);
+	}
 	data->img.addr = mlx_get_data_addr(data->img.img,
 			&(*data).img.bits_per_pixel, &(*data).img.line_length,
 			&(*data).img.endian);
