@@ -6,7 +6,7 @@
 /*   By: fcosta-f < fcosta-f@student.42barcelona    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 16:07:24 by akozin            #+#    #+#             */
-/*   Updated: 2024/07/29 18:29:22 by akozin           ###   ########.fr       */
+/*   Updated: 2024/07/31 12:11:05 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -209,10 +209,15 @@ t_vec3	vec_inv(t_vec3 v);
 void	print_vector(t_vec3 v);
 
 double	plane_ray(t_vec3 o, t_vec3 d, t_vec3 pp, t_vec3 n);
+
 double	sphere_intersection(t_vec3 o, t_vec3 d, t_obj *obj);
 double	sphere_far_result(t_vec3 o, t_vec3 d, t_obj *obj);
 t_vec3	sphere_n(t_obj sp, t_vec3 p);
+
 double	cylinder_intersection(int *b, const t_ray cam, const t_obj obj);
+t_vec3	point_to_line(t_vec3 a, t_vec3 b, t_vec3 p);
+int		ci_cond_one(double d1, t_vec3 p1, t_obj obj);
+int		ci_cond_two(double d2, t_vec3 p2, t_vec3 c2, t_obj obj);
 
 void	draw(t_data *data);
 t_vec3	find_f(t_data *data, int px, int py, t_ur ur);

@@ -6,7 +6,7 @@
 #    By: fcosta-f < fcosta-f@student.42barcelona    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/18 16:54:33 by akozin            #+#    #+#              #
-#    Updated: 2024/07/29 16:59:19 by akozin           ###   ########.fr        #
+#    Updated: 2024/07/31 12:08:24 by akozin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,7 +61,8 @@ SRCNAMES = main.c \
 		   free_utils/free_utils.c \
 		   ray/ray_plane.c \
 		   ray/ray_sphere.c \
-		   ray/ray_cylinder.c
+		   ray/ray_cylinder.c \
+		   ray/ray_cylinder_internal.c
 
 
 SRCS = $(SRCNAMES)
