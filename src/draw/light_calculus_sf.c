@@ -6,7 +6,7 @@
 /*   By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 16:58:49 by akozin            #+#    #+#             */
-/*   Updated: 2024/07/29 18:22:49 by akozin           ###   ########.fr       */
+/*   Updated: 2024/07/31 15:22:32 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ t_vec3	cylinder_n(t_obj cy, t_vec3 p)
 	op = vec_sub(cy.origin, p);
 	interm = cross_prod(op, cy.normal);
 	res = cross_prod(cy.normal, interm);
+	normalize(&res);
 	return (res);
 }
 
