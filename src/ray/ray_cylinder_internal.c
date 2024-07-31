@@ -6,7 +6,7 @@
 /*   By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 12:07:20 by akozin            #+#    #+#             */
-/*   Updated: 2024/07/31 12:10:48 by akozin           ###   ########.fr       */
+/*   Updated: 2024/07/31 13:17:25 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,23 @@
 
 int	ci_cond_one(double d1, t_vec3 p1, t_obj obj)
 {
-	return (d1 < INFINITY && distance(p1, obj.origin) <= obj.diameter / 2);
+	return (!isinf(d1) && distance(p1, obj.origin) <= obj.diameter / 2);
 }
 
 int	ci_cond_two(double d2, t_vec3 p2, t_vec3 c2, t_obj obj)
 {
-	return (d2 < INFINITY && distance(p2, c2) <= obj.diameter / 2);
+	return (!isinf(d2) && distance(p2, c2) <= obj.diameter / 2);
+}
+
+int	ci_cond_three(double d1, t_vec3 p1, t_obj obj)
+{
+	return (d1 > EPSILON && !isinf(d1)
+		&& distance(p1, obj.origin) <= obj.diameter / 2);
+}
+
+int	ci_cond_four(double d2, t_vec3 p2, t_vec3 c2, t_obj obj)
+{
+	return (d2 > EPSILON && !isinf(d2) && distance(p2, c2) <= obj.diameter / 2);
 }
 
 /*

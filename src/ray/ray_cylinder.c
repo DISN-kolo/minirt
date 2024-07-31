@@ -6,7 +6,7 @@
 /*   By: fcosta-f < fcosta-f@student.42barcelona    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 17:15:59 by fcosta-f          #+#    #+#             */
-/*   Updated: 2024/07/31 12:11:11 by akozin           ###   ########.fr       */
+/*   Updated: 2024/07/31 13:22:26 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,19 +26,18 @@ static double	caps_intersection(t_ray cam, const t_obj obj)
 	c2 = vec_add(obj.origin, vec_scale(obj.normal, obj.height));
 	d1 = plane_ray(cam.o, cam.f, obj.origin, obj.normal);
 	d2 = plane_ray(cam.o, cam.f, c2, obj.normal);
-	if (d1 < INFINITY || d2 < INFINITY)
+	if ((!isinf(d1) && d1 > EPSILON) || (!isinf(d2) && d2 > EPSILON))
 	{
 		p1 = vec_add(cam.o, vec_scale(cam.f, d1));
 		p2 = vec_add(cam.o, vec_scale(cam.f, d2));
 		if (ci_cond_one(d1, p1, obj) && ci_cond_two(d2, p2, c2, obj))
 		{
-			if (d1 < d2)
-				return (d1);
-			return (d2);
+			if (ret_smthn_from_caps_if(d1, d2))
+				return (what_do_i_return_from_caps_if(d1, d2));
 		}
-		else if (d1 < INFINITY && distance(p1, obj.origin) <= obj.diameter / 2)
+		else if (ci_cond_three(d1, p1, obj))
 			return (d1);
-		else if (d2 < INFINITY && distance(p2, c2) <= obj.diameter / 2)
+		else if (ci_cond_four(d2, p2, c2, obj))
 			return (d2);
 	}
 	return (INFINITY);
@@ -103,7 +102,7 @@ static void	calc_correct_inters(double x2[2], const t_obj obj,
 	}
 	else if (dist1 >= 0 && dist1 <= obj.height && x2[0] > EPSILON)
 		x = x2[0];
-	else
+	else if (x2[1] > EPSILON)
 		x = x2[1];
 	x2[0] = x;
 }
@@ -137,11 +136,12 @@ double	cylinder_intersection(int *b, const t_ray cam, const t_obj obj)
 
 	dbody = body_inters(cam, obj);
 	dcaps = caps_intersection(cam, obj);
-	if (dbody < INFINITY || dcaps < INFINITY)
+	if (!isinf(dbody) || !isinf(dcaps))
 	{
-		if (dbody < dcaps)
+		if (dbody > EPSILON && dbody < dcaps)
 			return (*b = 1, dbody);
-		return (*b = 0, dcaps);
+		else if (dcaps > EPSILON)
+			return (*b = 0, dcaps);
 	}
 	return (INFINITY);
 }
