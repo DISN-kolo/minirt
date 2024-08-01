@@ -5,6 +5,15 @@ with https://github.com/Javocho !!
 
 # Example renders
 
+![42.rt scene](https://github.com/DISN-kolo/minirt/blob/59750d316b3920c257d16dfbe4588e4f64217c48/images_for_github/42.rt.png)
+
+<p align=center><i>The 42.rt scene<br><br><br></i></p>
+
+
+![42.2.rt scene](https://github.com/DISN-kolo/minirt/blob/59750d316b3920c257d16dfbe4588e4f64217c48/images_for_github/42.2.rt.png)
+
+<p align=center><i>The 42.2.rt scene<br><br><br></i></p>
+
 # Install
 
 ```
@@ -83,6 +92,8 @@ Using valgrind, you will find a suppressed error. It's probably something from t
 Placing the camera inside of a plane (or very close to it) (or perhaps this also works with any other surface) will sometimes produce noise; this is probably due to the floating point inaccuracy creeping in on the "shall we ignore this light" optimization-light-blocker checker. I haven't yet thought of a way to fix this; I've tried checking more things using ```> EPSILON``` in place of ```> 0```, but it didn't really seem to help me this time.
 
 Each object adds a pass to each pixel. Each light adds as many check-if-ignored passes as there are objects in the scene to each pixel. Each non-ignored light adds as many ray passes as there are objects to each pixel as well. The point is: it's quite slow. But on something like a 1000x1000 window with 5 objects and 3 lights it's OK ^^.
+
+_Less of an issue, more of an inconvenience:_ the ```.rt``` files only accept spaces as delimiters. Empty lines are OK, don't worry!
 
 #### P.S. You Might Find The Following Command Quite Useful (bash)
 
