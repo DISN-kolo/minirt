@@ -1,7 +1,5 @@
-# minirt
-42's MiniRT
-
-with https://github.com/Javocho !!
+# MiniRT
+42's MiniRT task, made in collaboration with https://github.com/Javocho
 
 # Example renders
 
@@ -75,15 +73,15 @@ cy x,y,z normal_x,normal_y,normal_z diameter height r,g,b
 ```
 *Cylinder's origin point is in its bottom cap*
 
-The recommended values for the coordinates and sizes are within the 0.5 to 10 range. Beyond that, light begin to be almost innoticable. To ammend that, however, you might want to toy around with the ```inc/minirt.h``` file's ```FALLOFF``` define. It should not be set to 1.0 or less, but the closer to 1.0 it is, the more gradual the fall-off of lights is.
+The recommended values for the coordinates and sizes are within the 0.5 to 10 range. Beyond that, light begins to be almost unnoticable. To amend that, however, you might want to toy around with the ```inc/minirt.h``` file's ```FALLOFF``` define. It should not be set to 1.0 or less, but the closer to 1.0 it is, the more gradual the fall-off of lights is.
 
-The values for the normal vector will be normalized.
+The values for the normal vectors will be normalized.
 
 The rgb values are integers from 0 to 255.
 
 The intensity is a floating point number with a range from 0.0 to 1.0.
 
-If there's a problem with the configuration, you will be told that upon attempting to launch the program, with varying degrees of narrowness :P
+If there's a problem with the configuration, you will be informed of that upon attempting to launch the program, with varying degrees of narrowness.
 
 # Known Issues (c)
 
@@ -91,9 +89,11 @@ Using valgrind, you will find a suppressed error. It's probably something from t
 
 Placing the camera inside of a plane (or very close to it) (or perhaps this also works with any other surface) will sometimes produce noise; this is probably due to the floating point inaccuracy creeping in on the "shall we ignore this light" optimization-light-blocker checker. I haven't yet thought of a way to fix this; I've tried checking more things using ```> EPSILON``` in place of ```> 0```, but it didn't really seem to help me this time.
 
-Each object adds a pass to each pixel. Each light adds as many check-if-ignored passes as there are objects in the scene to each pixel. Each non-ignored light adds as many ray passes as there are objects to each pixel as well. The point is: it's quite slow. But on something like a 1000x1000 window with 5 objects and 3 lights it's OK ^^.
+Each object adds a pass to each pixel. Each light adds as many check-if-ignored passes as there are objects in the scene to each pixel. Each non-ignored light adds as many ray passes as there are objects to each pixel as well. The point is: it's quite slow. But on something like a 1000x1000 window with 5 objects and 3 lights it's OK.
 
 _Less of an issue, more of an inconvenience:_ the ```.rt``` files only accept spaces as delimiters. Empty lines are OK, don't worry!
+
+_Most of the limitations here stem from the original subject.pdf as well as Norminette._
 
 #### P.S. You Might Find The Following Command Quite Useful (bash)
 
